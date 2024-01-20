@@ -1,0 +1,61 @@
+\documentclass[letterpaper,landscape, 12pt]{report}
+\usepackage[colorlinks=true,linkcolor=black,anchorcolor=black,citecolor=black,filecolor=black,menucolor=black,runcolor=black,urlcolor=black]{hyperref}
+\usepackage{schedule}
+\usepackage{fourier}
+\usepackage{phonenumbers}
+
+\usepackage{wasysym}
+\usepackage{marvosym }
+\usepackage{xcolor}
+\pagestyle{empty}
+\usepackage[width=11in, height=8.5in,left=0.5in,top=0.5in]{geometry}
+	\definecolor{light-gray}{gray}{0.95}
+	\definecolor{light-orange}{HTML}{FED8B1}
+\definecolor{light-yellow}{HTML}{FFFFE0}
+\begin{document}
+
+\CellHeight{0.70in}
+\CellWidth{1.85in}
+\TimeRange{8:00-17:00}
+\SubUnits{15}
+\BeginOn{Monday}
+\TextSize{\small}
+\FiveDay
+\TwentyFourHour %\TwelveHour
+
+\NewAppointment{myclass}{light-orange}{black}
+\NewAppointment{meeting}{light-gray}{black}
+\NewAppointment{lunch}{light-gray}{black}
+\NewAppointment{office}{yellow}{black}
+\NewAppointment{notavail}{light-gray}{black}
+\NewAppointment{appointment}{yellow}{black}
+\begin{flushleft}
+\Large
+\textbf{Barton Willis, PhD}\\
+Professor of Mathematics and Statistics\\
+\vspace{0.1in}
+\phone: \phonenumber[country=US]{3088658868}\\
+\Email: \href{mailto:willisb@unk.edu}{willisb@unk.edu}
+\end{flushleft}
+
+\noindent Blocks marked ``Appointments'' (yellow highlight) means \emph{possibly} available 
+to make appointments. Blocks with gray highlights mean not available.
+
+%\normalsize
+\begin{schedule}[Spring \the\year]
+\lunch{\textbf{Lunch (not available)}}{}{M,W,F}{11:00-12:20}
+\lunch{\textbf{Lunch (not available)}}{}{T,Th}{11:00-12:30}
+\myclass{\textbf{CYBR 304-01}}{8:00-8:55, DSCH 116}{M,W,F}{8:00-8:50}
+\myclass{\textbf{Calculus II}}{12:20-13:10, DSCH 386}{M,W,F}{12:20-13:10}
+\myclass{\textbf{Calculus II}}{12:30-13:20, DSCH 386}{T,Th}{12:30-13:20}
+\meeting{\textbf{Departmental Meeting}}{14:00-15:00}{T}{14:00-15:00}
+\meeting{\textbf{Departmental Meeting}}{14:00-15:00}{Th}{14:00-15:00}
+\office{\textbf{Office Hours}}{9:30--11:00, DSCH 368}{T,Th}{9:30-11:00}
+\office{\textbf{Office Hours}}{9:00--11:00, DSCH 368}{M,W,F}{9:00-11:00}
+\notavail{\textbf{Not Available}}{15:00-17:00}{M,T,W,Th,F}{15:00-17:00}
+\notavail{\textbf{Not Available}}{8:00-9:30}{T,Th}{8:00-9:30}
+\appointment{\textbf{Appointments}}{13:15-15:00, DSCH 368}{M,W,F}{13:15-15:00}
+\appointment{\textbf{Appointments}}{13:20-14:00, DSCH 368}{T,Th}{13:20-14:00}
+\end{schedule}
+\end{document}
+
