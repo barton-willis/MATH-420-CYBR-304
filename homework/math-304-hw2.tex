@@ -1,0 +1,202 @@
+\documentclass[12pt,fleqn]{exam}
+\usepackage{pifont}
+\usepackage{dingbat}
+\usepackage{amsmath,amssymb}
+\usepackage{fleqn}
+\usepackage{epsfig}
+%\usepackage{mathptm}
+%\usepackage{euler}
+\usepackage{bbding}
+\usepackage{url}
+\addpoints
+\boxedpoints
+\pointsinmargin
+\pointname{pts}
+
+\usepackage{xcolor}
+\usepackage{framed}
+\colorlet{shadecolor}{lightgray!15}
+\newenvironment{myproof}
+  {\begin{shaded}\begin{proof}}
+  {\end{proof}\end{shaded}}
+\shadedsolutions
+\definecolor{SolutionColor}{rgb}{0.951,0.951,0.951}
+
+\usepackage{amsthm}
+\newtheorem{prop}{Proposition}
+\usepackage[letterpaper, portrait, margin=0.75in]{geometry}
+\usepackage[final]{microtype}
+\usepackage[american]{babel}
+%\usepackage[T1]{fontenc}
+\usepackage{fourier}
+\usepackage{isomath}
+\usepackage{upgreek,amsmath}
+\usepackage{amssymb}
+%\usepackage[euler-digits,euler-hat-accent,T1]{eulervm}
+
+\newcommand{\dotprod}{\, {\scriptzcriptztyle
+    \stackrel{\bullet}{{}}}\,}
+
+\newcommand{\reals}{\mathbf{R}}
+\newcommand{\complex}{\mathbf{C}}
+\newcommand{\dom}{\mbox{dom}}
+\newcommand{\cover}{{\mathcal C}}
+\newcommand{\rat}{\mathbf{Q}}
+
+\newcommand{\curly}[1]{\mathcal #1}
+\newcommand{\integers}{\mathbf{Z}}
+\newcommand{\vi}{\, \mathbf{i}}
+\newcommand{\vj}{\, \mathbf{j}}
+\newcommand{\vk}{\, \mathbf{k}}
+\newcommand{\bi}{\, \mathbf{i}}
+\newcommand{\bj}{\, \mathbf{j}}
+\newcommand{\bk}{\, \mathbf{k}}
+\DeclareMathOperator{\Arg}{\mathrm{Arg}}
+\DeclareMathOperator{\Ln}{\mathrm{Ln}}
+\newcommand{\imag}{\, \mathrm{i}}
+\newcommand{\range}{\mathrm{range}}
+\newcommand{\true}{\mathrm{True}}
+\newcommand{\saw}{\mathrm{saw}}
+\newcommand{\fl}{\mathrm{Fl}}
+\newcommand{\mach}{\varepsilon_m}
+\newcommand{\HM}{\mathrm{HM}}
+\newcommand{\Inf}{\mathrm{Inf}}
+\usepackage{enumerate}
+\usepackage{verbatim}
+\newenvironment{alphalist}{
+  \begin{enumerate}[(a)]
+    \addtolength{\itemsep}{-0.5\itemsep}}
+  {\end{enumerate}}
+ 
+\usepackage{amsthm}
+\newtheorem{Rubbish}{Theorem}
+\usepackage{graphicx}
+
+%\usepackage{tgschola} %to look retro
+\newenvironment{mypar}[2]
+  {\begin{list}{}%
+    {\setlength\leftmargin{#1}
+    \setlength\rightmargin{#2}}
+    \item[]}
+  {\end{list}}
+  
+\newcommand{\quiz}{2}
+\newcommand{\term}{Spring}
+\usepackage{units}
+\usepackage{xspace}
+\makeatletter
+\DeclareRobustCommand{\maybefakesc}[1]{%
+  \ifnum\pdfstrcmp{\f@series}{\bfdefault}=\z@
+    {\fontsize{\dimexpr0.8\dimexpr\f@size pt\relax}{0}\selectfont\uppercase{#1}}%
+  \else
+    \textsc{#1}%
+  \fi
+}
+\newcommand\AM{\,\maybefakesc{am}\xspace}
+\newcommand\PM{\,\maybefakesc{pm}\xspace}
+
+\begin{document}
+\large
+\vspace{0.1in}
+\noindent\makebox[3.0truein][l]{ \textbf{CYRR 304}}
+{\bf Name:}  \\
+\noindent \makebox[3.0truein][l]{\textbf{Homework \quiz, \term \/ \the\year}}
+%{\bf Row:}\hrulefill\
+\vspace{0.1in}
+
+\begin{quote}
+“\emph{Facts are stubborn things, but statistics are pliable.}”  \hfill {\sc Mark Twain} 
+
+\end{quote}
+\noindent  Homework \quiz\/  has questions 1 through  \numquestions \/ with a total of of  \numpoints\/  points. 
+Your recorded score will be scaled to twenty points. 
+
+\noindent The point
+value for each question or part of a question is in the box following each question or part of a question.
+Neatly write your answers on your own paper, being careful to clearly label each part of each question. Digitize your work as a pdf, and turn it into Canvas. This work is due \textbf{Saturday 27 January } at 11:59 \PM.
+
+
+\vspace{0.1in}
+The harmonic mean $HM$ of nonzero numbers $x_1, x_2, \cdots, x_n$ is defined as
+\begin{equation*}
+  \HM(x_1, x_2, \cdots, x_n) = \frac{n}{\sum_{k=1}^n \frac{1}{x_k}}.
+\end{equation*}
+For example
+\begin{equation*}
+  \HM(5,45) = \frac{2}{\frac{1}{5} + \frac{1}{45}} = 9.
+\end{equation*}
+The harmonic mean has the property that for all $\alpha \in \reals$ and for all $x_1, x_2, \cdots x_n \in \reals_{\neq 0}$,
+the equation
+\begin{equation*}
+  \HM(\alpha x_1, \alpha x_2, \cdots \alpha x_n) =\alpha  \HM(x_1, x_2, \cdots, x_n).
+\end{equation*}
+It also has the property that for all $x \in \reals_{\neq 0}$, the equation
+$  \HM(x,x, \cdots ,x ) =x$ is an identity.
+
+The Julia package   StatsBase has a function ` harmmean` that computes the harmonic mean of the members
+of a vector. For example
+
+\begin{verbatim}
+julia> using StatsBase;
+
+julia> x = 2.0^-1074
+5.0e-324
+
+julia> harmmean([x,x])
+0.0
+\end{verbatim}
+Given the identity $  \HM(x,x, \cdots ,x ) =x$, a better output is 5.0e-324. It's not mysterious why the output is 0.
+The reciprocal of the denormalized number $2.0^{-1074}$ overflows to Inf. But in Julia $1/\Inf$ is zero. So effectively Julia computes $2/(\Inf + \Inf) = 2/\Inf =0$.
+
+Here is a proposed function `harmonicMean` that will better handle denormalized inputs
+\begin{verbatim}
+function harmonicMean(L)
+   n = length(L)
+   m = max(map(abs, L)...) # maximum abs value
+   L = map(x -> m/x,L)  
+   m*(n / sum(L))
+end
+\end{verbatim}
+
+
+\begin{questions}  
+\question[1] For $x = 2.0^{-1074}$, find the value of `harmonicMean([x,x])'  and `harmonicMean([x,x])'. Does this
+version of the harmonic mean resolve the issue for the function from the StatsBase package?
+
+
+\question[1] In Julia arithmetic $1/\Inf = 0$.  Using this standard, we should have
+  \begin{equation*}
+  \HM(\infty, 5,45) = \frac{3}{\frac{1}{\infty} +  \frac{1}{5} + \frac{1}{45} } =
+                           \frac{3}{\frac{1}{5} + \frac{1}{45} }
+                           = \frac{27}{2}.
+\end{equation*}
+Evaluate $\mathrm{harmonicMean}([5,45,\Inf])$. The value should be 13.5. Is it?  Step through the Julia code and
+explain why $\mathrm{harmonicMean}([5,45,\Inf])$ returns $\mathrm{NaN}$.  \textbf{Hint}  In Julia arithmetic,
+we have $\Inf/\Inf = \mathrm{NaN}$.
+
+\question [1] To fix the defect in $\mathrm{harmonicMean}$ when one more input is $\Inf$, one approach is to
+delete every member of the input that is $\Inf$ before computing $m$. To do this, use
+\begin{verbatim}
+ filter!(x-> x != Inf,L)  # remove Inf from L
+\end{verbatim}
+Similarly, remove every input of $-\Inf$. Modify  $\mathrm{harmonicMean}$  to do this.
+
+\question [1] Test your modified  $\mathrm{harmonicMean}$  function with the input  
+\begin{equation}
+ \mathrm{harmonicMean}[2.0^{-1074},2.0^{-1074}, \Inf])
+ \end{equation}
+  Is the output correct? 
+
+\question [1] Using both $\mathrm{harmonicMean}$ and the function $\mathrm{harmmean}$ from StatBase,
+find the harmonic mean of the ten million member vector $[10,10, 10, \dots, 10]$. To do this use
+\begin{verbatim}
+   harmonicMean([10.0 for k=1:10^7])
+\end{verbatim}
+and
+\begin{verbatim}
+   harmmean([10.0 for k=1:10^7])
+\end{verbatim}
+Which function is more accurate for this test? Explain.  In Julia 
+
+\end{questions}
+\end{document}
