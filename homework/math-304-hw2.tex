@@ -115,7 +115,7 @@ This work is due \textbf{Saturday 3 Feb  } at 11:59 \PM. For this assignment, tu
 
 
 \vspace{0.1in}
-The harmonic mean $\HM$ of nonzero numbers $x_1, x_2, \cdots, x_n$ is defined as
+The harmonic mean $\HM$ of positive numbers $x_1, x_2, \cdots, x_n$ is defined as
 \begin{equation*}
   \HM(x_1, x_2, \cdots, x_n) = \frac{n}{\sum_{k=1}^n \frac{1}{x_k}}.
 \end{equation*}
@@ -124,19 +124,29 @@ For example
   \HM(5,45) = \frac{2}{\frac{1}{5} + \frac{1}{45}} = 9.
 \end{equation*}
 The harmonic mean has lots of applications to statistics, engineering, and finance.   One simple example is that if
-Suzi drives from Kearney to North Platte at 60 mph and returns home at 70 mph, her average speed for the trip
-is the harmonic, not arithmetic mean of 60 and 70.
+you drive from Kearney to North Platte at 60 mph and turn around and drive back to Kearney at 70 mph, your average speed for the trip is the harmonic, not arithmetic mean of 60 and 70; thus your average speed is 
+\begin{equation*}
+\frac{2}{\frac{1}{60} + \frac{1}{70}} = \frac{840}{13} \approx 64.6 \mathrm{mph}.
+\end{equation*}
 
-The harmonic mean has the property that for all $\alpha \in \reals_{\neq 0}$ and for all $x_1, x_2, \cdots x_n \in \reals_{\neq 0}$,
+The harmonic mean has the property that for all $\alpha \in \reals_{\neq 0}$ and for all $x_1, x_2, \cdots x_n \in \reals_{> 0}$,
 the equation
 \begin{equation*}
   \HM(x_1, x_2, \cdots x_n) =\alpha  \HM(x_1 / \alpha , x_2 /\alpha , \cdots, x_n/\alpha ).
 \end{equation*}
-is an identity. Additionally, for all $x \in \reals_{\neq 0}$, the equation
+is an identity. Additionally, for all $x \in \reals_{>0}$, the equation
 $  \HM(x,x, \cdots ,x ) =x$ is an identity.
 
-The Julia package   StatsBase has a function ` harmmean` that computes the harmonic mean of the members
-of a vector. For example
+The Julia package   StatsBase has a function `harmmean' that computes the harmonic mean of the members
+of a vector.  You'll need to download and install this package. This is done using the package manager
+
+\begin{verbatim}
+julia> using Pkg
+julia> Pkg.add("StatsBase")
+   Resolving package versions...
+ \end{verbatim}
+Once you have downloaded and installed the this package, you don't need to do these steps again. To make the
+package available enter
 
 \begin{verbatim}
 julia> using StatsBase;
@@ -165,7 +175,7 @@ end
 
 \begin{questions}  
 \question[1] For $x = 2.0^{-1074}$, find the value of `harmonicMean([x,x])'  and `harmonicMean([x,x,x])'. Does this
-version of the harmonic mean resolve the issue for the function from the StatsBase package?
+version of the harmonic mean seem to resolve the issue for the function from the StatsBase package?
 
 
 \question[1] In Julia arithmetic $1/\Inf = 0$.  Using this standard, we should have
