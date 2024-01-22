@@ -109,15 +109,13 @@
 
 \end{quote}
 \noindent  Homework \quiz\/  has questions 1 through  \numquestions \/ with a total of of  \numpoints\/  points. 
-Your recorded score will be scaled to twenty points. 
-
-\noindent The point
+Your recorded score will be scaled to twenty points. The point
 value for each question or part of a question is in the box following each question or part of a question.
-Neatly write your answers on your own paper, being careful to clearly label each part of each question. Digitize your work as a pdf, and turn it into Canvas. This work is due \textbf{Saturday 27 January } at 11:59 \PM.
+This work is due \textbf{Saturday 3 Feb  } at 11:59 \PM. For this assignment, turn in a Jupyter notebook (a IPYNB file) to Canvas
 
 
 \vspace{0.1in}
-The harmonic mean $HM$ of nonzero numbers $x_1, x_2, \cdots, x_n$ is defined as
+The harmonic mean $\HM$ of nonzero numbers $x_1, x_2, \cdots, x_n$ is defined as
 \begin{equation*}
   \HM(x_1, x_2, \cdots, x_n) = \frac{n}{\sum_{k=1}^n \frac{1}{x_k}}.
 \end{equation*}
@@ -125,12 +123,16 @@ For example
 \begin{equation*}
   \HM(5,45) = \frac{2}{\frac{1}{5} + \frac{1}{45}} = 9.
 \end{equation*}
-The harmonic mean has the property that for all $\alpha \in \reals$ and for all $x_1, x_2, \cdots x_n \in \reals_{\neq 0}$,
+The harmonic mean has lots of applications to statistics, engineering, and finance.   One simple example is that if
+Suzi drives from Kearney to North Platte at 60 mph and returns home at 70 mph, her average speed for the trip
+is the harmonic, not arithmetic mean of 60 and 70.
+
+The harmonic mean has the property that for all $\alpha \in \reals_{\neq 0}$ and for all $x_1, x_2, \cdots x_n \in \reals_{\neq 0}$,
 the equation
 \begin{equation*}
-  \HM(\alpha x_1, \alpha x_2, \cdots \alpha x_n) =\alpha  \HM(x_1, x_2, \cdots, x_n).
+  \HM(x_1, x_2, \cdots x_n) =\alpha  \HM(x_1 / \alpha , x_2 /\alpha , \cdots, x_n/\alpha ).
 \end{equation*}
-It also has the property that for all $x \in \reals_{\neq 0}$, the equation
+is an identity. Additionally, for all $x \in \reals_{\neq 0}$, the equation
 $  \HM(x,x, \cdots ,x ) =x$ is an identity.
 
 The Julia package   StatsBase has a function ` harmmean` that computes the harmonic mean of the members
@@ -145,9 +147,11 @@ julia> x = 2.0^-1074
 julia> harmmean([x,x])
 0.0
 \end{verbatim}
-Given the identity $  \HM(x,x, \cdots ,x ) =x$, a better output is 5.0e-324. It's not mysterious why the output is 0.
-The reciprocal of the denormalized number $2.0^{-1074}$ overflows to Inf. But in Julia $1/\Inf$ is zero. So effectively Julia computes $2/(\Inf + \Inf) = 2/\Inf =0$.
-
+Given the identity $  \HM(x,x) =x$, a better output is 5.0e-324. But it's not mysterious why the output is 0.
+The reciprocal of the denormalized number $2.0^{-1074}$ overflows to Inf. But in Julia $1/\Inf$ is zero. So effectively Julia (miss) computes 
+\begin{equation} 
+  2 / (1/{5.0\times 10^{-324}}  + 1/{5.0\times 10^{-324}}) = 2 /(\Inf + \Inf) = 2/\Inf =0.
+ \end{equation}
 Here is a proposed function `harmonicMean` that will better handle denormalized inputs
 \begin{verbatim}
 function harmonicMean(L)
@@ -160,7 +164,7 @@ end
 
 
 \begin{questions}  
-\question[1] For $x = 2.0^{-1074}$, find the value of `harmonicMean([x,x])'  and `harmonicMean([x,x])'. Does this
+\question[1] For $x = 2.0^{-1074}$, find the value of `harmonicMean([x,x])'  and `harmonicMean([x,x,x])'. Does this
 version of the harmonic mean resolve the issue for the function from the StatsBase package?
 
 
@@ -174,12 +178,12 @@ Evaluate $\mathrm{harmonicMean}([5,45,\Inf])$. The value should be 13.5. Is it? 
 explain why $\mathrm{harmonicMean}([5,45,\Inf])$ returns $\mathrm{NaN}$.  \textbf{Hint}  In Julia arithmetic,
 we have $\Inf/\Inf = \mathrm{NaN}$.
 
-\question [1] To fix the defect in $\mathrm{harmonicMean}$ when one more input is $\Inf$, one approach is to
+\question [1] To fix the defect in $\mathrm{harmonicMean}$ when one or more input is $\Inf$, one approach is to
 delete every member of the input that is $\Inf$ before computing $m$. To do this, use
 \begin{verbatim}
  filter!(x-> x != Inf,L)  # remove Inf from L
 \end{verbatim}
-Similarly, remove every input of $-\Inf$. Modify  $\mathrm{harmonicMean}$  to do this.
+The Julia function filter! modifies its argument. Similarly, remove every input of $-\Inf$. Modify  $\mathrm{harmonicMean}$  to do this.
 
 \question [1] Test your modified  $\mathrm{harmonicMean}$  function with the input  
 \begin{equation}
@@ -188,15 +192,15 @@ Similarly, remove every input of $-\Inf$. Modify  $\mathrm{harmonicMean}$  to do
   Is the output correct? 
 
 \question [1] Using both $\mathrm{harmonicMean}$ and the function $\mathrm{harmmean}$ from StatBase,
-find the harmonic mean of the ten million member vector $[10,10, 10, \dots, 10]$. To do this use
+find the harmonic mean of the one thousand member vector $[10,10, 10, \dots, 10]$. To do this use
 \begin{verbatim}
-   harmonicMean([10.0 for k=1:10^7])
+   harmonicMean([10.0 for k=1:10^3])
 \end{verbatim}
 and
 \begin{verbatim}
-   harmmean([10.0 for k=1:10^7])
+   harmmean([10.0 for k=1:10^3])
 \end{verbatim}
-Which function is more accurate for this test? Explain.  In Julia 
+Which function is more accurate for this test? Why? Congratulations, you have built a better Julia function for the harmonic mean.
 
 \end{questions}
 \end{document}
