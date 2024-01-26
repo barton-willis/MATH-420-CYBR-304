@@ -1,4 +1,4 @@
-\documentclass[12pt,fleqn,answers]{exam}
+\documentclass[12pt,fleqn]{exam}
 \usepackage{pifont}
 \usepackage{dingbat}
 \usepackage{amsmath,amssymb}
@@ -19,6 +19,8 @@
 \newenvironment{myproof}
   {\begin{shaded}\begin{proof}}
   {\end{proof}\end{shaded}}
+\shadedsolutions
+\definecolor{SolutionColor}{rgb}{0.951,0.951,0.951}
 
 \usepackage{amsthm}
 \newtheorem{prop}{Proposition}
@@ -130,24 +132,77 @@ not stored and defaults to one.
  
  \part[1]  How many bits must be used to store the exponent in computer memory? Explain.  
  
+ \begin{solution} We need enough bits to store 32 numbers, so we need choose the number of bits $n$ 
+ in the exponent so that $32 \leq 2^n$.  The least such integer is $5$.  It would be peculiar to use
+ more bits than need, so indeed there are five bits for the exponent of a binary16 number. 
+ 
+ \end{solution}
+ 
  \part[1] How many bits must be used to store the entire binary16 number in computer memory? Explain.
  
+ \begin{solution}
+   We need one bit for the sign, five bits for the exponent, and ten bits for the fractional part, for a total of sixteen bits.
+ \end{solution}
  \part[1] Find the \emph{largest} number of the type binary16.
+ \begin{solution} To find the largest binary16 number, we set the exponent to its largest value of 15 and
+ we set each bit in the fractional part to one.  Thus the largest binary16 number is
+ \begin{equation*}
+    (1.1111111111)_2 \times 2^{15} = 2^{15} \sum_{k=0}^{10} \frac{1}{2^k} =  65 504.
+ \end{equation*}
  
+ \end{solution}
  \part[1] Find the \emph{smallest} positive normalized number of the type binary16. Remember that 
  the leading bit of a normalized number is one. 
  
+ \begin{solution} To find the smallest positive binary16 number, we set the exponent to its smallest value of -14 and
+ we set each bit in the fractional part to zero.  Thus the smallest positive binary16 number
+ \begin{equation*}
+    (1.0000000000)_2 \times 2^{-14} = \frac{1}{16 384}.
+ \end{equation*}
+ \end{solution}
+ 
  \part[1] Find the \emph{smallest} positive  denormalized   number of the type binary16. Remember that 
  the leading bit of a denormalized number is zero.  Also, the exponent of a denormalized binary16 is -14.
+  \begin{solution} To find the smallest positive denormalized  binary16 number, we set the exponent to its smallest value of -14, we set the leading bit to zero, and  we set each bit in the fractional part to zero, except  for the last bit that that is one.  
+ Thus  the smallest positive  denormalized   number of the type binary16 is
+ \begin{equation*}
+    (0.0000000001)_2 \times 2^{-14} = 2^{-20} = \frac{1}{104 8576}.
+ \end{equation*}
+ \end{solution}
  
  \part[1] Find the \emph{machine epsilon}  $\mach$ for a number of the type binary16.
+ \begin{solution} There are ten bits in the fractional part of binary16 number, so 
+ \begin{equation*}
+    \mach = \frac{1}{2^{11}} = \frac{1}{2048}.
+ \end{equation*}
  
+ \end{solution}
  \part[1] We have  $\fl(1/10) = (-1)^0 (1.1001100110)_2 \times 2^{-4}$.  Express  $\fl(1/10)$ as a rational number
  (that is, as a quotient of integers).
 
+\begin{solution} We have
+\begin{align*}
+    \fl(1/10)  &= \left(1+1/2 + 1/16 + 1/32 + 1/512 + 1/1024 \right) \times \frac{1}{16},\\
+                  &=  \frac{1635}{16384}. \\
+                  &\approx 0.09979248046875.
+\end{align*}
+\end{solution}
 \part[1] Show that $|\fl(1/10)  - 1/10| \leq \mach$.
 
+\begin{solution}
+We have 
 
+\begin{align*}
+    \left[ \left |\fl(1/10)  - 1/10| \leq  \frac{1}{2048}  \right | \right] &\equiv \left[ \left | \frac{1635}{16384}  - \frac{1}{10} \right |  \leq  \frac{1}{2048} \right], 
+    \\
+    &\equiv  \left[ \frac{17}{81920} \leq \frac{1}{2048} \right], \\
+    &\equiv \left[17 \times 2048 \leq 81920 \right], \\
+     &\equiv \left[34816 \leq 81920 \right], \\
+    &\equiv \text{True}.
+\end{align*} 
+
+
+\end{solution}
  \end{parts}
 
 \end{questions}
