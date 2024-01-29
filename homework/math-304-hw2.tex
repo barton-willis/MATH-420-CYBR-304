@@ -111,7 +111,11 @@
 \noindent  Homework \quiz\/  has questions 1 through  \numquestions \/ with a total of of  \numpoints\/  points. 
 Your recorded score will be scaled to twenty points. The point
 value for each question or part of a question is in the box following each question or part of a question.
-This work is due \textbf{Saturday 3 Feb  } at 11:59 \PM. For this assignment, turn in a Jupyter notebook (a IPYNB file) to Canvas
+This work is due \textbf{Saturday 3 Feb  } at 11:59 \PM.  
+
+For this assignment, convert your  Jupyter notebook (a IPYNB file)
+ to HTML and submit the HTML file to Canvas. To convert you Jupyter notebook to HTML, do File --> Download as --> HTML. (For the File menu, look toward the 
+ upper right corner.)
 
 
 \vspace{0.1in}
@@ -121,10 +125,10 @@ The harmonic mean $\HM$ of positive numbers $x_1, x_2, \cdots, x_n$ is defined a
 \end{equation*}
 For example
 \begin{equation*}
-  \HM(5,45) = \frac{2}{\frac{1}{5} + \frac{1}{45}} = 9.
+  \HM(5,45) = \frac{2}{\frac{1}{5} + \frac{1}{45}} = 9, \quad  \text{ and }  \HM(5,45, 200) = \frac{3}{\frac{1}{5} + \frac{1}{45} +\frac{1}{200}} = \frac{5400}{409}.
 \end{equation*}
 The harmonic mean has lots of applications to statistics, engineering, and finance.   One simple example is that if
-you drive from Kearney to North Platte at 60 mph and turn around and drive back to Kearney at 70 mph, your average speed for the trip is the harmonic, not arithmetic mean of 60 and 70; thus your average speed is 
+you drive from Kearney to North Platte at 60 mph and turn around and drive back to Kearney at 70 mph, your average speed for the trip is the harmonic, not arithmetic mean, of 60 and 70; thus your average speed is 
 \begin{equation*}
 \frac{2}{\frac{1}{60} + \frac{1}{70}} = \frac{840}{13} \approx 64.6 \mathrm{mph}.
 \end{equation*}
@@ -160,7 +164,7 @@ julia> harmmean([x,x])
 Given the identity $  \HM(x,x) =x$, a better output is 5.0e-324. But it's not mysterious why the output is 0.
 The reciprocal of the denormalized number $2.0^{-1074}$ overflows to Inf. But in Julia $1/\Inf$ is zero. So effectively Julia (miss) computes 
 \begin{equation} 
-  2 / (1/{5.0\times 10^{-324}}  + 1/{5.0\times 10^{-324}}) = 2 /(\Inf + \Inf) = 2/\Inf =0.
+  \frac{2}{ \frac{1}{5.0\times 10^{-324}}  + \frac{1}{5.0\times 10^{-324}}}= \frac{2}{\Inf + \Inf} = \frac{2}{\Inf} =0.
  \end{equation}
 Here is a proposed function `harmonicMean` that will better handle denormalized inputs
 \begin{verbatim}
