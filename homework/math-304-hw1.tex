@@ -1,4 +1,4 @@
-\documentclass[12pt,fleqn]{exam}
+\documentclass[12pt,fleqn,answers]{exam}
 \usepackage{pifont}
 \usepackage{dingbat}
 \usepackage{amsmath,amssymb}
@@ -166,7 +166,7 @@ not stored and defaults to one.
   \begin{solution} To find the smallest positive denormalized  binary16 number, we set the exponent to its smallest value of -14, we set the leading bit to zero, and  we set each bit in the fractional part to zero, except  for the last bit that that is one.  
  Thus  the smallest positive  denormalized   number of the type binary16 is
  \begin{equation*}
-    (0.0000000001)_2 \times 2^{-14} = 2^{-20} = \frac{1}{104 8576}.
+    (0.0000000001)_2 \times 2^{-14} = 2^{-24} = \frac{1}{16777216}.
  \end{equation*}
  \end{solution}
  
@@ -182,9 +182,9 @@ not stored and defaults to one.
 
 \begin{solution} We have
 \begin{align*}
-    \fl(1/10)  &= \left(1+1/2 + 1/16 + 1/32 + 1/512 + 1/1024 \right) \times \frac{1}{16},\\
-                  &=  \frac{1635}{16384}. \\
-                  &\approx 0.09979248046875.
+    \fl(1/10)  &= \left(1+1/2 + 1/16 + 1/32 + 1/256 + 1/512 \right) \times \frac{1}{16},\\
+                  &=  \frac{819}{8192}, \\
+                  &\approx 0.0999755859375.
 \end{align*}
 \end{solution}
 \part[1] Show that $|\fl(1/10)  - 1/10| \leq \mach$.
@@ -193,12 +193,10 @@ not stored and defaults to one.
 We have 
 
 \begin{align*}
-    \left[ \left |\fl(1/10)  - 1/10| \leq  \frac{1}{2048}  \right | \right] &\equiv \left[ \left | \frac{1635}{16384}  - \frac{1}{10} \right |  \leq  \frac{1}{2048} \right], 
+    \left[ \left |\fl(1/10)  - 1/10| \leq  \frac{1}{2048}  \right | \right] &\equiv \left[ \left | \frac{819}{8192}  - \frac{1}{10} \right |  \leq  \frac{1}{2048} \right], 
     \\
-    &\equiv  \left[ \frac{17}{81920} \leq \frac{1}{2048} \right], \\
-    &\equiv \left[17 \times 2048 \leq 81920 \right], \\
-     &\equiv \left[34816 \leq 81920 \right], \\
-    &\equiv \text{True}.
+    &\equiv  \left[ \frac{1}{40960} \leq \frac{1}{2048} \right], \\
+       &\equiv \text{True}.
 \end{align*} 
 
 
