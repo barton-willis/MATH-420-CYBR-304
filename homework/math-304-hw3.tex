@@ -1,0 +1,169 @@
+\documentclass[12pt,fleqn]{exam}
+\usepackage{pifont}
+\usepackage{dingbat}
+\usepackage{amsmath,amssymb}
+\usepackage{fleqn}
+\usepackage{epsfig}
+%\usepackage{mathptm}
+%\usepackage{euler}
+\usepackage{bbding}
+\usepackage{url}
+\addpoints
+\boxedpoints
+\pointsinmargin
+\pointname{pts}
+
+\usepackage{xcolor}
+\usepackage{framed}
+\colorlet{shadecolor}{lightgray!15}
+\newenvironment{myproof}
+  {\begin{shaded}\begin{proof}}
+  {\end{proof}\end{shaded}}
+\shadedsolutions
+\definecolor{SolutionColor}{rgb}{0.951,0.951,0.951}
+
+\usepackage{amsthm}
+\newtheorem{prop}{Proposition}
+\usepackage[letterpaper, portrait, margin=0.75in]{geometry}
+\usepackage[final]{microtype}
+\usepackage[american]{babel}
+%\usepackage[T1]{fontenc}
+\usepackage{fourier}
+\usepackage{isomath}
+\usepackage{upgreek,amsmath}
+\usepackage{amssymb}
+%\usepackage[euler-digits,euler-hat-accent,T1]{eulervm}
+
+\newcommand{\dotprod}{\, {\scriptzcriptztyle
+    \stackrel{\bullet}{{}}}\,}
+
+\newcommand{\reals}{\mathbf{R}}
+\newcommand{\complex}{\mathbf{C}}
+\newcommand{\dom}{\mbox{dom}}
+\newcommand{\cover}{{\mathcal C}}
+\newcommand{\rat}{\mathbf{Q}}
+
+\newcommand{\curly}[1]{\mathcal #1}
+\newcommand{\integers}{\mathbf{Z}}
+\newcommand{\vi}{\, \mathbf{i}}
+\newcommand{\vj}{\, \mathbf{j}}
+\newcommand{\vk}{\, \mathbf{k}}
+\newcommand{\bi}{\, \mathbf{i}}
+\newcommand{\bj}{\, \mathbf{j}}
+\newcommand{\bk}{\, \mathbf{k}}
+\DeclareMathOperator{\Arg}{\mathrm{Arg}}
+\DeclareMathOperator{\Ln}{\mathrm{Ln}}
+\newcommand{\imag}{\, \mathrm{i}}
+\newcommand{\range}{\mathrm{range}}
+\newcommand{\true}{\mathrm{True}}
+\newcommand{\saw}{\mathrm{saw}}
+\newcommand{\fl}{\mathrm{Fl}}
+\newcommand{\mach}{\varepsilon_m}
+\newcommand{\HM}{\mathrm{HM}}
+\newcommand{\Inf}{\mathrm{Inf}}
+\usepackage{enumerate}
+\usepackage{verbatim}
+\newenvironment{alphalist}{
+  \begin{enumerate}[(a)]
+    \addtolength{\itemsep}{-0.5\itemsep}}
+  {\end{enumerate}}
+ 
+\usepackage{amsthm}
+\newtheorem{Rubbish}{Theorem}
+\usepackage{graphicx}
+
+%\usepackage{tgschola} %to look retro
+\newenvironment{mypar}[2]
+  {\begin{list}{}%
+    {\setlength\leftmargin{#1}
+    \setlength\rightmargin{#2}}
+    \item[]}
+  {\end{list}}
+  
+\newcommand{\quiz}{3}
+\newcommand{\term}{Spring}
+\usepackage{units}
+\usepackage{xspace}
+\makeatletter
+\DeclareRobustCommand{\maybefakesc}[1]{%
+  \ifnum\pdfstrcmp{\f@series}{\bfdefault}=\z@
+    {\fontsize{\dimexpr0.8\dimexpr\f@size pt\relax}{0}\selectfont\uppercase{#1}}%
+  \else
+    \textsc{#1}%
+  \fi
+}
+\newcommand\AM{\,\maybefakesc{am}\xspace}
+\newcommand\PM{\,\maybefakesc{pm}\xspace}
+
+\begin{document}
+\large
+\vspace{0.1in}
+\noindent\makebox[3.0truein][l]{ \textbf{CYRR 304}}
+{\bf Name:}  \\
+\noindent \makebox[3.0truein][l]{\textbf{Homework \quiz, \term \/ \the\year}}
+%{\bf Row:}\hrulefill\
+\vspace{0.1in}
+
+\begin{quote}
+“\emph{Fast is fine, but accuracy is everything.}”  \hfill {\sc Wyatt Erp} 
+
+\end{quote}
+\noindent  Homework \quiz\/  has questions 1 through  \numquestions \/ with a total of of  \numpoints\/  points. 
+Your recorded score will be scaled to twenty points. The point
+value for each question or part of a question is in the box following each question or part of a question.
+This work is due \textbf{Saturday 10 Feb  } at 11:59 \PM.  
+
+For this assignment, convert your  Jupyter notebook (a IPYNB file)
+ to HTML and submit the HTML file to Canvas. To convert you Jupyter notebook to HTML, do File --> Download as --> HTML. (For the File menu, look toward the 
+ upper right corner.)
+ 
+ \begin{questions}
+ 
+ \question Our problem this week comes from celestial mechanics. For a comet in parabolic orbit, the final step in finding the position of the comet as a function of time is to find the real solution to the equation $y^3 + 3y - x = 0$.  The (and indeed there is only one) real solution of this
+ equation has a nice form; it is
+ \begin{equation}
+ y={{\left( \frac{\sqrt{{{x}^{2}}+4}}{2}+\frac{x}{2}\right) }^{\frac{1}{3}}}-\frac{1}{{{\left( \frac{\sqrt{{{x}^{2}}+4}}{2}+\frac{x}{2}\right) }^{\frac{1}{3}}}}
+ \end{equation}
+ 
+ \begin{parts}
+ 
+ \part [5] Write a Julia function \texttt{orbit} that takes a number $x$ as its input and returns
+ \begin{equation*}
+ {{\left( \frac{\sqrt{{{x}^{2}}+4}}{2}+\frac{x}{2}\right) }^{\frac{1}{3}}}-\frac{1}{{{\left( \frac{\sqrt{{{x}^{2}}+4}}{2}+\frac{x}{2}\right) }^{\frac{1}{3}}}}
+ \end{equation*}
+ as its output.   Do two quick checks on your code and verify that \texttt{orbit(42.0) = 3.1890525141322277} and \texttt{orbit(-107.0) = -4.536964755824514}. If the last few digits of your value differ, don't panic. There can be 
+ some differences due to microprocessors and the operating system.
+ 
+ 
+ \part [5] Evaluate \texttt{orbit(-1.0e8)}.
+ 
+ \part [5] Use the bisection method to solve the equation $x^3 + 3 x + 10^8 = 0$. This should give 
+ the same value as  \texttt{orbit(-1.0e8)}.  For the bisection method in Julia, you may use the code we
+ used in class, or write your own. For your initial interval,   try $[-500,-100]$. Does this agree 
+ with the value from part `b`?
+ 
+ 
+ \part [5] Draw a graph of the function \texttt{orbit}.  Draw the graph for inputs from $-10^8$ to $10^8$.
+ From our knowledge of calculus, the graph should be smooth and continuous. Does it appear to be smooth and
+ continuous?  Explain.
+ 
+ \end{parts}
+ 
+ \end{questions}
+ What's the story? For $x \ll -1$, numerical evaluation of $\frac{\sqrt{{{x}^{2}}+4}}{2}+\frac{x}{2}$ is a trouble
+ maker.  Why so? Let $x = -10^8$. We need to evaluate
+ \begin{equation}
+ \frac{\sqrt{10^{16}+4}}{2}-\frac{10^8}{2}.
+\end{equation}
+But this is the difference of two numbers that are very close together, so the condition number of this sum is huge.
+This means that the relative difference of the true value of this sum and the computed value can be large.  
+And what are the lessons? First, adding two floating point numbers that have opposite signs and nearly equal magnitudes
+can give large relative errors. Second, ill-conditioned sums  aren't always easy to spot. And third, as intriguing and beautiful as the exact solution of the cubic maybe,
+it is poorly suited for numerical evaluation and a \emph{numerical method is more accurate}. 
+
+
+
+
+ 
+
+\end{document}
