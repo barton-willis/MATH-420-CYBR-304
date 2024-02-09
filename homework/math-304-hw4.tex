@@ -104,7 +104,7 @@
 \vspace{0.1in}
 
 \begin{quote}
-“\emph{Fast is fine, but accuracy is everything.}”  \hfill {\sc Wyatt Erp} 
+\emph{“Compound interest is the eighth wonder of the world. He who understands it, earns it; he who doesn't, pays it”.}  \hfill attributed to  {\sc Albert Einstein} 
 
 \end{quote}
 \noindent  Homework \quiz\/  has questions 1 through  \numquestions \/ with a total of of  \numpoints\/  points. 
@@ -118,49 +118,62 @@ For this assignment, convert your  Jupyter notebook (a IPYNB file)
  
  \begin{questions}
  
- \question On the first day of each month, Patsy invests \$100 in Larry's Pretty Good mutual fund  (LPG). The share price varies each day, so let's say that on the first of January the share price is $p_0$ dollars per share, the first of February, the 
- price is $p_1$, and \dots and $p_{11}$ on the first of December.   So on 31 December, Patsy owns
+ \question Starting on 1 January, Helen invests \$100 into stock mutual fund.  Every three months, she again invests \$100
+ into the same fund.   The share price varies each day, so let's say that on the first of January the share price is $p_0$ dollars
+ and the share price for the other three investments are $p_1, p_2$, and  $p_3$.  So on 31 December, the number of 
+ shares Helen owns $S$, is given by
  \begin{equation}
-    100 \sum_{k=0}^{11} \frac{1}{p_k}
+     S = 100 \left (\frac{1}{p_0} + \frac{1}{p_1} + \frac{1}{p_2}  + \frac{1}{p_3} \right) ,
  \end{equation}
- shares, and the value of these shares is  $\displaystyle 100 p_{12} \sum_{k=0}^{11} \frac{1}{p_k}$, where $p_{12}$ is the share price
-on the last day of the year.  Patsy would like to compare her investment to an investment that has a fixed rate of return of $r$. 
+ and the value of these shares is  $\displaystyle p_4 S$. Helen would like to compare her investment to an investment that has a fixed rate of return of $r$. 
 She calculates that had she similarly invested \$100 on the first day of each month to an investment with a fixed rate of 
-return, at the end of the year, her investment would be worth
+return $r$, at the end of the year, her investment would be worth
 \begin{equation}
-    100 r \frac{(1+r)^{1/12}}{(1+r)^{1/12} - 1}.
+    100 r \frac{(1+r)^{1/4}}{(1+r)^{1/4} - 1}.
 \end{equation}
-So to find the APR of her mutual fund return, Patsy wants to solve
+In official financial terms $r$ is the \emph{annual rate of return}, or APR.
+So to find the APR of her mutual fund return, Helen wants to solve
 \begin{equation}
- 100 p_{12} \sum_{k=0}^{11} \frac{1}{p_k} = 100 r \frac{(1+r)^{1/12}}{(1+r)^{1/12} - 1}.
+ 100 p_{4} \sum_{k=0}^{3} \frac{1}{p_k} = 100 r \frac{(1+r)^{1/4
 \end{equation}
 for $r$.  Of course, we can cancel the multiplicative factor of 100, so Patsy needs to solve the equation
 \begin{equation}
- p_{12} \sum_{k=0}^{11} \frac{1}{p_k} = r \frac{(1+r)^{1/12}}{(1+r)^{1/12} - 1}.
+ p_{4} \sum_{k=0}^3 \frac{1}{p_k} = r \frac{(1+r)^{1/4}}{(1+r)^{1/4} - 1}.
 \end{equation}
 for $r$.  The stuff on the left is known, so let's name it $q$.  So Patsy needs to solve
 \begin{equation}
- q  = r \frac{(1+r)^{1/12}}{(1+r)^{1/12} - 1}.
+ q  = r \frac{(1+r)^{1/4}}{(1+r)^{1/4} - 1}.
 \end{equation}
 No amount of algebra tricks allow Patsy to solve this equation, so she decides to use a numerical
 method.  Her favorite method is fixed point iteration, but her first step is to convert the equation to a fixed point form.
-There are lots of ways to do this--we need to pick one and try it.  A fairly obvious way to convert to fixed point form
-is to add $r-q$ to both sides of this equation; thus
+There are lots of ways to do this--we need to pick one and try it.  Here is one way
 \begin{equation}
-   r  = r \frac{(1+r)^{1/12}}{(1+r)^{1/12} - 1} - q + r.
+   r  = q \frac{(1+r)^{1/4} - 1}{(1+r)^{1/4} }
 \end{equation}
 
  \begin{parts}
  
- \part [5] Suppose $q = 13.5$. (This means after investing \$1,200 for the year, her account value at the end of the year
- is \$1,350, for a total gain of \$150.).  Use Gadfly to graph both $r \mapsto r$ and $r \mapsto r \frac{(1+r)^{1/12}}{(1+r)^{1/12} - 1} - 13.5+ r$.  Based on this graph, do you expect that a fixed point sequence will converge? 
+ \part [5] Use Gadfly to graph the function $r  \mapsto  r  \frac{(1+r)^{1/4}}{(1+r)^{1/4} - 1}$ on 
+ the interval $r \in [-1,1]$.  With a return of 100\% (that is, $r = 1$), what is the account balance 
+ on the last day of the year?
  
- \part [5] Use fixed point iteration to solve $ r  = r \frac{(1+r)^{1/12}}{(1+r)^{1/12} - 1} - 13.5 + r$ for $r$. 
+ \part [5] Suppose $q = 4.35$. (This means after investing a total of \$400 for the year, her account value at the end of the year is \$435, for a total gain of \$35 for the year.).  Use Gadfly to graph both $r \mapsto r$ and 
+ $r \mapsto  4.35 \frac{(1+r)^{1/4} - 1}{(1+r)^{1/4} }$.  Based on this graph, do you expect that a fixed point sequence will converge?  Explain.
  
- \part [5] Write  Julia code that takes the twelve monthly share prices $p_0, p_1, \dots p_{12}  $ and returns
- $p_{12} \sum_{k=1}^{11} \frac{1}{p_k}$.
+ \part [5] Write  a Julia function \texttt{APR} that takes the five share prices $p_0, p_1, p_2, p_3, p_4$ and returns
+ the solution to the equation 
+ \begin{equation}
+ p_{4} \sum_{k=0}^3 \frac{1}{p_k} = r \frac{(1+r)^{1/4}}{(1+r)^{1/4} - 1}.
+ \end{equation}
+ To solve the equation, use fixed point iteration.   Check your answers against
  
- \part [5] Write a Julia function  \textbf{Patsy(q)} that uses fixed point iteration to solve $  r  = r \frac{(1+r)^{1/12}}{(1+r)^{1/12} - 1} - q + r.$
+\begin{verbatim}
+julia> APY(1.0,1.0,1.0,1.0,1.0) 
+         0.00
+
+
+\end{verbatim}
+ 
 \end{parts}
 \end{questions}
 
