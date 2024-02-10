@@ -118,61 +118,31 @@ For this assignment, convert your  Jupyter notebook (a IPYNB file)
  
  \begin{questions}
  
- \question Starting on 1 January, Helen invests \$100 into stock mutual fund.  Every three months, she again invests \$100
- into the same fund.   The share price varies each day, so let's say that on the first of January the share price is $p_0$ dollars
- and the share price for the other three investments are $p_1, p_2$, and  $p_3$.  So on 31 December, the number of 
- shares Helen owns $S$, is given by
+ \question This week's assignment is motivated by a problem in financial math. But we'll skip the details of the origin of the problem and skip directly 
+ to the numerical analysis.  For various value of the number $q$, we need to solve the equation
  \begin{equation}
-     S = 100 \left (\frac{1}{p_0} + \frac{1}{p_1} + \frac{1}{p_2}  + \frac{1}{p_3} \right) ,
- \end{equation}
- and the value of these shares is  $\displaystyle p_4 S$. Helen would like to compare her investment to an investment that has a fixed rate of return of $r$. 
-She calculates that had she similarly invested \$100 on the first day of each month to an investment with a fixed rate of 
-return $r$, at the end of the year, her investment would be worth
-\begin{equation}
-    100 r \frac{(1+r)^{1/4}}{(1+r)^{1/4} - 1}.
-\end{equation}
-In official financial terms $r$ is the \emph{annual rate of return}, or APR.
-So to find the APR of her mutual fund return, Helen wants to solve
-\begin{equation}
- 100 p_{4} \sum_{k=0}^{3} \frac{1}{p_k} = 100 r \frac{(1+r)^{1/4
-\end{equation}
-for $r$.  Of course, we can cancel the multiplicative factor of 100, so Patsy needs to solve the equation
-\begin{equation}
- p_{4} \sum_{k=0}^3 \frac{1}{p_k} = r \frac{(1+r)^{1/4}}{(1+r)^{1/4} - 1}.
-\end{equation}
-for $r$.  The stuff on the left is known, so let's name it $q$.  So Patsy needs to solve
-\begin{equation}
- q  = r \frac{(1+r)^{1/4}}{(1+r)^{1/4} - 1}.
-\end{equation}
-No amount of algebra tricks allow Patsy to solve this equation, so she decides to use a numerical
-method.  Her favorite method is fixed point iteration, but her first step is to convert the equation to a fixed point form.
-There are lots of ways to do this--we need to pick one and try it.  Here is one way
-\begin{equation}
-   r  = q \frac{(1+r)^{1/4} - 1}{(1+r)^{1/4} }
-\end{equation}
-
+   q = z + z^2 + z^3 + z^4
+ \end{equation} 
+ for $z$.   Let's use fixed point iteration to do do this.  There are lots of ways to convert this equation to fixed point form; here is one way
+ \begin{equation}
+   z = q  - \left (z^2 + z^3 + z^4\right).
+ \end{equation} 
+ 
  \begin{parts}
  
- \part [5] Use Gadfly to graph the function $r  \mapsto  r  \frac{(1+r)^{1/4}}{(1+r)^{1/4} - 1}$ on 
- the interval $r \in [-1,1]$.  With a return of 100\% (that is, $r = 1$), what is the account balance 
- on the last day of the year?
+ \part [5] Suppose $q = 4.35$.  Use Gadfly to graph both $z \mapsto z$ and $z \mapsto  q  - \left (z^2 + z^3 + z^4\right)$ on the same graph.
+ Do you think the fixed point sequence will converge?  Explain.
  
- \part [5] Suppose $q = 4.35$. (This means after investing a total of \$400 for the year, her account value at the end of the year is \$435, for a total gain of \$35 for the year.).  Use Gadfly to graph both $r \mapsto r$ and 
- $r \mapsto  4.35 \frac{(1+r)^{1/4} - 1}{(1+r)^{1/4} }$.  Based on this graph, do you expect that a fixed point sequence will converge?  Explain.
+ \part [5]   For best convergence of a fixed point sequence for a function $F$, we would like the derivative of $F$ be zero at the fixed point.  And that gives and idea.  Instead of using the fixed point method on the function $F = z \mapsto q - \left(z^4 + z^3 + z^2 + z\right)$, let's find the fixed point
+ sequence of $G = z \mapsto F(z) + s (F(z) - z)$, where $s$ is some real number. The functions $F$ and $G$ have the same fixed points--let's choose
+ the number $s$ so that $G^\prime(1) = 0$.  Thus $0 = F'(1) + s(F^\prime(1)  -1)$. But $F^\prime(1) = -9$, so we want $s = -\frac{9}{10}$. This choice gives $G = z \mapsto \frac{1}{10} F(z) + \frac{9}{10} z$.
  
- \part [5] Write  a Julia function \texttt{APR} that takes the five share prices $p_0, p_1, p_2, p_3, p_4$ and returns
- the solution to the equation 
- \begin{equation}
- p_{4} \sum_{k=0}^3 \frac{1}{p_k} = r \frac{(1+r)^{1/4}}{(1+r)^{1/4} - 1}.
- \end{equation}
- To solve the equation, use fixed point iteration.   Check your answers against
+ Use Gadfly to graph both $z \mapsto z$ and $z \mapsto  \frac{1}{10} F(z) + \frac{9}{10} z$ on the same graph.  Do you think this fixed point sequence will converge?  Explain. 
  
-\begin{verbatim}
-julia> APY(1.0,1.0,1.0,1.0,1.0) 
-         0.00
+ \part [5] Used fixed point iteration to find the fixed point of $z \mapsto  \frac{1}{10} F(z) + \frac{9}{10} z$.
+ 
+ 
 
-
-\end{verbatim}
  
 \end{parts}
 \end{questions}
