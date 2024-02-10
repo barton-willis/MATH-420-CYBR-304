@@ -1,11 +1,9 @@
 \documentclass[12pt,fleqn]{exam}
-\usepackage{pifont}
-\usepackage{dingbat}
+%\usepackage{pifont}
+%\usepackage{dingbat}
 \usepackage{amsmath,amssymb}
 \usepackage{fleqn}
 \usepackage{epsfig}
-%\usepackage{mathptm}
-%\usepackage{euler}
 \usepackage{bbding}
 \usepackage{url}
 \addpoints
@@ -112,7 +110,7 @@ Your recorded score will be scaled to twenty points. The point
 value for each question or part of a question is in the box following each question or part of a question.
 This work is due \textbf{Saturday 17 Feb  } at 11:59 \PM.  
 
-For this assignment, convert your  Jupyter notebook (a IPYNB file)
+For this assignment, convert your Jupyter notebook (a IPYNB file)
  to HTML and submit the HTML file to Canvas. To convert you Jupyter notebook to HTML, do File --> Download as --> HTML. (For the File menu, look toward the 
  upper right corner.)
  
@@ -125,15 +123,19 @@ For this assignment, convert your  Jupyter notebook (a IPYNB file)
  \end{equation} 
  for $z$.   When $q=4$, the solution to the equation $ q = z + z^2 + z^3 + z^4$ is $z=1$. From now on, we'll choose $q = 4.35$.
  
- Let's use fixed point iteration to do do this.  There are lots of ways to convert this equation to fixed point form; here is one way
+ Let's use fixed point iteration to do this.  There are lots of ways to convert this equation to fixed point form; here is one way
  \begin{equation}
-   z = 4.35  - \left (z^2 + z^3 + z^4\right).
+   z = 4.35  - \left(z^2 + z^3 + z^4\right).
  \end{equation} 
  
  \begin{parts}
  
- \part [5] Use Gadfly to graph both $z \mapsto z$ and $z \mapsto  4.35  - \left (z^2 + z^3 + z^4\right)$ on the same graph. 
- Recalling that the solution is near $z=1$, try looking at this graph on the interval $[0,1.5]$.  Do you think the fixed point sequence will converge?  Explain.
+ \part [5] Use Gadfly to graph both $z \mapsto z$ and $z \mapsto  4.35  - \left(z^2 + z^3 + z^4\right)$ on the same graph. 
+ Recalling that the solution is near $z=1$, try looking at this graph on the interval $[0,1.5]$.  
+ Do you think the fixed point sequence will converge? Explain. \textbf{Remember} for a fixed point
+ $x^\star$ for a function $F$, the fixed point sequence will converge to  $x^\star$
+ when $|F^\prime(x^\star) | < 1$ and the initial value of the sequence is sufficiently
+ close to the fixed point.
  
  \part [5]   For best convergence of a fixed point sequence for a function $F$, we would like the derivative of $F$ be zero at the fixed point.  And that gives an idea.  Instead of using the fixed point method on the function 
  \begin{equation}
@@ -145,7 +147,7 @@ For this assignment, convert your  Jupyter notebook (a IPYNB file)
  \end{equation}
  where $s$ is some real number.  Provided that $s \neq -1$, the functions $F$ and $G$ have identical fixed points.  For best 
  convergence of a fixed point sequence for $G$, we want the derivative of $G$ to vanish at the fixed point. We know that the 
- fixed point is near 1, so let's choose  the number $s$ so that $G^\prime(1) = 0$.  Thus $0 = F'(1) + s(F^\prime(1)  -1)$. But $F^\prime(1) = -9$, so we want $s = -\frac{9}{10}$. This choice gives $G = z \mapsto \frac{1}{10} F(z) + \frac{9}{10} z$.
+ fixed point is near 1, so let's choose  the number $s$ so that $G^\prime(1) = 0$.  Thus, $0 = F'(1) + s(F^\prime(1)  -1)$. But $F^\prime(1) = -9$, so we want $s = -\frac{9}{10}$. This choice gives $G = z \mapsto \frac{1}{10} F(z) + \frac{9}{10} z$.
  
  \quad Use Gadfly to graph both $z \mapsto z$ and $z \mapsto  \frac{1}{10} F(z) + \frac{9}{10} z$ on the same graph.  Do you think this fixed point sequence will converge?  Explain. 
  
