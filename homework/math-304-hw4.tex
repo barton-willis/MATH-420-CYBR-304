@@ -80,7 +80,7 @@
     \item[]}
   {\end{list}}
   
-\newcommand{\quiz}{3}
+\newcommand{\quiz}{4}
 \newcommand{\term}{Spring}
 \usepackage{units}
 \usepackage{xspace}
@@ -110,7 +110,7 @@
 \noindent  Homework \quiz\/  has questions 1 through  \numquestions \/ with a total of of  \numpoints\/  points. 
 Your recorded score will be scaled to twenty points. The point
 value for each question or part of a question is in the box following each question or part of a question.
-This work is due \textbf{Saturday 10 Feb  } at 11:59 \PM.  
+This work is due \textbf{Saturday 17 Feb  } at 11:59 \PM.  
 
 For this assignment, convert your  Jupyter notebook (a IPYNB file)
  to HTML and submit the HTML file to Canvas. To convert you Jupyter notebook to HTML, do File --> Download as --> HTML. (For the File menu, look toward the 
@@ -119,25 +119,35 @@ For this assignment, convert your  Jupyter notebook (a IPYNB file)
  \begin{questions}
  
  \question This week's assignment is motivated by a problem in financial math. But we'll skip the details of the origin of the problem and skip directly 
- to the numerical analysis.  For various value of the number $q$, we need to solve the equation
+ to the numerical analysis.  For various value of the number $q$ that are close to four, we need to solve the equation
  \begin{equation}
    q = z + z^2 + z^3 + z^4
  \end{equation} 
- for $z$.   Let's use fixed point iteration to do do this.  There are lots of ways to convert this equation to fixed point form; here is one way
+ for $z$.   When $q=4$, the solution to the equation $ q = z + z^2 + z^3 + z^4$ is $z=1$. From now on, we'll choose $q = 4.35$.
+ 
+ Let's use fixed point iteration to do do this.  There are lots of ways to convert this equation to fixed point form; here is one way
  \begin{equation}
-   z = q  - \left (z^2 + z^3 + z^4\right).
+   z = 4.35  - \left (z^2 + z^3 + z^4\right).
  \end{equation} 
  
  \begin{parts}
  
- \part [5] Suppose $q = 4.35$.  Use Gadfly to graph both $z \mapsto z$ and $z \mapsto  q  - \left (z^2 + z^3 + z^4\right)$ on the same graph.
- Do you think the fixed point sequence will converge?  Explain.
+ \part [5] Use Gadfly to graph both $z \mapsto z$ and $z \mapsto  4.35  - \left (z^2 + z^3 + z^4\right)$ on the same graph. 
+ Recalling that the solution is near $z=1$, try looking at this graph on the interval $[0,1.5]$.  Do you think the fixed point sequence will converge?  Explain.
  
- \part [5]   For best convergence of a fixed point sequence for a function $F$, we would like the derivative of $F$ be zero at the fixed point.  And that gives and idea.  Instead of using the fixed point method on the function $F = z \mapsto q - \left(z^4 + z^3 + z^2 + z\right)$, let's find the fixed point
- sequence of $G = z \mapsto F(z) + s (F(z) - z)$, where $s$ is some real number. The functions $F$ and $G$ have the same fixed points--let's choose
- the number $s$ so that $G^\prime(1) = 0$.  Thus $0 = F'(1) + s(F^\prime(1)  -1)$. But $F^\prime(1) = -9$, so we want $s = -\frac{9}{10}$. This choice gives $G = z \mapsto \frac{1}{10} F(z) + \frac{9}{10} z$.
+ \part [5]   For best convergence of a fixed point sequence for a function $F$, we would like the derivative of $F$ be zero at the fixed point.  And that gives an idea.  Instead of using the fixed point method on the function 
+ \begin{equation}
+ F(z)  =  4.35 - \left(z^4 + z^3 + z^2 \right),
+ \end{equation}
+ let's find the fixed point  sequence of 
+ \begin{equation}
+ G(z)  =  F(z) + s (F(z) - z), 
+ \end{equation}
+ where $s$ is some real number.  Provided that $s \neq -1$, the functions $F$ and $G$ have identical fixed points.  For best 
+ convergence of a fixed point sequence for $G$, we want the derivative of $G$ to vanish at the fixed point. We know that the 
+ fixed point is near 1, so let's choose  the number $s$ so that $G^\prime(1) = 0$.  Thus $0 = F'(1) + s(F^\prime(1)  -1)$. But $F^\prime(1) = -9$, so we want $s = -\frac{9}{10}$. This choice gives $G = z \mapsto \frac{1}{10} F(z) + \frac{9}{10} z$.
  
- Use Gadfly to graph both $z \mapsto z$ and $z \mapsto  \frac{1}{10} F(z) + \frac{9}{10} z$ on the same graph.  Do you think this fixed point sequence will converge?  Explain. 
+ \quad Use Gadfly to graph both $z \mapsto z$ and $z \mapsto  \frac{1}{10} F(z) + \frac{9}{10} z$ on the same graph.  Do you think this fixed point sequence will converge?  Explain. 
  
  \part [5] Used fixed point iteration to find the fixed point of $z \mapsto  \frac{1}{10} F(z) + \frac{9}{10} z$.
  
