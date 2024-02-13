@@ -116,8 +116,11 @@ For this assignment, convert your Jupyter notebook (a IPYNB file)
  
  \begin{questions}
  
- \question This week's assignment is motivated by a problem in financial math. But we'll skip the details of the origin of the problem and skip directly 
- to the numerical analysis.  For various value of the number $q$ that are close to four, we need to solve the equation
+ \question I derived this week's assignment from a problem in 
+ financial math. But we'll skip the details of the origin of the 
+ problem and skip directly  to the numerical analysis.  For various 
+ value of the number $q$ that are close to four, we need to solve 
+ the equation
  \begin{equation}
    q = z + z^2 + z^3 + z^4
  \end{equation} 
@@ -137,7 +140,10 @@ For this assignment, convert your Jupyter notebook (a IPYNB file)
  when $|F^\prime(x^\star) | < 1$ and the initial value of the sequence is sufficiently
  close to the fixed point.
  
- \part [5]   For best convergence of a fixed point sequence for a function $F$, we would like the derivative of $F$ be zero at the fixed point.  And that gives an idea.  Instead of using the fixed point method on the function 
+ \part [5]   For best convergence of a fixed point sequence for a function $F$, we would like the derivative of $F$ to be zero,
+ or at least close to zero, at the 
+ fixed point.  And that gives an idea.  Instead of using the fixed point method 
+ on the function 
  \begin{equation}
  F(z)  =  4.35 - \left(z^4 + z^3 + z^2 \right),
  \end{equation}
@@ -157,6 +163,21 @@ For this assignment, convert your Jupyter notebook (a IPYNB file)
 
  
 \end{parts}
+
+
+
 \end{questions}
 
 \end{document}
+
+\tiny
+$$\mathbf{block}\;\left(\left[ {\it \%}_{1} , {\it \%}_{2} , 
+ {\it \%}_{3} , {\it \%}_{4} \right]  , {\it \%}_{1}:{{\sqrt{256\,q^3
+ +203\,q^2+88\,q+16}}\over{2\,\sqrt{3}^3}}+{{-4\,q-3\,\left(-3\,q-1
+ \right)-1}\over{6}}+{{1}\over{27}} , {\it \%}_{2}:{\it \%}_{1}^{{{1
+ }\over{3}}} , {\it \%}_{3}:{{1}\over{{\it \%}_{2}}} , {\it \%}_{4}:
+ \sqrt{{\it \%}_{3}\,\left(36\,{\it \%}_{1}^{{{2}\over{3}}}-15\,
+ {\it \%}_{2}-48\,q-8\right)} , {{\sqrt{{{15}\over{2\,{\it \%}_{4}}}-
+ {\it \%}_{2}+\left({{4\,q+1}\over{3}}+{{-1}\over{9}}\right)\,
+ {\it \%}_{3}-{{5}\over{6}}}}\over{2}}-{{{\it \%}_{4}}\over{12}}+{{-1
+ }\over{4}}\right)$$
