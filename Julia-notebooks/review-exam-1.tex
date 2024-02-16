@@ -1,0 +1,250 @@
+\documentclass[12pt,fleqn]{exam}
+\usepackage{algorithmic,url,calc,amsmath}
+\usepackage{amsopn}
+\renewcommand{\algorithmicensure}{\textbf{Return:}}
+\newenvironment{alphalist}{
+  \vspace{-0.4in}
+  \begin{enumerate}[(a)]g
+    \addtolength{\itemsep}{-1.2\itemsep}}
+  {\end{enumerate}}
+
+\newcommand{\integers}{\mathbf{Z}}
+\newcommand{\reals}{\mathbf{R}}
+\newcommand{\complex}{\mathbf{C}}
+\DeclareMathOperator{\rel}{rel}
+\DeclareMathOperator{\fl}{fl}
+\usepackage{fourier}
+\usepackage{color}\shadedsolutions
+\definecolor{SolutionColor}{rgb}{1,1,0.7}
+
+\addpoints
+\boxedpoints
+\pointsinmargin
+\pointname{pts}
+\begin{document}
+\begin{flushleft}
+
+
+{\bf
+  CYBR 304 \\
+   Spring \the\year\\
+  Review for First Examination
+}
+\end{flushleft}
+
+
+\begin{questions}
+
+
+\question  A floating point number of the type UNK has the form $\pm b_0.b_1 b_2 b_3 b_4 \times 2^e$, where
+$b_0$ through $b_4$ are bits and the exponent $e$ is an integer such that $-4 \leq e \leq 3$.  The bit $b_0$ is
+not stored--it defaults to 1.
+
+\begin{parts}
+
+\part  Find the \emph{largest} positive number of the type UNK.
+
+\part Find the \emph{smallest positive} number of the type UNK.
+
+\end{parts}
+
+ \question [5] The standard deviation \(\sigma\) of a list of two or more real numbers \(x_1, x_2, \dots, x_n\) is 
+\[
+   \sigma = \sqrt{\frac{\sum_{k=1}^n (x_k - \bar x)^2}{n}},
+\]
+where 
+\(
+ \bar x = \frac{\sum_{k=1}^n x_k }{n}.
+\)
+An alternative formula for \(\sigma\) is 
+\[
+   \sigma = \sqrt{\frac{\sum_{k=1}^n x_k^2  -  \left(\sum_{k=1}^n  x_k \right)^2/n}{n}}.
+\]
+For floating point evaluatation, which formula should you perfer?  Explain.
+\begin{solution}%[2.5in]
+
+\end{solution}
+
+%\newpage
+
+ \question[5]  Let \(a\) and \(b\) be  numbers and let \(\oplus\) be floating point addition.  Show that
+\[
+     \left|  (a  \oplus b)  - (a + b)   \right|  \leq \varepsilon_m  \left ( |a| + |b|  + \left |a + b \right|  \right)  +  \varepsilon_m^2 (| a|  + |b| ).
+ \]
+
+\begin{solution}%[3.5in]
+
+\end{solution}
+
+
+\question[5]  The sequence  \(\displaystyle k \mapsto 8 + \frac{1}{8^k} \) converges to 5. Show that the sequence 
+ converges to 5 \emph{linearly}.
+
+
+\begin{solution}%[3.5in]
+
+\end{solution}
+
+
+
+\question Define a sequence \(F\), by \(F_{k+1} = \begin{cases}  1  & \mbox{ if } k =-1  \\  1 - \frac{1}{2} F_k   & \mbox{ otherwise} \\  \end{cases} \).
+
+\begin{parts}
+
+\part[5]  Assuming \(F\) converges,  show that \(F\) converges to \(2/3\).
+\begin{solution}%[3.5in]
+
+\end{solution}
+\part[5]  Again assuming \(F\) converges,  show that \(F\) converges linearly.
+\begin{solution}%[3.5in]
+
+\end{solution}
+
+\end{parts}
+
+%\newpage
+
+
+\question [5]  Explain how given a term  in the Newton  sequence, how is the next term determined?  Draw a labeled graph that helps explain.
+\begin{solution}%[3.5in]
+
+\end{solution}
+\question The function \(G(x) = (x^2 - 3 x + 4)/2 \) has a fixed point at 1.  For an intial value that is close to 1, do you expect the fixed point sequence for \(G\) to converge or to diverge?  Why.
+
+\question The function \(H(x) = x^2 - 4 x + 4 \) has a fixed point at 1.  For an intial value that is close to 1, do you expect the fixed point sequence for \(H\) to converge or to diverge?  Why.
+
+
+\question For real numbers \(x\) and \(y\), you need to compute
+\(
+     \sqrt{\sqrt{{{y}^{2}}+{{x}^{2}}}+x}.
+    \)
+An alternative formula for this expression is
+\(\frac{\left| y\right| }{\sqrt{\sqrt{{{y}^{2}}+{{x}^{2}}}-x}}\).  
+
+\begin{parts}
+
+\part When \(x < 0\), from the point of view of accuracy, which expression should you use?  Why?
+
+\part When \(x >  0\), from the point of view of accuracy, which expression should you use?  Why?
+\end{parts}
+
+
+\question Understand the function \(\fl\) (See page 36) and its property 
+\[
+    \left | \fl(x) - x \right|  \leq |x| \varepsilon_m
+\] 
+
+\item  Know what we mean by subtractive cancellation.  You should be able to give an example of subtractive cancellation. 
+
+\textbf{Example:}  Suppose \(x = 3.14 \pm 0.01\) and \(y = 3.12 \pm 0.01\).  Thus \(x\) and \(y\) are known accurate to two decimal places. But the difference of these numbers \(x - y\) is a number in the interval \((0, 0.2)\). In \(\pm\) language,
+we have \(x - y = 0.1 \pm 0.1\).  Thus although \(x\) and \(y\) are known to be accurate to two decimal places,  the difference \(x - y\) is known accurately to zero digits. This is known as subtractive cancellation.
+
+
+
+
+\question Know the rule that for floating point addition of two floats that \(x  \oplus y = (x + y) (1 + \varepsilon) \), where \(|\varepsilon| \leq \varepsilon_m\).  Using this rule, be able to show that for floats \(a\) and \(b\), we have
+\[
+     \left|  a  \oplus b - (a + b)   \right|  \leq \varepsilon_m   \left |a + b \right| .
+ \]
+
+
+\question Understand the derivation and the significance of the result
+\[
+   \left | \frac{x + y -  (\fl(x) + \fl(y))}{x + y}  \right|  \leq \varepsilon_m \frac{|x| + |y|}{|x + y|}.
+\]
+
+
+
+
+
+%\question Know what it means for a function to have a simple zero and a multiple zero (classnotes, page 46, \S1.3).
+
+%\question Know how the secant sequence is defined. Know how to determine its next term from the pervious two terms.
+
+\question Know how the Newton  sequence is defined. Know how to determine its next term from the pervious term.
+
+\question Know what it means for a function to have a fixed point.
+
+\question Know how the fixed point sequence is defined. 
+
+\question Know how to prove that if a fixed point sequence converges, that it converges to a fixed point of the
+function.
+
+
+\question Know what it means for a sequence to converge linearly (page 54).  
+
+
+\question Know what it means for a sequence to converge quadraticaly  (page 54).  
+
+
+
+
+
+
+\question Find the \emph{fixed points} of the function \(x \mapsto {{10\,\left(1-x\right)\,\left(2-x\right)}\over{3}}\).
+
+
+
+
+\question  The sequence  \(\displaystyle k \mapsto 5 + \frac{1}{8^k} \) converges to 5. Show that the sequence 
+ converges to 5 \emph{linearly}.
+
+
+
+
+
+
+\question Given that a sequence \(F\) converges to 1, what does it mean to say that \(F\) converges to 1 \emph{linearly}?
+
+
+\question Show that the sequence \(\displaystyle k \mapsto 1 + \left(\frac{1}{2} \right)^k \) converges to 1 \emph{linearly}.
+
+
+
+
+\question  Although \(\displaystyle \sqrt{1+x} - 1 =
+\frac{x}{\sqrt{1+x} + 1}\) is an identity, for floating point
+evaluation one formula should be
+preferred over the other when \(x\) is near zero.
+Which formula is better when \(x\) is near zero
+and why?
+\end{questions}
+
+\end{document}
+
+
+\question  Although \(\displaystyle \sqrt{1+x} - 1 =
+\frac{x}{\sqrt{1+x} + 1}\) is an identity, for floating point
+evaluation one formula should be
+preferred over the other when \(x\) is near zero.
+Which formula is better when \(x\) is near zero
+and why?
+
+\vspace{2.0in}
+
+
+
+
+
+\question  Let \(a\) be a floating point number and let
+\(\varepsilon_M\) be the machine epsilon.  Find an upper
+bound for
+\(
+  \left | 1 \oplus a \otimes a  - (1 + a^2)\right|
+\).
+
+%\vspace*{2.5in}
+
+
+
+
+
+\question Draw a nicely labled diagram and show a derivation of the recursive formula for the Newton squence.
+
+\question Know what it means for a sequence to converge linearly.
+
+
+
+\end{questions}
+\end{document}
+
