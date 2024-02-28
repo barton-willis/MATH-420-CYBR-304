@@ -1,0 +1,218 @@
+\documentclass[12pt,fleqn]{exam}
+%\usepackage{pifont}
+%\usepackage{dingbat}
+\usepackage{amsmath,amssymb}
+\usepackage{fleqn}
+\usepackage{epsfig}
+\usepackage{bbding}
+\usepackage{url}
+\addpoints
+\boxedpoints
+\pointsinmargin
+\pointname{pts}
+
+\usepackage{xcolor}
+\usepackage{framed}
+\colorlet{shadecolor}{lightgray!15}
+\newenvironment{myproof}
+  {\begin{shaded}\begin{proof}}
+  {\end{proof}\end{shaded}}
+\shadedsolutions
+\definecolor{SolutionColor}{rgb}{0.951,0.951,0.951}
+
+\usepackage{amsthm}
+\newtheorem{prop}{Proposition}
+\usepackage[letterpaper, portrait, margin=0.75in]{geometry}
+\usepackage[final]{microtype}
+\usepackage[american]{babel}
+%\usepackage[T1]{fontenc}
+\usepackage{fourier}
+\usepackage{isomath}
+\usepackage{upgreek,amsmath}
+\usepackage{amssymb}
+%\usepackage[euler-digits,euler-hat-accent,T1]{eulervm}
+
+\newcommand{\dotprod}{\, {\scriptzcriptztyle
+    \stackrel{\bullet}{{}}}\,}
+
+\newcommand{\reals}{\mathbf{R}}
+\newcommand{\complex}{\mathbf{C}}
+\newcommand{\dom}{\mbox{dom}}
+\newcommand{\cover}{{\mathcal C}}
+\newcommand{\rat}{\mathbf{Q}}
+
+\newcommand{\curly}[1]{\mathcal #1}
+\newcommand{\integers}{\mathbf{Z}}
+\newcommand{\vi}{\, \mathbf{i}}
+\newcommand{\vj}{\, \mathbf{j}}
+\newcommand{\vk}{\, \mathbf{k}}
+\newcommand{\bi}{\, \mathbf{i}}
+\newcommand{\bj}{\, \mathbf{j}}
+\newcommand{\bk}{\, \mathbf{k}}
+\DeclareMathOperator{\Arg}{\mathrm{Arg}}
+\DeclareMathOperator{\Ln}{\mathrm{Ln}}
+\newcommand{\imag}{\, \mathrm{i}}
+\newcommand{\range}{\mathrm{range}}
+\newcommand{\true}{\mathrm{True}}
+\newcommand{\saw}{\mathrm{saw}}
+\newcommand{\fl}{\mathrm{Fl}}
+\newcommand{\mach}{\varepsilon_m}
+\newcommand{\HM}{\mathrm{HM}}
+\newcommand{\Inf}{\mathrm{Inf}}
+\usepackage{enumerate}
+\usepackage{verbatim}
+\newenvironment{alphalist}{
+  \begin{enumerate}[(a)]
+    \addtolength{\itemsep}{-0.5\itemsep}}
+  {\end{enumerate}}
+ 
+\usepackage{amsthm}
+\newtheorem{Rubbish}{Theorem}
+\usepackage{graphicx}
+
+%\usepackage{tgschola} %to look retro
+\newenvironment{mypar}[2]
+  {\begin{list}{}%
+    {\setlength\leftmargin{#1}
+    \setlength\rightmargin{#2}}
+    \item[]}
+  {\end{list}}
+  
+\newcommand{\quiz}{5}
+\newcommand{\term}{Spring}
+\usepackage{units}
+\usepackage{xspace}
+\makeatletter
+\DeclareRobustCommand{\maybefakesc}[1]{%
+  \ifnum\pdfstrcmp{\f@series}{\bfdefault}=\z@
+    {\fontsize{\dimexpr0.8\dimexpr\f@size pt\relax}{0}\selectfont\uppercase{#1}}%
+  \else
+    \textsc{#1}%
+  \fi
+}
+\newcommand\AM{\,\maybefakesc{am}\xspace}
+\newcommand\PM{\,\maybefakesc{pm}\xspace}
+
+
+\usepackage{fancyvrb,newverbs,xcolor}
+\usepackage{lipsum}% just for this example
+
+\definecolor{cverbbg}{gray}{0.93}
+
+\newenvironment{cverbatim}
+ {\SaveVerbatim{cverb}}
+ {\endSaveVerbatim
+  \flushleft\fboxrule=0pt\fboxsep=.5em
+  \colorbox{cverbbg}{\BUseVerbatim{cverb}}%
+  \endflushleft
+}
+\newenvironment{lcverbatim}
+ {\SaveVerbatim{cverb}}
+ {\endSaveVerbatim
+  \flushleft\fboxrule=0pt\fboxsep=.5em
+  \colorbox{cverbbg}{%
+    \makebox[\dimexpr\linewidth-2\fboxsep][l]{\BUseVerbatim{cverb}}%
+  }
+  \endflushleft
+}
+
+\newcommand{\ctexttt}[1]{\colorbox{cverbbg}{\texttt{#1}}}
+\newverbcommand{\cverb}
+  {\setbox\verbbox\hbox\bgroup}
+  {\egroup\colorbox{cverbbg}{\box\verbbox}}
+\begin{document}
+\vspace{0.1in}
+\noindent\makebox[3.0truein][l]{ \textbf{CYRR 304}}
+{\bf Name:}  \\
+\noindent \makebox[3.0truein][l]{\textbf{Homework \quiz, \term \/ \the\year}}
+%{\bf Row:}\hrulefill\
+\vspace{0.1in}
+
+\begin{quote}
+\emph{“Is it hard?' Not if you have the right attitudes. It's having the right attitudes that's hard.”} \\ $\phantom{xxx} $ \hfill {\sc Robert Pirsig}
+\end{quote}
+
+\noindent  Homework \quiz\/  has questions 1 through  \numquestions \/ with a total of of  \numpoints\/  points. 
+Your recorded score will be scaled to twenty points. The point
+value for each question or part of a question is in the box following each question or part of a question.
+This work is due \textbf{Saturday 2 March  } at 11:59 \PM.  
+
+For this assignment, convert your Jupyter notebook (a IPYNB file)  to HTML and submit the HTML file to Canvas.
+
+\begin{questions}
+
+\question [10] Write a Julia function \texttt{PR} (page rank) that does fixed point iteration on a stochastic matrix.   This is a
+simplified version of the Google Page Rank algorithm. Specifically,  for a stochastic matrix
+$M$, the function should find the terms of the recursively defined sequence $p$ defined as
+\begin{equation*}
+    p_{k} = \begin{cases} p_0 & k = 0 \\    M p_{k-1}  & k  \in \integers_{\geq 1}  \end{cases}.
+\end{equation*}
+For $p_0$, use a column vector whose elements are all given by $1/n$, where $n$ is the number of rows of the matrix $M$.  The Julia function \texttt{size} returns the size of a matrix as a two-tuple; for example
+
+\begin{cverbatim}
+julia> size([1/2 1/3 0; 0 1/3 1/2; 1/2 1/3 1/2])
+       (3,3)
+\end{cverbatim}
+To construct $p_0$, use a Julia array comprehension;  for example
+\begin{cverbatim}
+julia> mat = [1/2 1/3 0; 0 1/3 1/2; 1/2 1/3 1/2];
+
+julia> (m,n) = size(mat);
+
+julia> p0 = [[1/m] for k=1:m]
+
+3-element Vector{Vector{Float64}}:
+ [0.3333333333333333]
+ [0.3333333333333333]
+ [0.3333333333333333]
+
+\end{cverbatim}
+
+The function \texttt{PR} should stop finding terms of the fixed point sequence when consecutive terms $p_k$ and $p_{k+1}$ satisfy 
+$\| p_k - p_{k+1} \|_{\infty}  < \text{tol}$, where the positive number $\text{tol}$ is a user-supplied tolerance.  To find the infinity norm, use the function \texttt{norm}. To use this function, you will need
+to use the Julia package manager to install the package \texttt{LinearAlgebra}.  After you have installed and loaded this package, 
+you can find the infinity norm using 
+\begin{cverbatim}
+julia> norm([[1],[-4], [-2024]],Inf)
+     2024
+\end{cverbatim}
+
+When the stopping criteria is never satisfied, your code should give an error ``Fixed point sequence diverges or converges too slowly.''
+
+Let's give our function function keyword arguments to both the stopping tolerance \texttt{tol} and for the maximum number of
+iterations \texttt{maxiter}. Specifically, define your function as
+
+\begin{cverbatim}
+function PR(mat::Matrix; tol = sqrt(eps(eltype(mat))), maxiter::Int64 = 50)
+\end{cverbatim}
+
+\question[10] Test your function \texttt{PR} on the four inputs
+\begin{cverbatim}
+PR([1/2 1/3 0; 0 1/3 1/2; 1/2 1/3 1/2])
+3-element Vector{Vector{Float64}}:
+ [0.22222222753502474]
+ [0.3333333285777581]
+ [0.4444444438872168]
+ 
+ PR([0.0 1.0; 1.0 0.0])
+ 2-element Vector{Vector{Float64}}:
+ [0.5]
+ [0.5]
+ 
+ PR( [1 0.1 0 0 ; 0 0 0 1; 0 0 1 0; 0 0.9 0 0])
+ Fixed point sequence diverges or converges too slowly.
+ 
+ PR( [1 0.1 0 0 ; 0 0 0 1; 0 0 1 0; 0 0.9 0 0], maxiter=1000)
+ 4-element Vector{Vector{Float64}}:
+ [0.7499997441900677]
+ [1.3463680648771707e-7]
+ [0.25]
+ [1.2117312583894537e-7]
+ 
+\end{cverbatim}
+
+Your values should be very close to the given values; if not, check your work to part `a,' and try again.
+
+\end{questions}
+
+\end{document}
