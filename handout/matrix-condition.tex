@@ -1,0 +1,439 @@
+\documentclass[usenames,dvipsnames,fleqn]{beamer}
+%\usetheme[height=7mm]{Rochester}
+\usetheme{Boadilla}
+
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{footline}[text line]{%
+\parbox{\linewidth}{\vspace*{-8pt}\hfill\insertshortauthor\hfill\insertpagenumber}}
+\setbeamertemplate{navigation symbols}{}
+\author[BW]{BW}
+
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+%\usepackage{isomath}
+\usepackage{comment}
+%\usepackage[dvipsnames]{color}
+%\usefonttheme{professionalfonts}
+%\usefonttheme{serif}
+
+\newcommand{\reals}{\mathbf{R}}
+\newcommand{\complex}{\mathbf{C}}
+\newcommand{\integers}{\mathbf{Z}}
+\DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\cond}{cond}
+\DeclareMathOperator{\domain}{domain}
+\DeclareMathOperator{\codomain}{codomain}
+\DeclareMathOperator{\sspan}{span}
+\DeclareMathOperator{\F}{F}
+\DeclareMathOperator{\G}{G}
+\DeclareMathOperator{\B}{B}
+
+\DeclareMathOperator{\fl}{fl}
+
+\DeclareMathOperator{\nullspace}{nullity}
+\theoremstyle{definition}
+\newtheorem{mydef}{Definition}
+\newtheorem{myex}{Example}
+\newtheorem{myth}{Theorem} 
+\newtheorem{myfact}{Fact}
+\newtheorem{metathm}{Meta Theorem}
+\newtheorem{Question}{Question}
+\newtheorem{Answer}{Qnswer}
+\newtheorem{myproof}{Proof}
+\newtheorem{hurestic}{Hurestic}
+
+\usepackage[english]{babel}
+\usepackage[final]{microtype}
+\usepackage[]{xcolor}
+%\usefonttheme{professionalfonts}
+%\usefonttheme{serif}
+\usepackage{courier}
+%\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true}
+%\lstset{framextopmargin=50pt,frame=bottomline}
+%\usepackage{lipsum}  % generates filler text
+
+
+%\begin{document}
+
+\usepackage[]{graphicx}
+
+\newcommand{\foo}{\hspace{-2.3pt}$\bullet$ \hspace{5pt}}
+
+%--------
+%usepackage[usenames,dvipsnames,svgnames,table]{color}
+
+\usepackage{comment}
+\usepackage{wrapfig}
+\begin{document}
+
+
+\begin{frame}{Small change, big effect}
+
+
+Small changes in inputs can cause big changes in the output. For example, the solution set to 
+\begin{align*}
+    1000 x - 1000 y &= -1000\\
+   1001 x - 1000 y &= -1000
+\end{align*}
+is \(x = 0, y = 1 \).  But the solution set to
+\begin{align*}
+    1000 x - 1000 y &= -1000 \\
+   1001 x - 1000 y &= -900
+\end{align*}
+is \(x=100,y=101\). 
+
+
+\begin{enumerate}
+
+\item  Decreasing the constant term in the second equation by 10\% from -1000 to  \(-900\), changes the solution set from \(x=0,y=1\) to 
+ \(x=100,y=101\). 
+ 
+ \item It's the butterfly effect.
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+In matrix form, these two sets of linear equations are
+\begin{align*}
+ \begin{bmatrix} 1000& -1000 \\ 1001 & -1000 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} &= 
+     \begin{bmatrix} -1000 \\ -1000 \end{bmatrix}, \\
+ \begin{bmatrix} 1000 & -1000 \\ 1001 & -1000 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} &= 
+     \begin{bmatrix} -1000 \\ -900 \end{bmatrix}.   
+\end{align*}
+
+\begin{enumerate}
+
+\item These linear equations have the same coefficient matrix and the constant terms differ by at most 10\%.
+
+\item But the solution sets are far apart. 
+
+\item The determinate of each coefficient matrix \(1000\).
+
+\item a  determinant near zero \emph{isn't} required for the butterfly effect.
+
+\item The solution set is the intersection of two lines that are nearly parallel.
+
+\item Something like nearly parallel lines \emph{is }  required for the butterfly effect.
+
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+Consider the linear equations
+\[
+   M x = y, \quad \widehat M  \, \widehat x = \widehat y.
+\]
+
+\begin{enumerate}
+
+\item Unhatted variables are the true value, and hatted variables are approximations to the true value.
+
+\item We might have, for example,
+\[
+   M = \begin{bmatrix} \pi & \sqrt{3} \\ \frac{1}{10} & 23 \end{bmatrix},  
+   \widehat M =   \begin{bmatrix} \fl(\pi) & \fl(\sqrt{3}) \\ \fl(\frac{1}{10}) & \fl(23) \end{bmatrix}
+   y = \begin{bmatrix} \frac{2}{3} \\ \frac{1}{42} \end{bmatrix}, 
+   \widehat y = \begin{bmatrix} \fl(\frac{2}{3}) \\ \fl(\frac{1}{42}) \end{bmatrix} 
+   \]
+where \(\fl\) rounds to the nearest float.
+
+\item We would like to bound \( \| x - \widehat x \| \).
+
+\item Let's not commit to a specfic norm.
+
+\item We'll assume that both \(M\) and \(\widehat M \) have inverses.
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+
+We know something about \(\| y - \widehat y\| \) and  \( \| M  - \widehat M \| \), but we know nothing directly about
+\(M^{-1} y - \widehat M^{-1} \widehat y\); thus
+\begin{align*}
+   x - \widehat x &= M^{-1} y - \widehat M^{-1} \widehat y, \\
+       &=M^{-1} \left(y - \widehat y + \widehat y \right)  - \widehat M^{-1} \widehat y, &(\mbox{add and subtract}), \\
+       &= M^{-1} \left(y - \widehat y \right) + \left(M^{-1} - \widehat M^{-1} \right) \widehat y.  &(\mbox{regroup})\\
+\end{align*}
+So
+\begin{align*}
+  \|  x - \widehat x \| &= \|M^{-1} \left(y - \widehat y \right) + \left(M^{-1} - \widehat M^{-1} \right) \widehat y \|,\\
+       &\leq  \|M^{-1} \left(y - \widehat y \right) \| + \| \left(M^{-1} - \widehat M^{-1} \right) \widehat y \|. &(\mbox{triangle inquality})
+\end{align*}
+We'll bound each term of the last two terms separately.
+
+\end{frame}
+\begin{frame}
+
+\begin{align*}
+   \|M^{-1} \left(y - \widehat y \right) \| &\leq \| M^{-1} \| \| y - \widehat y  \|,  &(\mbox{basic norm fact}) \\
+               &\leq  \varepsilon_m \| M^{-1} \| y  \|, &(\mbox{assumption}) \\
+               &= \varepsilon_m \| M^{-1} \| M x  \|,  &(\mbox{defintion of } x ), \\
+               &=  \varepsilon_m \| M^{-1} \|  \| M  \| \|x  \|.  &(\mbox{basic norm fact}) 
+\end{align*}
+\end{frame}
+
+\begin{frame}
+
+Bounding the other term \( \left(M^{-1} - \widehat M^{-1} \right) \widehat y \) is tricky. A good warmup 
+is a simple algebra fact:
+
+\textbf{Warmup}  For \(a,b \in \reals_{\neq 0}\), we have
+\[
+   a^{-1} - b^{-1} = \frac{1}{a} - \frac{1}{b} = \frac{b-a}{a b} = a^{-1} (b - a) b^{-1}
+\]
+
+
+\textbf{Fact} If \(a\) and \(b\) are invertible matrices, then
+\[
+    a^{-1} - b^{-1} = a^{-1} (b - a) b^{-1}.
+\]
+But for matrices \(a\) and \(b\), the expression  \(\frac{b-a}{a b}\) is ambiguoyus .
+
+
+\end{frame}
+\begin{frame}
+ \begin{align*}
+    \left(M^{-1} - \widehat M^{-1} \right) \widehat y &= M^{-1} (\widehat M - M) \widehat M^{-1} \widehat y, \\
+    &=   M^{-1} (\widehat M - M) \widehat x.
+ \end{align*}
+ The norm is bounded by
+ \begin{align*}
+  \| \left(M^{-1} - \widehat M^{-1} \right) \widehat y \| &= \| M^{-1} \| 
+     \|  \widehat M - M \| \|\widehat x \|, \\
+     &\leq  \varepsilon_m  \| M^{-1} \|  \| M \|  \|\widehat x \|.
+ \end{align*} 
+ The product  \(\| M^{-1} \|  \| M \| \) appears in the upper bounds for both of our terms. Let's name it:
+ \[
+    \cond_M = \| M^{-1} \|  \| M \|.
+ \]
+ We've shown that 
+ \[
+    \| x - \widehat x \| \leq \varepsilon_m \cond_M \left (\| x \| + \| \widehat x \| \right).
+ \]
+\end{frame}
+\begin{frame}
+Final refinement:
+\begin{align*} 
+    \| x - \widehat x \| & \leq \varepsilon_m \cond_M \left (\| x \| + \| \widehat x - x + x \| \right), \\
+                &\leq  \varepsilon_m \cond_M \left (\| x \| + \| \widehat x - x  \| + \| x \| \right).
+ \end{align*}
+ Combining the \(\| x - \widehat x \| \) terms on the left and the right and assuming 
+ \(1 - \varepsilon_m \cond_M   > \) gives
+ \[
+     \| x - \widehat x \| \leq \varepsilon \frac{2 \cond_M}{1 - \varepsilon_m \cond_M } \| x \| .
+ \]
+\end{frame}
+\end{document}
+\begin{frame}[fragile]{Famous matrix reduction}
+
+Step \#1, eliminate in the first column
+\[
+  \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix} 
+     \begin{matrix}  \phantom{1}  \\ R_2 \leftarrow R_2 - 4 R_1  \\ R_3 \leftarrow R_3 - 7 R_1  \end{matrix}
+     \begin{bmatrix} 1 & 2 & 3 \\ 0 & -3 & -6 \\ 0 & -6 & -12 \end{bmatrix}
+\]
+\begin{enumerate}
+ \item The 1,1 entry is nonzero, so it can be used as a piviot.
+ \item Each elimination looks like \(R_k \leftarrow R_k + \mbox{ multiplier } \times  R_1 \).
+ \item Each multipler is a quotient with the pivot in the denominator.
+\end{enumerate}
+
+\end{frame}
+\begin{frame}[fragile]
+Step \#2, eliminate in the second column
+\[
+   \begin{bmatrix} 1 & 2 & 3 \\ 0 & -3 & -6 \\ 0 & -6 & -12 \end{bmatrix}
+     \begin{matrix}  \phantom{1}  \\ \phantom{1}  \\ R_3 \leftarrow R_3 - 2 R_2  \end{matrix}
+     \begin{bmatrix} 1 & 2 & 3 \\ 0 & -3 & -6 \\ 0 & 0  & 0 \end{bmatrix}
+\]
+\begin{enumerate}
+ \item The 2,2 entry is nonzero, so it can be used as a piviot.
+ \item We're done eliminating--the result is an upper triangular matrix.
+\end{enumerate}
+\end{frame}
+\begin{frame}[fragile]{Famous matrix reduction redux}
+
+
+\begin{enumerate}
+ \item Each step in row reduction can be done by left multiplication by a lower triangular matrix.
+
+\end{enumerate}
+Step \#1, eliminate in the first column
+\[
+  \underbrace{\begin{bmatrix} 1 & 0 & 0 \\ -4 & 1 & 0 \\ -7 & 0 & 1 \end{bmatrix} }_{=E_1}
+  \underbrace{\begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix} }_{=M}
+  =    \begin{bmatrix} 1 & 2 & 3 \\ 0 & -3 & -6 \\ 0 & -6 & -12 \end{bmatrix}
+\]
+
+\end{frame}
+
+\begin{frame}[fragile]
+Step \#2, eliminate in the second column
+\[
+  \underbrace{\begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & -2 & 1 \end{bmatrix}}_{=E_2}
+  \begin{bmatrix} 1 & 2 & 3 \\ 0 & -3 & -6 \\ 0 & -6 & -12 \end{bmatrix} =
+   \underbrace{ \begin{bmatrix} 1 & 2 & 3 \\ 0 & -3 & -6 \\ 0 & 0  & 0 \end{bmatrix}}_{=U}
+\]
+
+Symbolically, this is \(E_2 E_1 M = U \).
+
+
+\end{frame}
+\begin{frame}[fragile]
+\textbf{Question:} How to undo \(R_2 \leftarrow R_2 - 4 R_1 \) and \( R_3 \leftarrow R_3 - 7 R_1\)? 
+
+\textbf{Answer:} Do  \(R_2 \leftarrow R_2 + 4 R_1 \) and \( R_3 \leftarrow R_3 + 7 R_1\).
+
+\vspace{0.1in}
+
+\textbf{Question} What is the matrix associated with \(R_2 \leftarrow R_2 + 4 R_1,  \,  R_3 \leftarrow R_3 + 7 R_1\)? 
+
+\textbf{Answer} It is 
+\(
+  \begin{bmatrix} 1 & 0 & 0 \\ 4 & 1 & 0 \\ 7 & 0 & 1  \end{bmatrix} 
+\)
+
+Check:
+\[
+  \begin{bmatrix} 1 & 0 & 0 \\ 4 & 1 & 0 \\ 7 & 0 & 1 \end{bmatrix}
+   \begin{bmatrix} 1 & 0 & 0 \\ -4 & 1 & 0 \\ -7 & 0 & 1 \end{bmatrix} =
+    \begin{bmatrix} 1 & 0 & 0 \\ 1 & 0 & 0 \\ 1 & 0 & 1 \end{bmatrix} = I
+  \]
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+Multipling \(E_2 E_1 M = U\) on the left by \(E_1^{-1} E_2^{-1} \) gives
+ \[
+ 	    E_1^{-1} \underbrace{E_2^{-1} E_2}_{ = I} E_1 M = \underbrace{E_1^{-1} E_1}_{=I}  M =  M =  E_1^{-1} E_2^{-1} U
+ \] 
+ Let's look at \( E_1^{-1} E_2^{-1} \):
+ \[
+    \begin{bmatrix} 1 & 0 & 0 \\ 4 & 1 & 0 \\ 7 & 0 & 1 \end{bmatrix} 
+      \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 2 & 1 \end{bmatrix} 
+      = \begin{bmatrix} 1 & 0 & 0 \\ 4 & 1 & 0 \\ 7 & 2 & 1 \end{bmatrix}
+ \]
+ \begin{enumerate}
+  \item The entries of  \(E_1^{-1} E_2^{-1}  \) below the diagonal are the negation of  multipliers; the diagonal entries are
+  1s.
+  \item This isn't a coincidence.
+  
+  \item We've factored a matrix into a product of a lower triangular matrix with 1s on the diagonal times an upper triangular matrix.
+  
+  \item This is the Doolittle factoriation. 
+ \end{enumerate}
+ 
+\end{frame}
+
+\begin{frame}[fragile]
+Specfically, the Doolittle factoratation of our famuous matrix is
+\[
+     \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix}  = 
+        \begin{bmatrix} 1 & 0 & 0 \\ 4 & 1 & 0 \\ 7 & 2 & 1 \end{bmatrix} 
+           \begin{bmatrix} 1 & 2 & 3 \\ 0 & -3 & -6 \\ 0 & 0  & 0 \end{bmatrix}
+\]
+
+\textbf{Fact:} When a pivot is zero, rows need to be swapped to place a nonzero entry on the pivot. This results in a factorization
+\[
+    P M = L U,
+\]
+where \(P\) is a matrix formed by swapping rows of \(I\), the matrix \(L\) is lower triangular, and \(U\) is upper triangular.
+
+\end{frame}
+\begin{frame}[fragile]{Maxima LU}
+
+\begin{enumerate}
+
+\item Maxima's \texttt{lu\_factor} returns the lower triangular factor in in the lower part of the matrix, and the upper triangular part in the same matrix.
+ The 1s on the diagonal are implied.
+
+\item The second item returned \texttt{lu\_factor} tells us if there were row swaps. 
+
+\item The third item return tells us what arithematic Maxima used.
+
+\item The \texttt{get\_lu\_factors} returns the matrices \(P, L, U\).
+\end{enumerate}
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}{\color{red}\bf
+\begin{verbatim}
+(%i4) 
+\end{verbatim}
+}%
+\end{minipage}%
+\begin{minipage}[t]{\textwidth}{\color{blue}
+\begin{verbatim}
+lu_factor(matrix([1,2,3],[4,5,6],[7,8,9]));
+\end{verbatim}
+}%
+\end{minipage}%
+%%% OUTPUT:
+\definecolor{labelcolor}{RGB}{100,0,0}
+
+
+\begin{math}\displaystyle
+\parbox{8ex}{\color{labelcolor}(\%o4) }
+[\begin{pmatrix}1 & 2 & 3\cr 4 & -3 & -6\cr 7 & 2 & 0\end{pmatrix},[1,2,3],generalring]\mbox{}
+\end{math}
+%%%%%%%%%%%%%%%
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}{\color{red}\bf
+\begin{verbatim}
+(%i5) 
+\end{verbatim}
+}%
+\end{minipage}%
+\begin{minipage}[t]{\textwidth}{\color{blue}
+\begin{verbatim}
+get_lu_factors(%);
+\end{verbatim}
+}%
+\end{minipage}%
+%%% OUTPUT:
+\definecolor{labelcolor}{RGB}{100,0,0}
+
+
+\begin{math}\displaystyle
+\parbox{8ex}{\color{labelcolor}(\%o5) }
+[\begin{pmatrix}1 & 0 & 0\cr 0 & 1 & 0\cr 0 & 0 & 1\end{pmatrix},\begin{pmatrix}1 & 0 & 0\cr 4 & 1 & 0\cr 7 & 2 & 1\end{pmatrix},\begin{pmatrix}1 & 2 & 3\cr 0 & -3 & -6\cr 0 & 0 & 0\end{pmatrix}]\mbox{}
+\end{math}
+%%%%%%%%%%%%%%%
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}{\color{red}\bf
+\begin{verbatim}
+(%i6) 
+\end{verbatim}
+}%
+\end{minipage}%
+\begin{minipage}[t]{\textwidth}{\color{blue}
+\begin{verbatim}
+first(%) . second(%) . third(%);
+\end{verbatim}
+}%
+\end{minipage}%
+%%% OUTPUT:
+\definecolor{labelcolor}{RGB}{100,0,0}
+
+
+\begin{math}\displaystyle
+\parbox{8ex}{\color{labelcolor}(\%o6) }
+\begin{pmatrix}1 & 2 & 3\cr 4 & 5 & 6\cr 7 & 8 & 9\end{pmatrix}\mbox{}
+\end{math}
+%%%%%%%%%%%%%%%
+
+\end{frame}
+
+
+\end{document}
+
