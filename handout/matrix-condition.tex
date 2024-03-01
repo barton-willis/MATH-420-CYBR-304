@@ -115,7 +115,7 @@ In matrix form, these two sets of linear equations are
 
 \item The solution set is the intersection of two lines that are nearly parallel.
 
-\item Something like nearly parallel lines \emph{is }  required for the butterfly effect.
+\item Something like nearly parallel lines \emph{is}  required for the butterfly effect.
 
 \end{enumerate}
 \end{frame}
@@ -128,7 +128,7 @@ Consider the linear equations
 
 \begin{enumerate}
 
-\item Unhatted variables are the true value, and hatted variables are approximations to the true value.
+\item Variables with no hats are the true value, and variables with hats are approximations to the true value.
 
 \item We might have, for example,
 \[
@@ -141,7 +141,7 @@ where \(\fl\) rounds to the nearest float.
 
 \item We would like to bound \( \| x - \widehat x \| \).
 
-\item Let's not commit to a specfic norm.
+\item Let's not commit to a specific norm.
 
 \item We'll assume that both \(M\) and \(\widehat M \) have inverses.
 \end{enumerate}
@@ -170,7 +170,7 @@ We'll bound each term of the last two terms separately.
 \begin{align*}
    \|M^{-1} \left(y - \widehat y \right) \| &\leq \| M^{-1} \| \| y - \widehat y  \|,  &(\mbox{basic norm fact}) \\
                &\leq  \varepsilon_m \| M^{-1} \| y  \|, &(\mbox{assumption}) \\
-               &= \varepsilon_m \| M^{-1} \| M x  \|,  &(\mbox{defintion of } x ), \\
+               &= \varepsilon_m \| M^{-1} \| M x  \|,  &(\mbox{definition of } x ), \\
                &=  \varepsilon_m \| M^{-1} \|  \| M  \| \|x  \|.  &(\mbox{basic norm fact}) 
 \end{align*}
 \end{frame}
@@ -180,7 +180,7 @@ We'll bound each term of the last two terms separately.
 Bounding the other term \( \left(M^{-1} - \widehat M^{-1} \right) \widehat y \) is tricky. A good warmup 
 is a simple algebra fact:
 
-\textbf{Warmup}  For \(a,b \in \reals_{\neq 0}\), we have
+\textbf{Warm up}  For \(a,b \in \reals_{\neq 0}\), we have
 \[
    a^{-1} - b^{-1} = \frac{1}{a} - \frac{1}{b} = \frac{b-a}{a b} = a^{-1} (b - a) b^{-1}
 \]
@@ -190,7 +190,7 @@ is a simple algebra fact:
 \[
     a^{-1} - b^{-1} = a^{-1} (b - a) b^{-1}.
 \]
-But for matrices \(a\) and \(b\), the expression  \(\frac{b-a}{a b}\) is ambiguoyus .
+But for matrices \(a\) and \(b\), the expression  \(\frac{b-a}{a b}\) is ambiguous .
 
 
 \end{frame}
@@ -236,9 +236,9 @@ Step \#1, eliminate in the first column
      \begin{bmatrix} 1 & 2 & 3 \\ 0 & -3 & -6 \\ 0 & -6 & -12 \end{bmatrix}
 \]
 \begin{enumerate}
- \item The 1,1 entry is nonzero, so it can be used as a piviot.
+ \item The 1,1 entry is nonzero, so it can be used as a pivot.
  \item Each elimination looks like \(R_k \leftarrow R_k + \mbox{ multiplier } \times  R_1 \).
- \item Each multipler is a quotient with the pivot in the denominator.
+ \item Each multiplier is a quotient with the pivot in the denominator.
 \end{enumerate}
 
 \end{frame}
@@ -250,7 +250,7 @@ Step \#2, eliminate in the second column
      \begin{bmatrix} 1 & 2 & 3 \\ 0 & -3 & -6 \\ 0 & 0  & 0 \end{bmatrix}
 \]
 \begin{enumerate}
- \item The 2,2 entry is nonzero, so it can be used as a piviot.
+ \item The 2,2 entry is nonzero, so it can be used as a pivot.
  \item We're done eliminating--the result is an upper triangular matrix.
 \end{enumerate}
 \end{frame}
@@ -307,7 +307,7 @@ Check:
 \end{frame}
 
 \begin{frame}[fragile]
-Multipling \(E_2 E_1 M = U\) on the left by \(E_1^{-1} E_2^{-1} \) gives
+Multiplying \(E_2 E_1 M = U\) on the left by \(E_1^{-1} E_2^{-1} \) gives
  \[
  	    E_1^{-1} \underbrace{E_2^{-1} E_2}_{ = I} E_1 M = \underbrace{E_1^{-1} E_1}_{=I}  M =  M =  E_1^{-1} E_2^{-1} U
  \] 
@@ -324,13 +324,13 @@ Multipling \(E_2 E_1 M = U\) on the left by \(E_1^{-1} E_2^{-1} \) gives
   
   \item We've factored a matrix into a product of a lower triangular matrix with 1s on the diagonal times an upper triangular matrix.
   
-  \item This is the Doolittle factoriation. 
+  \item This is the Doolittle factorization. 
  \end{enumerate}
  
 \end{frame}
 
 \begin{frame}[fragile]
-Specfically, the Doolittle factoratation of our famuous matrix is
+Specifically, the Doolittle factorization of our famous matrix is
 \[
      \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix}  = 
         \begin{bmatrix} 1 & 0 & 0 \\ 4 & 1 & 0 \\ 7 & 2 & 1 \end{bmatrix} 
@@ -353,7 +353,7 @@ where \(P\) is a matrix formed by swapping rows of \(I\), the matrix \(L\) is lo
 
 \item The second item returned \texttt{lu\_factor} tells us if there were row swaps. 
 
-\item The third item return tells us what arithematic Maxima used.
+\item The third item return tells us what arithmetic Maxima used.
 
 \item The \texttt{get\_lu\_factors} returns the matrices \(P, L, U\).
 \end{enumerate}
