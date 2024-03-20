@@ -152,24 +152,24 @@ combination of these five polynomials.  On the interval $[0,1]$, the Bernstein p
 property makes them well suited to approximating functions that are nonnegative on $[0,1]$.  
 \begin{questions}
 
-\question [5] Use Gadfly to graph $P_0$ through $P_1$ on the interval $[0,1]$.
+\question [5] Use Gadfly to graph $P_0$ through $P_4$ on the interval $[0,1]$.
 
-\question [5] Find the real numbers $c_0, c_1, c_2,c_3, c_4,$ and $c_5$ such that the function 
+\question [5] Find the real numbers $c_0, c_1, c_2,c_3,$ and $c_4$ such that the function 
 \begin{equation}
-  F(x) = \sum_{k=0}^5 c_k P_k(x)
+  F(x) = \sum_{k=0}^4 c_k P_k(x)
 \end{equation}
 minimizes
 \begin{equation}
-   \sum_{k=0}^5 \left(c_k P \left (\frac{k}{10} \right) - \sin\left(\frac{\uppi k}{10}\right) \right)^2.
+   \sum_{k=0}^4 \left(c_k P \left (\frac{k}{10} \right) - \sin\left(\frac{\uppi k}{10}\right) \right)^2.
  \end{equation}
  Be sure to find the condition number of the coefficient matrix of the normal equations.
 
-\question [5] Use Gadfly to graph both $y = \sin(\uppi x)$ and $ y = \sum_{k=0}^5 c_k P_k(x)$ on the interval $[0,1]$, where the numbers
-$c_0$ through $c_5$ are the numbers that you found in Question 2.
+\question [5] Use Gadfly to graph both $y = \sin(\uppi x)$ and $ y = \sum_{k=0}^4 c_k P_k(x)$ on the interval $[0,1]$, where the numbers
+$c_0$ through $c_4$ are the numbers that you found in Question 2.
 
-\question [5] Use Gadfly to graph  $y = \left| \sin(\uppi x) -  \sum_{k=0}^5 c_k P_k(x) \right| $, where the numbers
-$c_0$ through $c_5$ are the numbers that you found in Question 2.  Visually find $\underset{x \in [0,1]}{\max} 
-\left(\left| \sin(\uppi x) -  \sum_{k=0}^5 c_k P_k(x) \right| \right).$
+\question [5] Use Gadfly to graph  $y = \left| \sin(\uppi x) -  \sum_{k=0}^4 c_k P_k(x) \right| $, where the numbers
+$c_0$ through $c_4$ are the numbers that you found in Question 2.  Visually find $\underset{x \in [0,1]}{\max} 
+\left(\left| \sin(\uppi x) -  \sum_{k=0}^4 c_k P_k(x) \right| \right).$
 \end{questions}
 
 \end{document}
