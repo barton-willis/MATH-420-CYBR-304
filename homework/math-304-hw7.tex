@@ -1,0 +1,175 @@
+\documentclass[12pt,fleqn]{exam}
+%\usepackage{pifont}
+%\usepackage{dingbat}
+\usepackage{amsmath,amssymb}
+\usepackage{fleqn,nicefrac}
+\usepackage{epsfig}
+\usepackage{bbding}
+\usepackage{url}
+\addpoints
+\boxedpoints
+\pointsinmargin
+\pointname{pts}
+
+\usepackage{xcolor}
+\usepackage{framed}
+\colorlet{shadecolor}{lightgray!15}
+\newenvironment{myproof}
+  {\begin{shaded}\begin{proof}}
+  {\end{proof}\end{shaded}}
+\shadedsolutions
+\definecolor{SolutionColor}{rgb}{0.951,0.951,0.951}
+
+\usepackage{amsthm}
+\newtheorem{prop}{Proposition}
+\usepackage[letterpaper, portrait, margin=0.75in]{geometry}
+\usepackage[final]{microtype}
+\usepackage[american]{babel}
+%\usepackage[T1]{fontenc}
+\usepackage{fourier}
+\usepackage{isomath}
+\usepackage{upgreek,amsmath}
+\usepackage{amssymb}
+%\usepackage[euler-digits,euler-hat-accent,T1]{eulervm}
+
+\newcommand{\dotprod}{\, {\scriptzcriptztyle
+    \stackrel{\bullet}{{}}}\,}
+
+\newcommand{\reals}{\mathbf{R}}
+\newcommand{\complex}{\mathbf{C}}
+\newcommand{\dom}{\mbox{dom}}
+\newcommand{\cover}{{\mathcal C}}
+\newcommand{\rat}{\mathbf{Q}}
+
+\newcommand{\curly}[1]{\mathcal #1}
+\newcommand{\integers}{\mathbf{Z}}
+\newcommand{\vi}{\, \mathbf{i}}
+\newcommand{\vj}{\, \mathbf{j}}
+\newcommand{\vk}{\, \mathbf{k}}
+\newcommand{\bi}{\, \mathbf{i}}
+\newcommand{\bj}{\, \mathbf{j}}
+\newcommand{\bk}{\, \mathbf{k}}
+\DeclareMathOperator{\Arg}{\mathrm{Arg}}
+\DeclareMathOperator{\Ln}{\mathrm{Ln}}
+\newcommand{\imag}{\, \mathrm{i}}
+\newcommand{\range}{\mathrm{range}}
+\newcommand{\true}{\mathrm{True}}
+\newcommand{\saw}{\mathrm{saw}}
+\newcommand{\fl}{\mathrm{Fl}}
+\newcommand{\mach}{\varepsilon_m}
+\newcommand{\HM}{\mathrm{HM}}
+\newcommand{\Inf}{\mathrm{Inf}}
+\newcommand{\sigmoid}{\mathrm{sigmoid}}
+\newcommand{\erf}{\mathrm{erf}}
+
+\usepackage{enumerate}
+\usepackage{verbatim}
+\newenvironment{alphalist}{
+  \begin{enumerate}[(a)]
+    \addtolength{\itemsep}{-0.5\itemsep}}
+  {\end{enumerate}}
+ 
+\usepackage{amsthm}
+\newtheorem{Rubbish}{Theorem}
+\usepackage{graphicx}
+
+%\usepackage{tgschola} %to look retro
+\newenvironment{mypar}[2]
+  {\begin{list}{}%
+    {\setlength\leftmargin{#1}
+    \setlength\rightmargin{#2}}
+    \item[]}
+  {\end{list}}
+  
+\newcommand{\quiz}{7}
+\newcommand{\term}{Spring}
+\usepackage{units}
+\usepackage{xspace}
+\makeatletter
+\DeclareRobustCommand{\maybefakesc}[1]{%
+  \ifnum\pdfstrcmp{\f@series}{\bfdefault}=\z@
+    {\fontsize{\dimexpr0.8\dimexpr\f@size pt\relax}{0}\selectfont\uppercase{#1}}%
+  \else
+    \textsc{#1}%
+  \fi
+}
+\newcommand\AM{\,\maybefakesc{am}\xspace}
+\newcommand\PM{\,\maybefakesc{pm}\xspace}
+
+
+\usepackage{fancyvrb,newverbs,xcolor}
+\usepackage{lipsum}% just for this example
+
+\definecolor{cverbbg}{gray}{0.93}
+
+\newenvironment{cverbatim}
+ {\SaveVerbatim{cverb}}
+ {\endSaveVerbatim
+  \flushleft\fboxrule=0pt\fboxsep=.5em
+  \colorbox{cverbbg}{\BUseVerbatim{cverb}}%
+  \endflushleft
+}
+\newenvironment{lcverbatim}
+ {\SaveVerbatim{cverb}}
+ {\endSaveVerbatim
+  \flushleft\fboxrule=0pt\fboxsep=.5em
+  \colorbox{cverbbg}{%
+    \makebox[\dimexpr\linewidth-2\fboxsep][l]{\BUseVerbatim{cverb}}%
+  }
+  \endflushleft
+}
+
+\newcommand{\ctexttt}[1]{\colorbox{cverbbg}{\texttt{#1}}}
+\newverbcommand{\cverb}
+  {\setbox\verbbox\hbox\bgroup}
+  {\egroup\colorbox{cverbbg}{\box\verbbox}}
+\begin{document}
+\vspace{0.1in}
+\noindent\makebox[3.0truein][l]{ \textbf{CYRR 304}}
+{\bf Name:}  \\
+\noindent \makebox[3.0truein][l]{\textbf{Homework \quiz, \term \/ \the\year}}
+%{\bf Row:}\hrulefill\
+\vspace{0.1in}
+
+\begin{quote}
+\noindent \emph{“When you’re good to others, you’re best to yourself.”} \hfill {\sc Benjamin Franklin}
+\end{quote}
+
+\noindent  Homework \quiz\/  has questions 1 through  \numquestions \/ with a total of of  \numpoints\/  points. 
+Your recorded score will be scaled to twenty points. The point
+value for each question or part of a question is in the box following each question or part of a question.
+This work is due \textbf{Saturday 23 March  } at 11:59 \PM.  
+
+For this assignment, convert your Jupyter notebook (a IPYNB file)  to HTML and submit the HTML file to Canvas.
+
+The degree four Bernstein polynomials $P_0$ through $P_4$ are defined by
+\begin{equation}
+P_0(x) = (1-x)^4, \quad P_1(x)  = 4 x (1-x)^3, \quad P_2(x) = 6 x^2 (1-x)^2, \quad P_3(x) = 4 x^3 (1-x),
+\quad P_4(x) = x^4.
+\end{equation}
+The degree of each Bernstein polynomial is four, and it can be proven that every polynomial of degree four or less is a linear
+combination of these five polynomials.  On the interval $[0,1]$, the Bernstein polynomials are non negative. This 
+property makes them well suited to approximating functions that are nonnegative on $[0,1]$.  
+\begin{questions}
+
+\question [5] Use Gadfly to graph $P_0$ through $P_1$ on the interval $[0,1]$.
+
+\question [5] Find the real numbers $c_0, c_1, c_2,c_3, c_4,$ and $c_5$ such that the function 
+\begin{equation}
+  F(x) = \sum_{k=0}^5 c_k P_k(x)
+\end{equation}
+minimizes
+\begin{equation}
+   \sum_{k=0}^5 \left(c_k P \left (\frac{k}{10} \right) - \sin\left(\frac{\uppi k}{10}\right) \right)^2.
+ \end{equation}
+ Be sure to find the condition number of the coefficient matrix of the normal equations.
+
+\question [5] Use Gadfly to graph both $y = \sin(\uppi x)$ and $ y = \sum_{k=0}^5 c_k P_k(x)$ on the interval $[0,1]$, where the numbers
+$c_0$ through $c_5$ are the numbers that you found in Question 2.
+
+\question [5] Use Gadfly to graph  $y = \left| \sin(\uppi x) -  \sum_{k=0}^5 c_k P_k(x) \right| $, where the numbers
+$c_0$ through $c_5$ are the numbers that you found in Question 2.  Visually find $\underset{x \in [0,1]}{\max} 
+\left(\left| \sin(\uppi x) -  \sum_{k=0}^5 c_k P_k(x) \right| \right).$
+\end{questions}
+
+\end{document}
