@@ -1,0 +1,120 @@
+\documentclass[12pt,fleqn]{exam}
+\usepackage{amsmath,fleqn, url}
+\usepackage{enumerate,color}
+%\pagestyle{empty}
+
+\usepackage{graphicx}
+\usepackage[letterpaper,margin=1.0in]{geometry}
+\usepackage[english]{babel}
+\usepackage[final,babel]{microtype}
+\usepackage{amsmath, amssymb, amsthm, upgreek, xfrac, isomath}
+\frenchspacing
+\usepackage[T1]{fontenc}
+%\usepackage{lmodern}
+\usepackage[upright]{fourier} %options: sloped, upright, widespace
+%\usepackage[euler-digits,euler-hat-accent,T1]{eulervm}
+
+\newcommand{\reals}{\mathbf{R}}
+\newcommand{\integers}{\mathbf{Z}}
+\newcommand{\eu}{\mathrm{e}}
+\usepackage{algorithm}
+\usepackage[noend]{algorithmic}
+\usepackage{isomath}
+\usepackage{graphicx}
+\renewcommand{\algorithmicrequire}{\textbf{input}}
+\renewcommand{\algorithmicensure}{\textbf{return}}
+
+
+\newcommand{\algo}[1]{\vspace{0.1in}
+      \begin{flushleft}
+         {\bf Algorithm} {\em #1}
+      \end{flushleft}
+      \vspace{0.1in}}
+
+\newenvironment{myalgorithm}[1]
+  {\setcounter{myalgo}{\value{myalgo}+1} 
+   \textbf{Algorithm \themysec.\hspace{-0.15in}\myalgo} {\em #1} \\ \vspace{-0.25in}}
+  
+
+\DeclareMathOperator{\fl}{fl}
+\newenvironment{alphalist}{
+  \begin{enumerate}[(a)]
+    \addtolength{\itemsep}{-1.0\itemsep}}
+  {\end{enumerate}}
+
+\newcommand{\quiz}{8}
+\newcommand{\term}{Spring}
+\usepackage{units}
+\usepackage{xspace}
+\makeatletter
+\DeclareRobustCommand{\maybefakesc}[1]{%
+  \ifnum\pdfstrcmp{\f@series}{\bfdefault}=\z@
+    {\fontsize{\dimexpr0.8\dimexpr\f@size pt\relax}{0}\selectfont\uppercase{#1}}%
+  \else
+    \textsc{#1}%
+  \fi
+}
+\newcommand\AM{\,\maybefakesc{am}\xspace}
+\newcommand\PM{\,\maybefakesc{pm}\xspace}
+
+\addpoints
+\boxedpoints
+\pointsinmargin
+\pointname{pts}
+\begin{document}
+
+\vspace{0.1in}
+\noindent\makebox[3.0truein][l]{ \textbf{CYRR 304}}
+{\bf Name:}  \\
+\noindent \makebox[3.0truein][l]{\textbf{Homework \quiz, \term \/ \the\year}}
+%{\bf Row:}\hrulefill\
+\vspace{0.1in}
+
+\begin{quote}
+\noindent \emph{
+“Instructions for living a life.
+Pay attention.
+Be astonished.
+Tell about it.” \\ 
+$\phantom{xxx}$ \hfill {\sc Mary Oliver}}
+  
+\end{quote}
+
+
+\noindent  Homework 8  has questions 1 through  \numquestions \/ with a total of of  \numpoints\/  points. 
+Your recorded score will be scaled to twenty points. The point
+value for each question or part of a question is in the box following each question or part of a question.
+This work is due \textbf{Saturday 30 March  } at 11:59 \PM.  
+\begin{questions}
+
+\question You need a pretty good value of  $\int_0^{10}  \sin(x^2) \, \mathrm{d} x$. To do this, you will use the $n$ panel trapezoidal rule.
+
+\begin{parts}
+
+\part [5] Use Gadfly to plot a graph of the \emph{second derivative} of $ x \mapsto \sin(x^2)$.  Visually determine the value of \(\underset{x \in [0,10]}{\max}
+\left  |2 \cos{\left( {{x}^{2}}\right) }-4 {{x}^{2}} \sin{\left( {{x}^{2}}\right) } \right |\).
+
+\part [5] Find the least value for $n$ needed so that the $n$-panel trapezoidal rule gives an error of no more than $10^{-8}$.
+
+\part[5] Using that value of $n$, estimate the value of  $\int_0^{10}  \sin(x^2) \, \mathrm{d} x$.
+
+
+
+\end{parts}
+
+
+\question  Let $T_n$ be the $n$-panel trapezoidal rule value for $\int_0^1 \sqrt{x} \,  \mathrm{d} x$. 
+
+\begin{parts}
+
+\part [5] Sketch a graph of $T$ on the interval $ 1   \dots 500.$
+
+\part [5] The true value of  $\int_0^1 \sqrt{x} \,  \mathrm{d} x$ is $2/3$.  Sketch a graph of $n \mapsto n^2 (T_n - 2/3)$ on the interval $ 1 \dots  500$. Does it appear that
+the graph has a horizontal asymptote? Doesn't the theory say it should?  Explain. (Hint is $x \mapsto \sqrt{x}$ sufficiently smooth on $[0,1]$?)
+
+
+
+\end{parts}
+
+\end{questions}
+\end{document}
