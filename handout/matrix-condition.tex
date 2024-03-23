@@ -1,7 +1,7 @@
 \documentclass[usenames,dvipsnames,fleqn]{beamer}
 %\usetheme[height=7mm]{Rochester}
-\usetheme{Boadilla}
-
+%\usetheme{Boadilla}
+\usetheme{metropolis}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{footline}[text line]{%
 \parbox{\linewidth}{\vspace*{-8pt}\hfill\insertshortauthor\hfill\insertpagenumber}}
@@ -46,9 +46,9 @@
 \usepackage[english]{babel}
 \usepackage[final]{microtype}
 \usepackage[]{xcolor}
-%\usefonttheme{professionalfonts}
+\usefonttheme{professionalfonts}
 %\usefonttheme{serif}
-\usepackage{courier}
+%\usepackage{courier}
 %\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true}
 %\lstset{framextopmargin=50pt,frame=bottomline}
 %\usepackage{lipsum}  % generates filler text
@@ -71,7 +71,8 @@
 \begin{frame}{Small change, big effect}
 
 
-Small changes in inputs can cause big changes in the output. For example, the solution set to 
+Small changes in inputs can cause big changes in the output. For example, the 
+solution set to the linear equations
 \begin{align*}
     1000 x - 1000 y &= -1000\\
    1001 x - 1000 y &= -1000
@@ -84,17 +85,17 @@ is \(x = 0, y = 1 \).  But the solution set to
 is \(x=100,y=101\). 
 
 
-\begin{enumerate}
+\begin{itemize}
 
 \item  Decreasing the constant term in the second equation by 10\% from -1000 to  \(-900\), changes the solution set from \(x=0,y=1\) to 
  \(x=100,y=101\). 
  
  \item It's the butterfly effect.
-\end{enumerate}
+\end{itemize}
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}{In matrix form}
 In matrix form, these two sets of linear equations are
 \begin{align*}
  \begin{bmatrix} 1000& -1000 \\ 1001 & -1000 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} &= 
@@ -103,21 +104,21 @@ In matrix form, these two sets of linear equations are
      \begin{bmatrix} -1000 \\ -900 \end{bmatrix}.   
 \end{align*}
 
-\begin{enumerate}
+\begin{itemize}
 
 \item These linear equations have the same coefficient matrix and the constant terms differ by at most 10\%.
 
-\item But the solution sets are far apart. 
+\item But the solutions are far apart. 
 
-\item The determinate of each coefficient matrix \(1000\).
+\item The determinant of each coefficient matrix \(1000\).
 
-\item a  determinant near zero \emph{isn't} required for the butterfly effect.
+\item A  determinant near zero \emph{isn't} required for the butterfly effect.
 
-\item The solution set is the intersection of two lines that are nearly parallel.
+%\item The solution set is the intersection of two lines that are nearly parallel.
 
-\item Something like nearly parallel lines \emph{is}  required for the butterfly effect.
+%\item Something like nearly parallel lines \emph{is}  required for the butterfly effect.
 
-\end{enumerate}
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -126,16 +127,16 @@ Consider the linear equations
    M x = y, \quad \widehat M  \, \widehat x = \widehat y.
 \]
 
-\begin{enumerate}
+\begin{itemize}
 
 \item Variables with no hats are the true value, and variables with hats are approximations to the true value.
 
 \item We might have, for example,
 \[
    M = \begin{bmatrix} \pi & \sqrt{3} \\ \frac{1}{10} & 23 \end{bmatrix},  
-   \widehat M =   \begin{bmatrix} \fl(\pi) & \fl(\sqrt{3}) \\ \fl(\frac{1}{10}) & \fl(23) \end{bmatrix}
+   \widehat M =   \begin{bmatrix} \fl(\pi) & \fl(\sqrt{3}) \\ \fl(\frac{1}{10}) & \fl(23) \end{bmatrix},
    y = \begin{bmatrix} \frac{2}{3} \\ \frac{1}{42} \end{bmatrix}, 
-   \widehat y = \begin{bmatrix} \fl(\frac{2}{3}) \\ \fl(\frac{1}{42}) \end{bmatrix} 
+   \widehat y = \begin{bmatrix} \fl(\frac{2}{3}) \\ \fl(\frac{1}{42}) \end{bmatrix},
    \]
 where \(\fl\) rounds to the nearest float.
 
@@ -144,7 +145,7 @@ where \(\fl\) rounds to the nearest float.
 \item Let's not commit to a specific norm.
 
 \item We'll assume that both \(M\) and \(\widehat M \) have inverses.
-\end{enumerate}
+\end{itemize}
 
 \end{frame}
 
@@ -154,30 +155,31 @@ We know something about \(\| y - \widehat y\| \) and  \( \| M  - \widehat M \| \
 \(M^{-1} y - \widehat M^{-1} \widehat y\); thus
 \begin{align*}
    x - \widehat x &= M^{-1} y - \widehat M^{-1} \widehat y, \\
-       &=M^{-1} \left(y - \widehat y + \widehat y \right)  - \widehat M^{-1} \widehat y, &(\mbox{add and subtract}), \\
+       &=M^{-1} \left(y - \widehat y + \widehat y \right)  - \widehat M^{-1} \widehat y, &(\mbox{add and subtract}) \\
        &= M^{-1} \left(y - \widehat y \right) + \left(M^{-1} - \widehat M^{-1} \right) \widehat y.  &(\mbox{regroup})\\
 \end{align*}
 So
 \begin{align*}
   \|  x - \widehat x \| &= \|M^{-1} \left(y - \widehat y \right) + \left(M^{-1} - \widehat M^{-1} \right) \widehat y \|,\\
-       &\leq  \|M^{-1} \left(y - \widehat y \right) \| + \| \left(M^{-1} - \widehat M^{-1} \right) \widehat y \|. &(\mbox{triangle inquality})
+       &\leq  \|M^{-1} \left(y - \widehat y \right) \| + \| \left(M^{-1} - \widehat M^{-1} \right) \widehat y \|. &(\mbox{triangle $\leq$})
 \end{align*}
 We'll bound each term of the last two terms separately.
 
 \end{frame}
-\begin{frame}
-
+\begin{frame}{One term at a time}
+We'll assume that for our norm, we have $\| y - \widehat y  \| \leq \varepsilon_m \| y \|$.
+Thus
 \begin{align*}
    \|M^{-1} \left(y - \widehat y \right) \| &\leq \| M^{-1} \| \| y - \widehat y  \|,  &(\mbox{basic norm fact}) \\
-               &\leq  \varepsilon_m \| M^{-1} \| y  \|, &(\mbox{assumption}) \\
-               &= \varepsilon_m \| M^{-1} \| M x  \|,  &(\mbox{definition of } x ), \\
+               &\leq  \varepsilon_m \| M^{-1} \| \| y  \|, &(\mbox{assumption}) \\
+               &= \varepsilon_m \| M^{-1} \|  \| M x  \|,  &(\mbox{definition of } x ) \\
                &=  \varepsilon_m \| M^{-1} \|  \| M  \| \|x  \|.  &(\mbox{basic norm fact}) 
 \end{align*}
 \end{frame}
 
-\begin{frame}
+\begin{frame}{On to the second term}
 
-Bounding the other term \( \left(M^{-1} - \widehat M^{-1} \right) \widehat y \) is tricky. A good warmup 
+Bounding the other term \( \left(M^{-1} - \widehat M^{-1} \right) \widehat y \) is tricky. A good warm--up 
 is a simple algebra fact:
 
 \textbf{Warm up}  For \(a,b \in \reals_{\neq 0}\), we have
@@ -190,7 +192,7 @@ is a simple algebra fact:
 \[
     a^{-1} - b^{-1} = a^{-1} (b - a) b^{-1}.
 \]
-But for matrices \(a\) and \(b\), the expression  \(\frac{b-a}{a b}\) is ambiguous .
+But for matrices \(a\) and \(b\), the expression  \(\frac{b-a}{a b}\) is ambiguous.
 
 
 \end{frame}
@@ -214,16 +216,16 @@ But for matrices \(a\) and \(b\), the expression  \(\frac{b-a}{a b}\) is ambiguo
     \| x - \widehat x \| \leq \varepsilon_m \cond_M \left (\| x \| + \| \widehat x \| \right).
  \]
 \end{frame}
-\begin{frame}
+\begin{frame}{Our final result}
 Final refinement:
 \begin{align*} 
     \| x - \widehat x \| & \leq \varepsilon_m \cond_M \left (\| x \| + \| \widehat x - x + x \| \right), \\
                 &\leq  \varepsilon_m \cond_M \left (\| x \| + \| \widehat x - x  \| + \| x \| \right).
  \end{align*}
  Combining the \(\| x - \widehat x \| \) terms on the left and the right and assuming 
- \(1 - \varepsilon_m \cond_M   > \) gives
+ \(1 - \varepsilon_m \cond_M   > 0 \) gives
  \[
-     \| x - \widehat x \| \leq \varepsilon \frac{2 \cond_M}{1 - \varepsilon_m \cond_M } \| x \| .
+     \| x - \widehat x \| \leq \varepsilon_m \frac{2 \cond_M}{1 - \varepsilon_m \cond_M } \| x \| .
  \]
 \end{frame}
 \end{document}
