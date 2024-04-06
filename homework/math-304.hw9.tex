@@ -1,0 +1,178 @@
+\documentclass[12pt,fleqn]{exam}
+\usepackage{amsmath,fleqn, url}
+\usepackage{enumerate,color}
+%\pagestyle{empty}
+
+\usepackage{graphicx}
+\usepackage[letterpaper,margin=1.0in]{geometry}
+\usepackage[english]{babel}
+\usepackage[final,babel]{microtype}
+\usepackage{amsmath, amssymb, amsthm, upgreek, xfrac, isomath}
+\frenchspacing
+\usepackage[T1]{fontenc}
+%\usepackage{lmodern}
+\usepackage[upright]{fourier} %options: sloped, upright, widespace
+%\usepackage[euler-digits,euler-hat-accent,T1]{eulervm}
+
+\newcommand{\reals}{\mathbf{R}}
+\newcommand{\integers}{\mathbf{Z}}
+\newcommand{\eu}{\mathrm{e}}
+\newcommand{\range}{\mathrm{range}}
+\usepackage{algorithm}
+\usepackage[noend]{algorithmic}
+\usepackage{isomath}
+\usepackage{graphicx}
+\renewcommand{\algorithmicrequire}{\textbf{input}}
+\renewcommand{\algorithmicensure}{\textbf{return}}
+
+\usepackage[T1]{fontenc}
+
+
+\usepackage[usenames,dvipsnames]{xcolor}
+
+
+\newcommand{\algo}[1]{\vspace{0.1in}
+      \begin{flushleft}
+         {\bf Algorithm} {\em #1}
+      \end{flushleft}
+      \vspace{0.1in}}
+
+\newenvironment{myalgorithm}[1]
+  {\setcounter{myalgo}{\value{myalgo}+1} 
+   \textbf{Algorithm \themysec.\hspace{-0.15in}\myalgo} {\em #1} \\ \vspace{-0.25in}}
+  
+
+\DeclareMathOperator{\fl}{fl}
+\newenvironment{alphalist}{
+  \begin{enumerate}[(a)]
+    \addtolength{\itemsep}{-1.0\itemsep}}
+  {\end{enumerate}}
+
+\newcommand{\quiz}{9}
+\newcommand{\term}{Spring}
+\usepackage{units}
+\usepackage{xspace}
+\makeatletter
+\DeclareRobustCommand{\maybefakesc}[1]{%
+  \ifnum\pdfstrcmp{\f@series}{\bfdefault}=\z@
+    {\fontsize{\dimexpr0.8\dimexpr\f@size pt\relax}{0}\selectfont\uppercase{#1}}%
+  \else
+    \textsc{#1}%
+  \fi
+}
+\newcommand\AM{\,\maybefakesc{am}\xspace}
+\newcommand\PM{\,\maybefakesc{pm}\xspace}
+
+\addpoints
+\boxedpoints
+\pointsinmargin
+\pointname{pts}
+\begin{document}
+
+\vspace{0.1in}
+\noindent\makebox[3.0truein][l]{ \textbf{CYRR 304}}
+{\bf Name:}  \\
+\noindent \makebox[3.0truein][l]{\textbf{Homework \quiz, \term \/ \the\year}}
+%{\bf Row:}\hrulefill\
+\vspace{0.1in}
+
+
+
+
+\noindent  Homework 9  has questions 1 through  \numquestions \/ with a total of of  \numpoints\/  points,  with 
+an opportunity to earn ten bonus points. The point
+value for each question or part of a question is in the box following each question or part of a question.
+This work is due \textbf{Saturday 13 April  } at 11:59 \PM.  
+
+An equation of the form
+\begin{equation*}
+   F(x) = g(x) + \int_0^1 K(x,y) F(y) \, \mathrm{d} y
+\end{equation*}
+is a \emph{Fredholm  integral equation of the second kind}.  The function $F$ is the unknown and the functions $g$ and $K$ are given.  The function
+$K$ is known as the \emph{kernel} of the equation.  
+
+Such equations have a rich history involving luminaries such as Norbert Weiner, Subrahmanyan Chandrasekhar, and John von Neumann. These equations have many applications, including scattering of light by planetary atmospheres, nuclear reactors, and digital filters. 
+
+Assuming both the functions $g$ and $K$ are continuous and that $\range(K) \subset (-1,1)$, the equation  $F(x) = g(x) + \int_0^1 K(x,y) F(y) \, \mathrm{d} y$ has a unique solution.  Although there are methods for finding solutions to these equations, for most kernels $K$, the solution doesn't have a representation in terms of functions that we know anything about, so we need to resort to a numerical method.  Our method will be to 
+replace the integral by the trapezoidal rule; this gives
+\begin{align*}
+     F(x) &= g(x) + \int_0^1 K(x,y) F(y) \, \mathrm{d} y, \\
+             &\approx g(x) + \sum_{j=0}^n w_j K(x,x_j) F(x_j).
+\end{align*}
+where the weights $w_0, w_1, \dots, w_n$ and the knots $x_0, w_1, \dots, x_n$ are the appropriate values for the trapezoidal rule.
+Our next task is to find equations for $F$ evaluated at each knot. To do that, we replace $x$ by $x_i$ in $F(x+i) \approx g(x) + \sum_{j=0}^n w_j K(x,x_j) F(x_j)$. That gives
+\begin{equation*}
+      F(x_i) = g(x_i) + \sum_{j=0}^n w_j K(x_i,x_j) F(x_j).
+\end{equation*}
+These are linear equations for the value of $F$ at each knot.  Here is a simple Julia language implementation of this method. 
+
+\begin{verbatim}
+function integral_equation(g::Function, K::Function, n::Integer)
+    w = k -> if k==0 || k==n 1/(2*n) else 1/n end
+    M = [(if i==j 1 else 0 end) - w(j)*K(i/n,j/n)  for i=0:n, j=0:n]
+    b = [g(i/n) for i = 0:n]
+    sol = M  \ b
+    x -> g(x) + sum([w(k) * K(x,k/n) * sol[k+1] for k = 0:n])
+end
+\end{verbatim}
+This code returns a Julia function that is our approximate solution.
+
+\begin{questions}
+
+\question [10] The exact solution to $F(x) = x + \int_0^1 \frac{1}{2} F(y) \, \mathrm{d} y$ is $F(x) = x + \frac{1}{2}$.   Use the 
+given code to numerically solve the equation
+\begin{equation}
+F(x) = x + \int_0^1 \frac{1}{2} F(y) \, \mathrm{d} y.
+\end{equation}
+You'll need to define $g = x \mapsto x$ and $K = (x,y) \mapsto \frac{1}{2}$. Graphically verify that the approximate solution and
+the true solution are identical. Use 10 panels to do this.
+
+
+\question[10]  Use the given code to numerically solve the equation
+\begin{equation}
+F(x) =  \frac{\left( 2 {{\ensuremath{\pi} }^{2}}\operatorname{+}2\right)  \sin{\left( \ensuremath{\pi}  x\right) }\operatorname{-}\ensuremath{\pi} }{2 {{\ensuremath{\pi} }^{2}}}  + \int_0^1 \frac{1}{2} |x - y| F(y) \, \mathrm{d} y.
+\end{equation}
+The exact solution to this equation is $F(x) = \sin(\pi x)$.  Using $n=50$,  use Gadfly to graph the absolute value of the difference between
+the true solution and the numerically determined approximate solution.  Visually determine the largest difference between the 
+ true solution and the numerically determined approximate solution.
+ 
+ 
+ \question (ten point bonus)   Let $T_n(F)$ be the n-panel trapezoidal rule for a function $F$.  The quadrature rule $\int_a^b F \approx
+ \frac{4}{3} T_{2n}(F) - \frac{1}{3} T_n(F)$ is the well-known Simpson rule.  The weights for this rule are
+ \begin{equation}
+    w_k = h \begin{cases}   \frac{1}{3} & k = 0 \text{ or } k = n \\
+                                              \frac{4}{3} & k \text{ is odd } \\
+                                                      \frac{2}{3} & k \text{ is even }
+\end{cases}, 
+ \end{equation}
+ where $h$ is the step size.  To modify our Julia code to use the Simpson rule, you'll need to replace
+ \begin{verbatim}
+function integral_equation(g::Function, K::Function, n::Integer)
+    w = k -> if k==0 || k==n 1/(2*n) else 1/n end
+    M = [(if i==j 1 else 0 end) - w(j)*K(i/n,j/n)  for i=0:n, j=0:n]
+    b = [g(i/n) for i = 0:n]
+    sol = M  \ b
+    x -> g(x) + sum([w(k) * K(x,k/n) * sol[k+1] for k = 0:n])
+end
+\end{verbatim}
+with 
+\begin{verbatim}
+function integral_equation(g::Function, K::Function, n::Integer)
+    w = k -> if k==0 || k==n 1/(3*n) elseif iseven(k) 2/(3*n) else 4/(3*n) end
+    M = [(if i==j 1 else 0 end) - w(j)*K(i/n,j/n)  for i=0:n, j=0:n]
+    b = [g(i/n) for i = 0:n]
+    sol = M  \ b
+    x -> g(x) + sum([w(k) * K(x,k/n) * sol[k+1] for k = 0:n])
+end
+\end{verbatim}
+
+Use the given code to numerically solve the equation
+\begin{equation}
+F(x) =  \frac{\left( 2 {{\ensuremath{\pi} }^{2}}\operatorname{+}2\right)  \sin{\left( \ensuremath{\pi}  x\right) }\operatorname{-}\ensuremath{\pi} }{2 {{\ensuremath{\pi} }^{2}}}  + \int_0^1 \frac{1}{2} |x - y| F(y) \, \mathrm{d} y.
+\end{equation}
+using the Simpson rule method.  Which method gives a more accurate value? 
+ 
+ 
+
+\end{questions}
+\end{document}
