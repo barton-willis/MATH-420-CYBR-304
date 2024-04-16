@@ -60,7 +60,7 @@
 
 \begin{frame}
 \begin{flushleft} 
-\textbf{Can I do X?} \\
+\textbf{Fun with generating functions} \\
 MATH 202 \\
 \today 
 \end{flushleft}
@@ -73,7 +73,7 @@ MATH 202 \\
 \begin{frame}[fragile]{Our problem}
 We would like to find an explicit formula for the sequence $c$ that is defined recursively by
 \begin{equation}
-  c_n= \begin{cases} 0 & n=0  \text{ or } n = 1 \\
+  c_n= \begin{cases} 0 & n \in \{0,1\} \\
                                  c_{n-1} + c_{n-2}+ 8 & n \in \integers_{\geq 2}
            \end{cases}
 \end{equation}
@@ -93,34 +93,39 @@ For positive integers $n$ and $k$ with $n \geq k$, we define
 \end{equation}
 \begin{handlist}
  \item Spoken $\binom{n}{k}$ is ``$n$ choose $k$.''
- \item For a finite set $A$ with $n$ members,  $\binom{n}{k}$ is the number of subsets of $A$ that have $k$ members.
+ \item For a finite set $A$ with exactly $n$ members,  $\binom{n}{k}$ is the number of subsets of $A$ that have exactly $k$ members.
 \end{handlist}
 \end{frame}
 
 \begin{frame}{Tool 2:  Product rule for $n$-th derivatives}
 
-For smooth functions $f$ and $g$ and a nonnegative integer $n$, the n-th derivative of the product of $f$ with $g$ is
+For smooth functions $f$ and $g$ and a nonnegative integer $n$, the n-th derivative of the product of $f$ times $g$ is
 \begin{equation}
        D^n (f g) = \sum_{k=0}^n  \binom{n}{k}  f^{k} g^{n-k}.
 \end{equation}
+\begin{handlist}
+\item This is a fun generalization of the product rule for derivatives.
+\end{handlist}
 \end{frame}
+
 
 \begin{frame}{Tool 3:  $n$-th derivative of a power series}
 
-Let $c$ be a sequnce and let $n$ be a nonnegative integer.  Then
+Let $c$ be a sequence and let $n$ be a nonnegative integer.  Then
 \begin{equation}
-       D^n_x \sum_{k=0}^\infty c_k x^k  \vert_{x=0} = n!  c_n.
+      \left.  D^n_x \left( \sum_{k=0}^\infty c_k x^k  \right)  \right \vert_{x=0} = n!  c_n.
 \end{equation}
 \begin{handlist}
+ \item The operator order is sum first, derivative second, and  evaluation at zero third.
    \item For this to be true, it has to be the case that  the radius of convergence of the series is nonzero.
 \end{handlist}
 \end{frame}
 
 \begin{frame}{Tool 4:   $n$-th derivative of a rational function}
 
-Let $a \in \reals$ and $n$ a nonnegative integer. Then
+Let $a \in \reals_{\neq 0} $ and $n$ a nonnegative integer. Then
 \begin{equation}
-       D^n_x \left(\frac{1}{x-a}  \right) \vert_{x=0} = -\frac{n!}{a^{n+1}}.
+      \left.  D^n_x \left(\frac{1}{x-a}  \right) \right \vert_{x=0} = -\frac{n!}{a^{n+1}}.
 \end{equation}
 \end{frame}
 
@@ -136,7 +141,7 @@ Multiply the recursion $c_n = c_{n-1} + c_{n-2}+ 8$ by $z^n$ and sum from $n=2$ 
 \end{frame}
 \begin{frame}{Step 1}
 
-If needed shift each sum index to make the each summand involve $c_k$.
+If needed, shift each sum index to make the each summand involve $c_n$, not $c_{n-1}$ or $c_{n-2}$.
 \begin{equation}
   \sum_{n=2}^\infty c_{n} z^n  =  \sum_{n=1}^\infty c_{n} z^{n+1} +  \sum_{n=0}^\infty c_{n} z^{n+2} +  \sum_{n=2}^\infty 8 z^n
 \end{equation}
@@ -146,7 +151,7 @@ If needed shift each sum index to make the each summand involve $c_k$.
 \end{frame}
 
 \begin{frame}{Step 2}
-Use the know values of $c_0$ and $c_1$ to extend the lower sum index of each sum to zero.
+Use the known values of $c_0$ and $c_1$ to extend the lower sum index of each sum to zero.
 \begin{equation}
   \sum_{n=0}^\infty c_{n} z^n  =  z \sum_{n=0}^\infty c_{n} z^{n} +  z^2 \sum_{n=0}^\infty c_{n} z^{n} +  \sum_{n=2}^\infty 8 z^n
 \end{equation}
@@ -170,14 +175,57 @@ So
 
 \end{frame}
 \begin{frame}{Step 3}
-From $G$, determine $c_k$. We have
+From $G$, determine $c_n$. We have
 \begin{align*}
- c_n &= \frac{1}{n!} D^n_z  \frac{1}{1-z-z^2} F(x) \vert_{x=0}, \\
-       &= \frac{1}{n!}  \sum_{k=0}^n \binom{n}{k} D^k_z \left( \frac{1}{1-z-z^2} \right)  D^{n-k} _z F(z ) \vert_{z=0} 
-       &= 
+ c_n &= \frac{1}{n!}  \left. D^n_z  \frac{1}{1-z-z^2} F(x) \right  \vert_{x=0}, \\
+       &= \frac{1}{n!}  \left. \sum_{k=0}^n \binom{n}{k} D^k_z \left( \frac{1}{1-z-z^2} \right)  D^{n-k} _z F(z )  \right \vert_{z=0} 
 \end{align*}
 
 \end{frame}
 
+\begin{frame}{Step 3}
+Find the k-th derivative of $\left( \frac{1}{1-z-z^2} \right) $
+\begin{align*}
+   D^k_z \left( \frac{1}{1-z-z^2} \right)  &=  D^k_z \left( -\frac{1}{z^2+z-1} \right) , \\
+                                                             &=  D^k_z \left( -\frac{1}{(z-\alpha) (z-\beta) } \right),\\
+                                                             &=  \frac{1}{\beta - \alpha} D^k_z \left( \frac{1}{z-\alpha} + \frac{1}{z-\beta}  \right), \\
+                                                              &=  -\frac{k!}{\beta - \alpha} \left( \frac{1}{\alpha^{k+1}} + \frac{1}{\beta^{k+1} } \right), \\
+                                                                &=  \frac{k!}{\sqrt{5}} \left( \frac{1}{\alpha^{k+1}} + \frac{1}{\beta^{k+1} } \right), \\
+\end{align*}
+
+\end{frame}
+
+\begin{frame}{Tip: When things get messy, call things names}
+
+\end{frame}
+\begin{frame}{Step 3}
+Find the n-k th derivative of $F(z) $.
+
+\begin{equation}
+D^{n-k} _z F(z ) \vert_{z=0}  = (n-k) ! \begin{cases} 0 &  n -k < 2 \\  8  & n -k \geq  2 \end{cases}.
+\end{equation}
+\end{frame}
+\begin{frame}{Step 3}
+Collecting these results gives
+
+\begin{align*}
+ c_n &= \frac{8}{\sqrt{5}} \sum_{k=2}^n \left ( \frac{1}{\alpha^{k+1}} + \frac{1}{\beta^{k+1}} \right) \\
+       &=   \frac{8}{\sqrt{5}} \left(\frac{{{\beta }^{\operatorname{-}n\operatorname{-}1}}\operatorname{-}\frac{1}{{{\beta }^{2}}}}{\left( \frac{1}{\beta }\operatorname{-}1\right)  \beta }\operatorname{+}\frac{{{\alpha }^{\operatorname{-}n\operatorname{-}1}}\operatorname{-}\frac{1}{{{\alpha }^{2}}}}{\left( \frac{1}{\alpha }\operatorname{-}1\right)  \alpha } \right)
+\end{align*}
+This is a bit messy--both the term $\beta^{-n}$ grows exponentially while $\alpha^{-n}$ decays exponentially, so let's ignore all terms except the growing exponential. That gives
+\begin{equation}
+   c_n \approx 5.8 \times 1.6^n
+\end{equation}
+\end{frame}
+
+\begin{frame}
+The value of 
+\begin{align*}
+c_{300} &= 2876634601652668487694125321377512792418937714474137858044718400, \\
+             &\approx 5.626 \times 10^{209}.
+\end{align*}
+Our aproximation gives $c_{300} \approx 5.8 \times 1.6^{300}  =  5.633 \times 10^{209}.$
+
+\end{frame}
 \end{document}
 
