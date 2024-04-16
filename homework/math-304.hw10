@@ -1,0 +1,153 @@
+\documentclass[12pt,fleqn]{exam}
+\usepackage{amsmath,fleqn, url}
+\usepackage{enumerate,color}
+%\pagestyle{empty}
+
+\usepackage{graphicx}
+\usepackage[letterpaper,margin=1.0in]{geometry}
+\usepackage[english]{babel}
+\usepackage[final,babel]{microtype}
+\usepackage{amsmath, amssymb, amsthm, upgreek, xfrac, isomath}
+\frenchspacing
+\usepackage[T1]{fontenc}
+%\usepackage{lmodern}
+\usepackage[upright]{fourier} %options: sloped, upright, widespace
+%\usepackage[euler-digits,euler-hat-accent,T1]{eulervm}
+
+\newcommand{\reals}{\mathbf{R}}
+\newcommand{\integers}{\mathbf{Z}}
+\newcommand{\eu}{\mathrm{e}}
+\newcommand{\range}{\mathrm{range}}
+\usepackage{algorithm}
+\usepackage[noend]{algorithmic}
+\usepackage{isomath}
+\usepackage{graphicx}
+\renewcommand{\algorithmicrequire}{\textbf{input}}
+\renewcommand{\algorithmicensure}{\textbf{return}}
+
+\usepackage[T1]{fontenc}
+
+
+\usepackage[usenames,dvipsnames]{xcolor}
+
+
+\newcommand{\algo}[1]{\vspace{0.1in}
+      \begin{flushleft}
+         {\bf Algorithm} {\em #1}
+      \end{flushleft}
+      \vspace{0.1in}}
+
+\newenvironment{myalgorithm}[1]
+  {\setcounter{myalgo}{\value{myalgo}+1} 
+   \textbf{Algorithm \themysec.\hspace{-0.15in}\myalgo} {\em #1} \\ \vspace{-0.25in}}
+  
+
+\DeclareMathOperator{\fl}{fl}
+\newenvironment{alphalist}{
+  \begin{enumerate}[(a)]
+    \addtolength{\itemsep}{-1.0\itemsep}}
+  {\end{enumerate}}
+
+\newcommand{\quiz}{9}
+\newcommand{\term}{Spring}
+\usepackage{units}
+\usepackage{xspace}
+\makeatletter
+\DeclareRobustCommand{\maybefakesc}[1]{%
+  \ifnum\pdfstrcmp{\f@series}{\bfdefault}=\z@
+    {\fontsize{\dimexpr0.8\dimexpr\f@size pt\relax}{0}\selectfont\uppercase{#1}}%
+  \else
+    \textsc{#1}%
+  \fi
+}
+\newcommand\AM{\,\maybefakesc{am}\xspace}
+\newcommand\PM{\,\maybefakesc{pm}\xspace}
+
+\addpoints
+\boxedpoints
+\pointsinmargin
+\pointname{pts}
+\begin{document}
+
+\vspace{0.1in}
+\noindent\makebox[3.0truein][l]{ \textbf{CYRR 304}}
+{\bf Name:}  \\
+\noindent \makebox[3.0truein][l]{\textbf{Homework \quiz, \term \/ \the\year}}
+%{\bf Row:}\hrulefill\
+\vspace{0.1in}
+
+\noindent  Homework 9  has questions 1 through  \numquestions \/ with a total of of  \numpoints\/  points.The point
+value for each question or part of a question is in the box following each question or part of a question.
+This work is due \textbf{Saturday 20 April  } at 11:59 \PM.  
+
+In class (and in our textbook), we applied the Gram-Schmidt process to the functions $x \mapsto 1$, $x \mapsto x, x \mapsto x^2, \dots$ using the interval $[-1,1]$ and an inner product
+defined as 
+\begin{equation*}
+\langle f,g \rangle = \int_{-1}^1 f(x) g(x) \, \mathrm{d} x.
+\end{equation*}
+For this homework, we'll do the same, except that we will change the inner product to 
+\begin{equation*}
+ \langle f,g \rangle = \int_{-1}^1 \sqrt{1-x^2} f(x) g(x) \, \mathrm{d} x.
+\end{equation*}
+This inner product has all the required properties and the weight function satisfies the requirements on page 205 of our textbook.
+
+Doing the Gram-Schimidt process by hand for these function might develop your character, but it's tedious and challenging to get correct. The result of doing so is
+\begin{align*}
+C_0(x) &= \frac{\sqrt{2}}{\sqrt{\uppi}}, \\
+C_1(x) &= \frac{\sqrt{8}}{\sqrt{\uppi}} x,\\
+C_2(x) &= \frac{\sqrt{2}}{\sqrt{\uppi}} (2x-1)(2x+1), \\
+C_3(x) &= \frac{\sqrt{32}}{\sqrt{\uppi}} x(2x^2-1), \\
+C_4(x) &= \frac{\sqrt{2}}{\sqrt{\uppi}} (4 x^2 - 2 x - 1)(4x^4+2x+1). 
+\end{align*}
+These functions have been normalized so that $ \langle C_k, C_\ell  \rangle  = \begin{cases} 0 & k \neq \ell \\ 1 & k=\ell \end{cases}$.  These functions are a special case
+of the well-known \emph{ultraspherical} polynomials that are known as the \emph{Chebyshev polynomials of the second kind}. The zeros of $C_4$ are 
+\begin{equation*}
+\[x_0 = \left[ \operatorname{-}\left( \frac{\sqrt{5}\operatorname{+}1}{4}\right) ,
+x_1 = \operatorname{-}\left( \frac{\sqrt{5}\operatorname{-}1}{4}\right),
+x_2 = \frac{\sqrt{5}\operatorname{-}1}{4}\operatorname{,}\frac{\sqrt{5}\operatorname{+}1}{4}\right] \]
+[x_0 = -((sqrt(5)+1)/4),x_1 = -((sqrt(5)-1)/4),x_2 = (sqrt(5)-1)/4,x_3 = (sqrt(5)+1)/4]
+x_0 = -\left({{\sqrt{5}+1}\over{4}}\right) , x_1 = {{\sqrt{5}-1
+ }\over{4}} ,x_2 = -\left({{\sqrt{5}-1}\over{4}}\right) , x_3 = {{\sqrt{5}+1
+ }\over{4}}.
+ \end{equation*}
+
+\begin{questions}
+
+\question[10] These polynomials can be defined recursively by 
+\begin{equation*}
+ (n+1) C_{n+1}(x) = 2 \left( n + \frac{3}{2} \right) x \, C_n(x) - (n+2)  C_{n-1} (x) = 0,
+\end{equation*}
+and $C_0(x) = \frac{\sqrt{2}}{\sqrt{\uppi}},  C_1(x) = \frac{\sqrt{8}}{\sqrt{\uppi}} x$.  Write a Julia function \texttt{ ultraspherical(n::Integer, x::Number)}  that evaluates these polynomials. 
+
+
+
+\question[10]  Check that $C_{10}(0.23) \approx 0.6818339026993401$  and  $C_{15}(-0.19) \approx 0.06737434860812452$
+
+\question[10] Use Gadfly to graph $C_0, C_1, C_2, C_3$, and $C_4$ on the interval $[-1,1]$.
+
+
+\question [10] As we did for the Legendre polynomials, let's build a quadrature rule whose knots are the zeros of $C_4$. The corresponding weights are
+
+\begin{equation*}
+ \ensuremath{\mathrm{w0}}\operatorname{=}\operatorname{-}\left( \frac{\left( \sqrt{5}\operatorname{-}5\right)  \ensuremath{\pi} }{40}\right) \operatorname{,}\ensuremath{\mathrm{w1}}\operatorname{=}\frac{\left( \sqrt{5}\operatorname{+}5\right)  \ensuremath{\pi} }{40}\operatorname{,}\ensuremath{\mathrm{w2}}\operatorname{=}\frac{\left( \sqrt{5}\operatorname{+}5\right)  \ensuremath{\pi} }{40}\operatorname{,}\ensuremath{\mathrm{w3}}\operatorname{=}\operatorname{-}\left( \frac{\left( \sqrt{5}\operatorname{-}5\right)  \ensuremath{\pi} }{40}\right) 
+\end{equation*}
+The resulting quadrature rule is
+\begin{equation}
+ \int_{-1}^1 \sqrt{1-x^2} F(x) \, \mathrm{d} x \approx \sum_{k=0}^3 w_k F(x_k).
+\end{equation}
+Write a Julia function that implements this quadrature rule.
+
+\question [10] Show that this quadrature rule is pretty close to exact when $F$ is a polynomial of degree eight or less.  To do this, test the rule on 
+\begin{align*}
+\int_{-1}^{1}{\sqrt{1-x^2}\;\mathrm{d}x}={{\pi}\over{2}} , \\
+\int_{-1 }^{1}{x\,\sqrt{1-x^2}\;\mathrm{d}x}=0 , \\
+\int_{-1}^{1}{x^2\,\sqrt{1-x^2}\;\mathrm{d}x}=  {{\pi}\over{8}} , \\
+ \int_{-1}^{1}{x^3\,\sqrt{1-x^2}\;\mathrm{d}x}=0 , \\
+  \int_{-1 }^{1}{x^4\,\sqrt{1-x^2}\;\mathrm{d}x}={{\pi}\over{16}} , \\
+   \int_{-1}^{1}{x^5\, \sqrt{1-x^2}\;\mathrm{d}x}=0 , \\
+   \int_{-1}^{1}{x^6\,\sqrt{1-x^2}\;\mathrm{d}x}={{5\,\pi  }\over{128}} , \\
+   \int_{-1}^{1}{x^7\,\sqrt{1-x^2}\;\mathrm{d}x}=0. 
+ \end{align*}
+
+\end{questions}
+\end{document}

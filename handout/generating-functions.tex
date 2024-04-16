@@ -1,0 +1,183 @@
+\documentclass[portrait,fleqn,12pt]{beamer}
+\usetheme[progressbar=frametitle]{metropolis}
+\usepackage{amsmath}
+\usepackage{fleqn,amssymb,shadow}
+\usepackage{float}
+\usepackage{epsfig}
+\usepackage{enumerate}
+\usepackage{cancel}
+\usepackage{fontawesome5}
+%\usepackage{fourier}
+\usepackage{upgreek}
+\raggedright
+
+% Custom commands
+\newcommand{\fma}{{\rm fma}}
+\newcommand{\reals}{\mathbf{R}}
+\newcommand{\epsmach}{\varepsilon_m}
+\newcommand{\mymax}{\mbox{max} \,\,}
+\newcommand{\mydeg}{\mbox{deg}}
+\newcommand{\dom}{\mbox{dom}}
+\newcommand{\fl}{\mbox{fl}}
+\newcommand{\rel}{\mbox{rel}}
+\newcommand{\cond}{\mbox{cond}}
+\newcommand{\bern}{\mathcal{B}}
+\newcommand{\order}{\mathcal{O}}
+\newcommand{\atan}{\rm{arctan}}
+\newcommand{\bfa}{\mathbf{a}}
+\newcommand{\bfb}{\mathbf{b}}
+\newcommand{\bfzero}{\mathbf{0}}
+\newcommand{\bfx}{\mathbf{x}}
+\newcommand{\complex}{\mathbf{C}}
+\newcommand{\integers}{\mathbf{Z}}
+
+% Custom environments
+\newenvironment{alphalist}
+   {\begin{enumerate}[(a)]
+       \addtolength{\itemsep}{0.0\itemsep}}
+     {\end{enumerate}}
+
+\newenvironment{handlist}
+   {\begin{enumerate}[\faHandPointRight]
+       \addtolength{\itemsep}{0.0\itemsep}}
+     {\end{enumerate}}
+
+\newenvironment{define}[1]{
+  \textbf{Definition} #1}{}
+
+\newenvironment{idefine}[2]{
+  \index{#1}
+  \textbf{Definition} #2}{\(\blacktriangleleft\)}
+
+\newenvironment{myexample}[1]{
+  \textbf{Example} #1}
+
+
+\newenvironment{mynote}[1]{
+  \textbf{Note} #1}
+
+\begin{document}
+
+\begin{frame}
+\begin{flushleft} 
+\textbf{Can I do X?} \\
+MATH 202 \\
+\today 
+\end{flushleft}
+
+
+\emph{“The law is reason unaffected by desire.”} \hfill {\sc Aristotle } 
+\end{frame}
+
+
+\begin{frame}[fragile]{Our problem}
+We would like to find an explicit formula for the sequence $c$ that is defined recursively by
+\begin{equation}
+  c_n= \begin{cases} 0 & n=0  \text{ or } n = 1 \\
+                                 c_{n-1} + c_{n-2}+ 8 & n \in \integers_{\geq 2}
+           \end{cases}
+\end{equation}
+\begin{handlist}
+\item The first eleven terms of the seqence $c$ are
+\begin{equation}
+      0,0,8,16,32,56,96,160,264,432,704
+\end{equation}
+\item To complete this task, we need three new tools
+\end{handlist}
+\end{frame}
+\begin{frame}{Tool 1:  Binomial Coefficents}
+
+For positive integers $n$ and $k$ with $n \geq k$, we define
+\begin{equation}
+      \binom{n}{k} = \frac{n!}{k! (n-k)!}
+\end{equation}
+\begin{handlist}
+ \item Spoken $\binom{n}{k}$ is ``$n$ choose $k$.''
+ \item For a finite set $A$ with $n$ members,  $\binom{n}{k}$ is the number of subsets of $A$ that have $k$ members.
+\end{handlist}
+\end{frame}
+
+\begin{frame}{Tool 2:  Product rule for $n$-th derivatives}
+
+For smooth functions $f$ and $g$ and a nonnegative integer $n$, the n-th derivative of the product of $f$ with $g$ is
+\begin{equation}
+       D^n (f g) = \sum_{k=0}^n  \binom{n}{k}  f^{k} g^{n-k}.
+\end{equation}
+\end{frame}
+
+\begin{frame}{Tool 3:  $n$-th derivative of a power series}
+
+Let $c$ be a sequnce and let $n$ be a nonnegative integer.  Then
+\begin{equation}
+       D^n_x \sum_{k=0}^\infty c_k x^k  \vert_{x=0} = n!  c_n.
+\end{equation}
+\begin{handlist}
+   \item For this to be true, it has to be the case that  the radius of convergence of the series is nonzero.
+\end{handlist}
+\end{frame}
+
+\begin{frame}{Tool 4:   $n$-th derivative of a rational function}
+
+Let $a \in \reals$ and $n$ a nonnegative integer. Then
+\begin{equation}
+       D^n_x \left(\frac{1}{x-a}  \right) \vert_{x=0} = -\frac{n!}{a^{n+1}}.
+\end{equation}
+\end{frame}
+
+\begin{frame}{Step 0}
+
+Multiply the recursion $c_n = c_{n-1} + c_{n-2}+ 8$ by $z^n$ and sum from $n=2$ to $\infty$.  This gives
+\begin{equation}
+  \sum_{n=2}^\infty c_{n} z^n  =  \sum_{n=2}^\infty c_{n-1} z^n +  \sum_{n=2}^\infty c_{n-2} z^n +  \sum_{n=2}^\infty 8 z^n
+\end{equation}
+\begin{handlist}
+\item The lowest sum index is two because the recursion  $c_n = c_{n-1} + c_{n-2}+ 8$ is only valid for $n \geq 2$.
+\end{handlist}
+\end{frame}
+\begin{frame}{Step 1}
+
+If needed shift each sum index to make the each summand involve $c_k$.
+\begin{equation}
+  \sum_{n=2}^\infty c_{n} z^n  =  \sum_{n=1}^\infty c_{n} z^{n+1} +  \sum_{n=0}^\infty c_{n} z^{n+2} +  \sum_{n=2}^\infty 8 z^n
+\end{equation}
+\begin{handlist}
+\item The lowest sum index is two because the recursion  $c_n = c_{n-1} + c_{n-2}+ 8$ is only valid for $n \geq 2$.
+\end{handlist}
+\end{frame}
+
+\begin{frame}{Step 2}
+Use the know values of $c_0$ and $c_1$ to extend the lower sum index of each sum to zero.
+\begin{equation}
+  \sum_{n=0}^\infty c_{n} z^n  =  z \sum_{n=0}^\infty c_{n} z^{n} +  z^2 \sum_{n=0}^\infty c_{n} z^{n} +  \sum_{n=2}^\infty 8 z^n
+\end{equation}
+\begin{handlist}
+\item If $c_0$ and $c_1$ were nonzero, we'd have a few more terms!
+\end{handlist}
+\end{frame}
+
+\begin{frame}{Step 3}
+
+Define $G(z) =  \sum_{n=0}^\infty c_{n} z^n$ and $F(x) = \sum_{n=2}^\infty 8 z^n$. We have
+\begin{equation}
+  G(z) = z G(z) + z^2 G(z) + F(z)
+\end{equation}
+So 
+\begin{equation}
+  G(z) = \frac{1}{1-z-z^2} F(x).
+\end{equation}
+
+
+
+\end{frame}
+\begin{frame}{Step 3}
+From $G$, determine $c_k$. We have
+\begin{align*}
+ c_n &= \frac{1}{n!} D^n_z  \frac{1}{1-z-z^2} F(x) \vert_{x=0}, \\
+       &= \frac{1}{n!}  \sum_{k=0}^n \binom{n}{k} D^k_z \left( \frac{1}{1-z-z^2} \right)  D^{n-k} _z F(z ) \vert_{z=0} 
+       &= 
+\end{align*}
+
+\end{frame}
+
+\end{document}
+
