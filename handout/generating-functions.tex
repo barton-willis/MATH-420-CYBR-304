@@ -9,7 +9,7 @@
 \usepackage{fontawesome5}
 %\usepackage{fourier}
 \usepackage{upgreek}
-\raggedright
+%\raggedright
 
 % Custom commands
 \newcommand{\fma}{{\rm fma}}
@@ -30,6 +30,7 @@
 \newcommand{\bfx}{\mathbf{x}}
 \newcommand{\complex}{\mathbf{C}}
 \newcommand{\integers}{\mathbf{Z}}
+\newcommand{\D}{\mathrm{D}}
 
 % Custom environments
 \newenvironment{alphalist}
@@ -66,54 +67,60 @@ MATH 202 \\
 \end{flushleft}
 
 
-\emph{“The law is reason unaffected by desire.”} \hfill {\sc Aristotle } 
+\emph{“We have no reason to believe a priori this series will exist, but we will be optimistic.”} \hfill{\sc Donald Knuth}
+
+\emph{“If you have a good recipe and can measure accurately, you can bake it.”} \hfill{\sc Frances Phillips}
 \end{frame}
 
 
 \begin{frame}[fragile]{Our problem}
 We would like to find an explicit formula for the sequence $c$ that is defined recursively by
 \begin{equation}
-  c_n= \begin{cases} 0 & n \in \{0,1\} \\
-                                 c_{n-1} + c_{n-2}+ 8 & n \in \integers_{\geq 2}
-           \end{cases}
+  c_n= \begin{cases} 0 & n =0 \text{ or } n =1 \\
+                                 c_{n-1} + c_{n-2}+ 8 & n \geq 2
+           \end{cases}.
 \end{equation}
 \begin{handlist}
 \item The first eleven terms of the seqence $c$ are
 \begin{equation}
-      0,0,8,16,32,56,96,160,264,432,704
+      0,0,8,16,32,56,96,160,264,432,704.
 \end{equation}
-\item To complete this task, we need three new tools
+\item To complete this task, we need \emph{four} new tools.
 \end{handlist}
 \end{frame}
-\begin{frame}{Tool 1:  Binomial Coefficents}
+\begin{frame}{Tool 1:  Binomial Coefficients}
 
 For positive integers $n$ and $k$ with $n \geq k$, we define
 \begin{equation}
-      \binom{n}{k} = \frac{n!}{k! (n-k)!}
+      \binom{n}{k} = \frac{n!}{k! (n-k)!}.
 \end{equation}
 \begin{handlist}
  \item Spoken $\binom{n}{k}$ is ``$n$ choose $k$.''
- \item For a finite set $A$ with exactly $n$ members,  $\binom{n}{k}$ is the number of subsets of $A$ that have exactly $k$ members.
+ \item For a set $A$ with cardinality n,  the number of subsets of $A$ that have cardinality $k$ is $\binom{n}{k}$.
+ \item The cardinality two subsets of $\{1,2,3\}$ are $\{1,2\},\{1,3\},$ and $\{2,3\}$.  So  $\binom{3}{2} = 3$.
 \end{handlist}
 \end{frame}
 
-\begin{frame}{Tool 2:  Product rule for $n$-th derivatives}
+\begin{frame}{Tool 2:  Product rule for nth derivatives}
 
-For smooth functions $f$ and $g$ and a nonnegative integer $n$, the n-th derivative of the product of $f$ times $g$ is
+For smooth functions $f$ and $g$ and a nonnegative integer $n$, the nth derivative of the product of $f$ times $g$ is
 \begin{equation}
-       D^n (f g) = \sum_{k=0}^n  \binom{n}{k}  f^{k} g^{n-k}.
+       \D^n (f g) = \sum_{k=0}^n  \binom{n}{k}  f^{(k)} g^{(n-k)}.
 \end{equation}
 \begin{handlist}
-\item This is a fun generalization of the product rule for derivatives.
+\item $ f^{(k)}$ is the kth derivative of $f$, not the kth power.
+\item This is a generalization of the product rule for derivatives.
+\item $(f g)^{\prime \prime} = \binom{2}{0} f g^{\prime \prime} + \binom{2}{1} f^\prime  g^{\prime} +
+\binom{2}{2} f^{\prime \prime} g  = f g^{\prime \prime} + 2  f^\prime  g^{\prime} + f g^{\prime \prime}$.
 \end{handlist}
 \end{frame}
 
 
-\begin{frame}{Tool 3:  $n$-th derivative of a power series}
+\begin{frame}{Tool 3:  nth derivative of a power series}
 
 Let $c$ be a sequence and let $n$ be a nonnegative integer.  Then
 \begin{equation}
-      \left.  D^n_x \left( \sum_{k=0}^\infty c_k x^k  \right)  \right \vert_{x=0} = n!  c_n.
+      \left.  \D^n_x \left( \sum_{k=0}^\infty c_k x^k  \right)  \right \vert_{x=0} = n!  c_n.
 \end{equation}
 \begin{handlist}
  \item The operator order is sum first, derivative second, and  evaluation at zero third.
@@ -121,21 +128,21 @@ Let $c$ be a sequence and let $n$ be a nonnegative integer.  Then
 \end{handlist}
 \end{frame}
 
-\begin{frame}{Tool 4:   $n$-th derivative of a rational function}
+\begin{frame}{Tool 4:   nth derivative of a rational function}
 
-Let $a \in \reals_{\neq 0} $ and $n$ a nonnegative integer. Then
+Let $a \in \reals_{\neq 0} $ and $n \in \integers_{\geq 0}$. Then
 \begin{equation*}
-      \left.  D^n_x \left(\frac{1}{x-a}  \right) \right \vert_{x=0} = -\frac{n!}{a^{n+1}}.
+      \left.  \D^n_x \left(\frac{1}{x-a}  \right) \right \vert_{x=0} = -\frac{n!}{a^{n+1}}.
 \end{equation*}
-And let $a,b \in \reals_{\neq 0} $ with $a \neq b$  and let $n$ a nonnegative integer. Then
+And let $a,b \in \reals_{\neq 0} $ with $a \neq b$  and let $n \in \integers_{\geq 0}$. Then
 \begin{equation*}
-      \left.  D^n_x \left(\frac{1}{(x-a)(x-b)}  \right) \right \vert_{x=0} = -\frac{n!}{a-b} \left(\frac{1}{a^{n+1}} - \frac{1}{b^{n+1}} \right)
+      \left.  \D^n_x \left(\frac{1}{(x-a)(x-b)}  \right) \right \vert_{x=0} = -\frac{n!}{a-b} \left(\frac{1}{a^{n+1}} - \frac{1}{b^{n+1}} \right)
 \end{equation*}
 \end{frame}
 
 \begin{frame}{Step 0}
 
-Multiply the recursion $c_n = c_{n-1} + c_{n-2}+ 8$ by $z^n$ and sum from $n=2$ to $\infty$.  This gives
+Multiply the recursion $c_n = c_{n-1} + c_{n-2}+ 8$ by $z^n$ and sum from $n=2$ to $n=\infty$.  This gives
 \begin{equation}
   \sum_{n=2}^\infty c_{n} z^n  =  \sum_{n=2}^\infty c_{n-1} z^n +  \sum_{n=2}^\infty c_{n-2} z^n +  \sum_{n=2}^\infty 8 z^n
 \end{equation}
@@ -150,7 +157,10 @@ If needed, shift each sum index to make the each summand involve $c_n$, not $c_{
   \sum_{n=2}^\infty c_{n} z^n  =  \sum_{n=1}^\infty c_{n} z^{n+1} +  \sum_{n=0}^\infty c_{n} z^{n+2} +  \sum_{n=2}^\infty 8 z^n
 \end{equation}
 \begin{handlist}
-\item The lowest sum index is two because the recursion  $c_n = c_{n-1} + c_{n-2}+ 8$ is only valid for $n \geq 2$.
+\item In $ \sum_{n=2}^\infty c_{n-2} z^n$, replace \emph{every} $n$ by $n+2$. That gives
+\begin{equation}
+  \sum_{n=2}^\infty c_{n-2} z^n =  \sum_{n+2=2}^{n+2 = \infty} c_{n} z^{n+2} = \sum_{n=0}^{\infty} c_{n} z^{n+2}
+\end{equation}
 \end{handlist}
 \end{frame}
 
@@ -160,7 +170,11 @@ Use the known values of $c_0$ and $c_1$ to extend the lower sum index of each su
   \sum_{n=0}^\infty c_{n} z^n  =  z \sum_{n=0}^\infty c_{n} z^{n} +  z^2 \sum_{n=0}^\infty c_{n} z^{n} +  \sum_{n=2}^\infty 8 z^n
 \end{equation}
 \begin{handlist}
-\item If $c_0$ and $c_1$ were nonzero, we'd have a few more terms!
+\item If $c_0$ and $c_1$ were nonzero, we'd have a few more terms:
+\begin{equation}
+  \sum_{n=2}^\infty c_{n} z^n = -c_0 - c_1 z + \sum_{n=0}^\infty c_{n} z^n
+\end{equation}
+But for our case $c_0 = 0$ and $c_1 = 0$.
 \end{handlist}
 \end{frame}
 
@@ -172,26 +186,30 @@ Define $G(z) =  \sum_{n=0}^\infty c_{n} z^n$ and $F(x) = \sum_{n=2}^\infty 8 z^n
 \end{equation}
 So 
 \begin{equation}
-  G(z) = \frac{1}{1-z-z^2} F(x).
+  G(z) = \frac{1}{1-z-z^2} F(z).
 \end{equation}
 
+\begin{handlist}
+\item The function $G$ is the \emph{generating function for the sequence} $c$.
+
+\end{handlist}
 
 
 \end{frame}
-\begin{frame}{Step 3}
+\begin{frame}{Step 4}
 From $G$, determine $c_n$. We have
 \begin{align*}
- c_n &= \frac{1}{n!}  \left. D^n_z  \frac{1}{1-z-z^2} F(x) \right  \vert_{x=0}, \\
-       &= \frac{1}{n!}  \left. \sum_{k=0}^n \binom{n}{k} D^k_z \left( \frac{1}{1-z-z^2} \right)  D^{n-k} _z F(z )  \right \vert_{z=0} 
+ c_n &= \frac{1}{n!}  \left. \D^n_z  \frac{1}{1-z-z^2} F(z) \right  \vert_{z=0}, \\
+       &= \frac{1}{n!}  \left. \left. \sum_{k=0}^n \binom{n}{k} \D^k_z \left( \frac{1}{1-z-z^2} \right)  \right \vert_{z=0} \times \D^{n-k} _z F(z )  \right \vert_{z=0} 
 \end{align*}
 
 \end{frame}
 
-\begin{frame}{Step 3}
-Find the k-th derivative of $\left( \frac{1}{1-z-z^2} \right) $.   The factors of $1-z-z^2$ are a bit messy, so let's just give them names. Say
+\begin{frame}{Step 5}
+Find the k-th derivative of $\left( \frac{1}{1-z-z^2} \right) $.   The factors of $1-z-z^2$ are messy, so let's just give them names. Say
 \begin{align*}
-   D^k_z \left( \frac{1}{1-z-z^2} \right)  &=  D^k_z \left( -\frac{1}{(z-a)(z-b)} \right) , \\
-                                                                       &=   \frac{n!}{a-b} \left(\frac{1}{a^{n+1}} - \frac{1}{b^{n+1}} \right)
+   \left. \D^k_z \left( \frac{1}{1-z-z^2} \right) \right \vert_{z=0} &=  \left. \D^k_z \left( -\frac{1}{(z-a)(z-b)} \right)  \right \vert_{z=0}, \\
+                                                                       &=   \frac{k!}{a-b} \left(\frac{1}{a^{k+1}} - \frac{1}{b^{k+1}} \right)
 \end{align*}
 Actually,
 \[
@@ -200,20 +218,34 @@ Actually,
 That makes $a-b = -\sqrt{5}$. 
 \end{frame}
 
-\begin{frame}{Step 3}
+\begin{frame}{Step 6}
 Find the n-k th derivative of $F(z) $.
 
 \begin{equation}
 D^{n-k} _z F(z ) \vert_{z=0}  = (n-k) ! \begin{cases} 0 &  n -k < 2 \\  8  & n -k \geq  2 \end{cases}.
 \end{equation}
 \end{frame}
-\begin{frame}{Step 3}
+\begin{frame}{Step 7}
 Collecting these results gives
 
 \[
  c_n = -\frac{8}{\sqrt{5}} \sum_{k=0}^{n-2} \left ( \frac{1}{a^{k+1}} - \frac{1}{b^{k+1}} \right) 
 \]
-We find an explicit sum, but the result is a bit messy.  Let's settle for an approximation. The term $b^{-k}$ grows exponentially while $a^{-n}$ decays exponentially, so let's ignore all terms except the growing exponential. That gives
+
+\begin{handlist}
+\item What's the story with all the factorials and binomial coefficients?
+\item  $\frac{1}{n!} \binom{n}{k} k! (n-k)! = 1$, that's what!
+\end{handlist}
+\end{frame}
+
+\begin{frame}{Step 8}
+
+We could sum these geometric sums 
+\[
+ c_n = -\frac{8}{\sqrt{5}} \sum_{k=0}^{n-2} \left ( \frac{1}{a^{k+1}} - \frac{1}{b^{k+1}} \right) 
+\]
+but the result is messy.  So, let's settle for an approximation. The term $b^{-k}$ grows exponentially while 
+$a^{-k}$ decays exponentially, so let's ignore all terms except the growing exponential. That gives
 \[
  c_n \approx  \frac{8}{\sqrt{5}} \sum_{k=0}^{n-2} \frac{1}{b^{k+1}} \approx  \frac{8 b}{\sqrt{5}} \frac{{{b}^{-n}}}{1-b}
 \]
@@ -225,11 +257,68 @@ We find an explicit sum, but the result is a bit messy.  Let's settle for an app
 \begin{frame}
 The value of 
 \begin{align*}
-c_{300} &= 2876634601652668487694125321377512792418937714474137858044718400, \\
+c_{300} &= 2876634 \dots (\text{ lots of digits deleted}) \dots 044718400, \\
              &\approx 5.626 \times 10^{209}.
 \end{align*}
-Our aproximation gives $c_{300} \approx 5.8 \times 1.6^{300}  =  5.633 \times 10^{209}.$
+Our approximation gives $c_{300} \approx 5.8 \times 1.6^{300}  =  5.633 \times 10^{209}.$
+
+\begin{handlist}
+\item At $10^{15}$ FLOPS, it would take about $10^{189}$ years to compute $P_{300}$ using 
+the Legendre polynomial recursion without memoization. 
+
+\item But with memoization, computing $P_{300}$ takes a few microseconds.
+
+\end{handlist}
+\end{frame}
+
+\begin{frame}{For further study}
+
+\emph{CONCRETE MATHEMATICS: A Foundation for Computer Science}, 2nd Edition, Ronald  Graham, Donald Knuth, and Oren,
+Addison-Wesley Professional, 1994.
+
+\end{frame}
+
+\begin{frame}{What did chatGPT about our class?}
+
+Upon reviewing the logical flow of the work, I didn't find any significant logical errors. However, I'll provide some feedback on specific aspects:
+
+\begin{itemize}
+    \item \textbf{Binomial Coefficients:} The explanation and usage of binomial coefficients seem correct.
+
+    \item \textbf{Product Rule for nth Derivatives:}  The expression provided for the nth derivative of the product of two functions is accurate and follows the standard mathematical notation.
+
+    \item \textbf{Derivatives of Power Series:}  The statement regarding the nth derivative of a power series is correct, but it's essential to ensure that the assumptions about the convergence of the series hold true.
+
+
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+
+    \item \textbf{Derivatives of Rational Functions:} The formulas for the nth derivative of a rational function appear to be correctly derived and presented.
+    
+    \item \textbf{Generating Function and Recursive Sequence:} The steps taken to derive the generating function for the given recursive sequence seem logical and well-justified. The subsequent manipulation of the generating function to find the explicit formula for the sequence also appears to be sound.
+
+\item \textbf{Approximation} The approximation made to simplify the expression seems reasonable, although it's important to note that it introduces an approximation error. The comparison with the exact value of $c_{300}$ helps to assess the accuracy of the approximation. 
+
+
+\end{itemize}
+Overall, the logical progression of the work seems sound, with each step building upon the previous ones in a coherent manner. However, it's always a good practice to double-check the calculations and assumptions to ensure accuracy.
+
+\end{frame}
+
+\begin{frame}{More from chatGPT} 
+
+This lecture seems like a great fit for third-year computer science majors. It covers essential mathematical concepts that are directly relevant to their studies and future careers. By exploring generating functions, binomial coefficients, and derivatives of functions, students will gain valuable insights into algorithmic analysis and data structures.
+
+What's particularly engaging is how the lecture applies these theoretical concepts to a practical problem: solving a recurrence relation. This hands-on approach helps students see the real-world implications of the math they're learning, making the material more relatable and exciting.
+
+The discussion on approximation adds another layer of interest by demonstrating how to balance precision and efficiency in problem-solving. Plus, the comparison between exact and approximate values provides a tangible way for students to gauge the accuracy of their solutions.
+
+Overall, this lecture offers a solid blend of theory and application, making it both informative and engaging for students at this stage of their academic journey.
 
 \end{frame}
 \end{document}
-
