@@ -62,8 +62,8 @@
 \begin{frame}
 \begin{flushleft} 
 \textbf{Fun with generating functions} \\
-MATH 202 \\
-\today 
+MATH 420 \& CYBR 304 \\
+Spring 2024 
 \end{flushleft}
 
 
@@ -81,14 +81,14 @@ We would like to find an explicit formula for the sequence $c$ that is defined r
            \end{cases}.
 \end{equation}
 \begin{handlist}
-\item The first eleven terms of the seqence $c$ are
+\item The first eleven terms of the sequence $c$ are
 \begin{equation}
       0,0,8,16,32,56,96,160,264,432,704.
 \end{equation}
 \item To complete this task, we need \emph{four} new tools.
 \end{handlist}
 \end{frame}
-\begin{frame}{Tool 1:  Binomial Coefficients}
+\begin{frame}{Tool 1:  Binomial Coefficients.}
 
 For positive integers $n$ and $k$ with $n \geq k$, we define
 \begin{equation}
@@ -111,7 +111,7 @@ For smooth functions $f$ and $g$ and a nonnegative integer $n$, the nth derivati
 \item $ f^{(k)}$ is the kth derivative of $f$, not the kth power.
 \item This is a generalization of the product rule for derivatives.
 \item $(f g)^{\prime \prime} = \binom{2}{0} f g^{\prime \prime} + \binom{2}{1} f^\prime  g^{\prime} +
-\binom{2}{2} f^{\prime \prime} g  = f g^{\prime \prime} + 2  f^\prime  g^{\prime} + f g^{\prime \prime}$.
+\binom{2}{2} f^{\prime \prime} g  = f g^{\prime \prime} + 2  f^\prime  g^{\prime} + f^{\prime \prime} g$.
 \end{handlist}
 \end{frame}
 
@@ -152,7 +152,7 @@ Multiply the recursion $c_n = c_{n-1} + c_{n-2}+ 8$ by $z^n$ and sum from $n=2$ 
 \end{frame}
 \begin{frame}{Step 1}
 
-If needed, shift each sum index to make the each summand involve $c_n$, not $c_{n-1}$ or $c_{n-2}$.
+If needed, shift each sum index to make each summand involve $c_n$, not $c_{n-1}$ or $c_{n-2}$.
 \begin{equation}
   \sum_{n=2}^\infty c_{n} z^n  =  \sum_{n=1}^\infty c_{n} z^{n+1} +  \sum_{n=0}^\infty c_{n} z^{n+2} +  \sum_{n=2}^\infty 8 z^n
 \end{equation}
@@ -206,7 +206,7 @@ From $G$, determine $c_n$. We have
 \end{frame}
 
 \begin{frame}{Step 5}
-Find the k-th derivative of $\left( \frac{1}{1-z-z^2} \right) $.   The factors of $1-z-z^2$ are messy, so let's just give them names. Say
+Find the kth derivative of $\left( \frac{1}{1-z-z^2} \right) $.   The factors of $1-z-z^2$ are messy, so let's just give them names. Say
 \begin{align*}
    \left. \D^k_z \left( \frac{1}{1-z-z^2} \right) \right \vert_{z=0} &=  \left. \D^k_z \left( -\frac{1}{(z-a)(z-b)} \right)  \right \vert_{z=0}, \\
                                                                        &=   \frac{k!}{a-b} \left(\frac{1}{a^{k+1}} - \frac{1}{b^{k+1}} \right)
@@ -257,7 +257,7 @@ $a^{-k}$ decays exponentially, so let's ignore all terms except the growing expo
 \begin{frame}
 The value of 
 \begin{align*}
-c_{300} &= 2876634 \dots (\text{ lots of digits deleted}) \dots 044718400, \\
+c_{300} &= 2876634 \dots (\text{lots of digits deleted}) \dots 044718400, \\
              &\approx 5.626 \times 10^{209}.
 \end{align*}
 Our approximation gives $c_{300} \approx 5.8 \times 1.6^{300}  =  5.633 \times 10^{209}.$
@@ -273,7 +273,8 @@ the Legendre polynomial recursion without memoization.
 
 \begin{frame}{For further study}
 
-\emph{CONCRETE MATHEMATICS: A Foundation for Computer Science}, 2nd Edition, Ronald  Graham, Donald Knuth, and Oren,
+\emph{CONCRETE MATHEMATICS: A Foundation for Computer Science}, 2nd Edition, Ronald  Graham, 
+Donald Knuth, and Oren Patashnik,
 Addison-Wesley Professional, 1994.
 
 \end{frame}
