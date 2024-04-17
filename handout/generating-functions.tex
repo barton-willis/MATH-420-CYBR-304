@@ -124,9 +124,13 @@ Let $c$ be a sequence and let $n$ be a nonnegative integer.  Then
 \begin{frame}{Tool 4:   $n$-th derivative of a rational function}
 
 Let $a \in \reals_{\neq 0} $ and $n$ a nonnegative integer. Then
-\begin{equation}
+\begin{equation*}
       \left.  D^n_x \left(\frac{1}{x-a}  \right) \right \vert_{x=0} = -\frac{n!}{a^{n+1}}.
-\end{equation}
+\end{equation*}
+And let $a,b \in \reals_{\neq 0} $ with $a \neq b$  and let $n$ a nonnegative integer. Then
+\begin{equation*}
+      \left.  D^n_x \left(\frac{1}{(x-a)(x-b)}  \right) \right \vert_{x=0} = -\frac{n!}{a-b} \left(\frac{1}{a^{n+1}} - \frac{1}{b^{n+1}} \right)
+\end{equation*}
 \end{frame}
 
 \begin{frame}{Step 0}
@@ -184,20 +188,18 @@ From $G$, determine $c_n$. We have
 \end{frame}
 
 \begin{frame}{Step 3}
-Find the k-th derivative of $\left( \frac{1}{1-z-z^2} \right) $
+Find the k-th derivative of $\left( \frac{1}{1-z-z^2} \right) $.   The factors of $1-z-z^2$ are a bit messy, so let's just give them names. Say
 \begin{align*}
-   D^k_z \left( \frac{1}{1-z-z^2} \right)  &=  D^k_z \left( -\frac{1}{z^2+z-1} \right) , \\
-                                                             &=  D^k_z \left( -\frac{1}{(z-\alpha) (z-\beta) } \right),\\
-                                                             &=  \frac{1}{\beta - \alpha} D^k_z \left( \frac{1}{z-\alpha} + \frac{1}{z-\beta}  \right), \\
-                                                              &=  -\frac{k!}{\beta - \alpha} \left( \frac{1}{\alpha^{k+1}} + \frac{1}{\beta^{k+1} } \right), \\
-                                                                &=  \frac{k!}{\sqrt{5}} \left( \frac{1}{\alpha^{k+1}} + \frac{1}{\beta^{k+1} } \right), \\
+   D^k_z \left( \frac{1}{1-z-z^2} \right)  &=  D^k_z \left( -\frac{1}{(z-a)(z-b)} \right) , \\
+                                                                       &=   \frac{n!}{a-b} \left(\frac{1}{a^{n+1}} - \frac{1}{b^{n+1}} \right)
 \end{align*}
-
+Actually,
+\[
+   a =  -\frac{\sqrt{5}+1}{2}, \quad b = \frac{\sqrt{5}-1}{2}
+\]
+That makes $a-b = -\sqrt{5}$. 
 \end{frame}
 
-\begin{frame}{Tip: When things get messy, call things names}
-
-\end{frame}
 \begin{frame}{Step 3}
 Find the n-k th derivative of $F(z) $.
 
@@ -208,11 +210,13 @@ D^{n-k} _z F(z ) \vert_{z=0}  = (n-k) ! \begin{cases} 0 &  n -k < 2 \\  8  & n -
 \begin{frame}{Step 3}
 Collecting these results gives
 
-\begin{align*}
- c_n &= \frac{8}{\sqrt{5}} \sum_{k=2}^n \left ( \frac{1}{\alpha^{k+1}} + \frac{1}{\beta^{k+1}} \right) \\
-       &=   \frac{8}{\sqrt{5}} \left(\frac{{{\beta }^{\operatorname{-}n\operatorname{-}1}}\operatorname{-}\frac{1}{{{\beta }^{2}}}}{\left( \frac{1}{\beta }\operatorname{-}1\right)  \beta }\operatorname{+}\frac{{{\alpha }^{\operatorname{-}n\operatorname{-}1}}\operatorname{-}\frac{1}{{{\alpha }^{2}}}}{\left( \frac{1}{\alpha }\operatorname{-}1\right)  \alpha } \right)
-\end{align*}
-This is a bit messy--both the term $\beta^{-n}$ grows exponentially while $\alpha^{-n}$ decays exponentially, so let's ignore all terms except the growing exponential. That gives
+\[
+ c_n = -\frac{8}{\sqrt{5}} \sum_{k=0}^{n-2} \left ( \frac{1}{a^{k+1}} - \frac{1}{b^{k+1}} \right) 
+\]
+We find an explicit sum, but the result is a bit messy.  Let's settle for an approximation. The term $b^{-k}$ grows exponentially while $a^{-n}$ decays exponentially, so let's ignore all terms except the growing exponential. That gives
+\[
+ c_n \approx  \frac{8}{\sqrt{5}} \sum_{k=0}^{n-2} \frac{1}{b^{k+1}} \approx  \frac{8 b}{\sqrt{5}} \frac{{{b}^{-n}}}{1-b}
+\]
 \begin{equation}
    c_n \approx 5.8 \times 1.6^n
 \end{equation}
