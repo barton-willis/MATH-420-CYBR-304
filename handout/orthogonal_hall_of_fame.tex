@@ -1,0 +1,121 @@
+\documentclass[portrait,fleqn,12pt]{beamer}
+\usetheme[progressbar=frametitle]{metropolis}
+\usepackage{amsmath}
+\usepackage{fleqn,amssymb,shadow}
+\usepackage{float}
+\usepackage{epsfig}
+\usepackage{enumerate}
+\usepackage{cancel}
+\usepackage{fontawesome5}
+%\usepackage{fourier}
+\usepackage{upgreek}
+%\raggedright
+
+% Custom commands
+\newcommand{\fma}{{\rm fma}}
+\newcommand{\reals}{\mathbf{R}}
+\newcommand{\epsmach}{\varepsilon_m}
+\newcommand{\mymax}{\mbox{max} \,\,}
+\newcommand{\mydeg}{\mbox{deg}}
+\newcommand{\dom}{\mbox{dom}}
+\newcommand{\fl}{\mbox{fl}}
+\newcommand{\rel}{\mbox{rel}}
+\newcommand{\cond}{\mbox{cond}}
+\newcommand{\bern}{\mathcal{B}}
+\newcommand{\order}{\mathcal{O}}
+\newcommand{\atan}{\rm{arctan}}
+\newcommand{\bfa}{\mathbf{a}}
+\newcommand{\bfb}{\mathbf{b}}
+\newcommand{\bfzero}{\mathbf{0}}
+\newcommand{\bfx}{\mathbf{x}}
+\newcommand{\complex}{\mathbf{C}}
+\newcommand{\integers}{\mathbf{Z}}
+\newcommand{\D}{\mathrm{D}}
+
+% Custom environments
+\newenvironment{alphalist}
+   {\begin{enumerate}[(a)]
+       \addtolength{\itemsep}{0.0\itemsep}}
+     {\end{enumerate}}
+
+\newenvironment{handlist}
+   {\begin{enumerate}[\faHandPointRight]
+       \addtolength{\itemsep}{0.0\itemsep}}
+     {\end{enumerate}}
+
+\newenvironment{define}[1]{
+  \textbf{Definition} #1}{}
+
+\newenvironment{idefine}[2]{
+  \index{#1}
+  \textbf{Definition} #2}{\(\blacktriangleleft\)}
+
+\newenvironment{myexample}[1]{
+  \textbf{Example} #1}
+
+
+\newenvironment{mynote}[1]{
+  \textbf{Note} #1}
+
+\begin{document}
+
+\begin{frame}
+\begin{flushleft} 
+\textbf{Fun with generating functions} \\
+MATH 420 \& CYBR 304 \\
+Spring 2024 
+\end{flushleft}
+
+
+
+\end{frame}
+
+\begin{frame}{Long ago, we defined}
+\begin{define}
+Let $\{f_1, f_2, \dots, f_n \}  \subset  C_{[a,b]}$ and let $\langle \cdot, \cdot \rangle$ be an inner product
+on $C_{[a,b]}$.  The set of functions $\{f_1, f_2, \dots, f_n \}$ is \emph{orthogonal} provided distinct pairs
+of these functions are orthogonal.  The set is \emph{orthonormal} provided
+\begin{equation}
+\langle f_k, f_\ell \rangle = \begin{cases} 1 & k=\ell \\ 0 & k \neq \ell \end{cases}
+\end{equation}
+\end{define}
+
+\begin{handlist}
+\item Every orthonormal set is orthogonal.
+
+\item When $\{f_1, f_2, \dots, f_n \} $ is orthogonal, but not orthonormal, we can define
+\begin{equation}
+   \widehat f_k = \frac{f_k}{\sqrt{ \langle f_k, f_k \rangle}}.
+\end{equation}
+Then the set $\{\widehat f_1, \widehat f_2, \dots, \widehat f_n \}$ is orthonormal.
+\end{handlist}
+\end{frame}
+
+\begin{frame}{More facts from the past}
+
+Let  $\{f_1, f_2, \dots, f_n \} \subset C_{[a,b]}$, and suppose that this set is orthnormal. Given $F \in C_{[a,b]}$,
+we would like to find $c_1, c_2, \dots c_n$ that minimize the function
+\begin{equation}
+  (c_1, c_1, \dots, c_n) \in \reals^n \mapsto \| F - \sum_{k=0}^n c_k f_k, F  \|_2^2
+ \end{equation}
+The solution is
+\begin{equation}
+   c_k  =  \langle F, f_k \rangle, \text{ for } k \in 1 \dots n.
+\end{equation}
+\begin{handlist}
+\item Recall $\| f \|_2^2 = \langle f, f \rangle$
+\end{handlist}
+\end{frame}
+
+\begin{frame}{A Hall of Fame Orthogonal set}
+
+\textbf{Fact} For $k, \ell \in \integers$, we have
+\begin{align*}
+&\int_{-\uppi}^\uppi \cos(k x) \cos(\ell x) \, \mathrm{d} x = \begin{cases} \uppi & k = \ell \\ 0  & k \neq  \ell \end{cases},\\
+&\int_{-\uppi}^\uppi \cos(k x) \sin(\ell x) \, \mathrm{d} x = 0, \\
+&\int_{-\uppi}^\uppi \sin(k x) \sin(\ell x) \, \mathrm{d} x = \begin{cases} \uppi & k = \ell \\ 0  & k \neq  \ell \end{cases}.
+\end{align*}
+
+
+\end{frame}
+\end{document}
