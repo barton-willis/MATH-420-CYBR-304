@@ -32,6 +32,8 @@
 \newcommand{\integers}{\mathbf{Z}}
 \newcommand{\D}{\mathrm{D}}
 
+\newcommand{\nth}{n\textsuperscript{th}\,}
+\newcommand{\kth}{k\textsuperscript{th}\,}
 % Custom environments
 \newenvironment{alphalist}
    {\begin{enumerate}[(a)]
@@ -101,14 +103,14 @@ For positive integers $n$ and $k$ with $n \geq k$, we define
 \end{handlist}
 \end{frame}
 
-\begin{frame}{Tool 2:  Product rule for nth derivatives}
+\begin{frame}{Tool 2:  Product rule for \nth derivatives}
 
-For smooth functions $f$ and $g$ and a nonnegative integer $n$, the nth derivative of the product of $f$ times $g$ is
+For smooth functions $f$ and $g$ and a nonnegative integer $n$, the \nth derivative of the product of $f$ times $g$ is
 \begin{equation}
        \D^n (f g) = \sum_{k=0}^n  \binom{n}{k}  f^{(k)} g^{(n-k)}.
 \end{equation}
 \begin{handlist}
-\item $ f^{(k)}$ is the kth derivative of $f$, not the kth power.
+\item $ f^{(k)}$ is the \kth derivative of $f$, not the \kth power.
 \item This is a generalization of the product rule for derivatives.
 \item $(f g)^{\prime \prime} = \binom{2}{0} f g^{\prime \prime} + \binom{2}{1} f^\prime  g^{\prime} +
 \binom{2}{2} f^{\prime \prime} g  = f g^{\prime \prime} + 2  f^\prime  g^{\prime} + f^{\prime \prime} g$.
@@ -116,7 +118,7 @@ For smooth functions $f$ and $g$ and a nonnegative integer $n$, the nth derivati
 \end{frame}
 
 
-\begin{frame}{Tool 3:  nth derivative of a power series}
+\begin{frame}{Tool 3:  \nth derivative of a power series}
 
 Let $c$ be a sequence and let $n$ be a nonnegative integer.  Then
 \begin{equation}
@@ -128,7 +130,7 @@ Let $c$ be a sequence and let $n$ be a nonnegative integer.  Then
 \end{handlist}
 \end{frame}
 
-\begin{frame}{Tool 4:   nth derivative of a rational function}
+\begin{frame}{Tool 4:   \nth derivative of a rational function}
 
 Let $a \in \reals_{\neq 0} $ and $n \in \integers_{\geq 0}$. Then
 \begin{equation*}
@@ -206,7 +208,7 @@ From $G$, determine $c_n$. We have
 \end{frame}
 
 \begin{frame}{Step 5}
-Find the kth derivative of $\left( \frac{1}{1-z-z^2} \right) $.   The factors of $1-z-z^2$ are messy, so let's just give them names. Say
+Find the \kth derivative of $\left( \frac{1}{1-z-z^2} \right) $.   The factors of $1-z-z^2$ are messy, so let's just give them names. Say
 \begin{align*}
    \left. \D^k_z \left( \frac{1}{1-z-z^2} \right) \right \vert_{z=0} &=  \left. \D^k_z \left( -\frac{1}{(z-a)(z-b)} \right)  \right \vert_{z=0}, \\
                                                                        &=   \frac{k!}{a-b} \left(\frac{1}{a^{k+1}} - \frac{1}{b^{k+1}} \right)
