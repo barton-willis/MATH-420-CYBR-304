@@ -48,7 +48,7 @@
     \addtolength{\itemsep}{-1.0\itemsep}}
   {\end{enumerate}}
 
-\newcommand{\quiz}{10}
+\newcommand{\quiz}{11}
 \newcommand{\term}{Spring}
 \usepackage{units}
 \usepackage{xspace}
@@ -78,7 +78,11 @@
 
 \noindent  Homework 11  has questions 1 through  \numquestions \/ with a total of of  \numpoints\/  points. The point
 value for each question or part of a question is in the box following each question or part of a question.
-This work is due \textbf{Saturday 20 April  } at 11:59 \PM.  
+This work is due \textbf{Saturday 27 April  } at 11:59 \PM.  
+
+For this assignment, neatly handwrite your work, digitize it, and turn in the digital copy to Canvas.  If you use Julia
+to draw the graph for the last problem, convert it to HTML and submit that; if you use Desmos, export it as a png file 
+and include the png file.
 
 \begin{questions}
 
@@ -116,7 +120,7 @@ $f_3(x) = \frac{1}{\sqrt{\uppi}} \sin(3 x)$,  $f_4(x) = \frac{1}{\sqrt{\uppi}} \
 \part [10] Find numbers
 $c_1, c_2, \dots, c_{10}$ that minimize the function
 \begin{equation*}
-   (c_1, c_2, \dots, c_{10}) \in \reals^{10} \mapsto  \int (x - \sum_{k=1}^{10} \frac{1}{\sqrt{\uppi}} c_k \sin(k x))^2 \, \mathrm{d} x.
+   (c_1, c_2, \dots, c_{10}) \in \reals^{10} \mapsto  \int_{-\uppi}^{\uppi} \left(x - \sum_{k=1}^{10} \frac{1}{\sqrt{\uppi}} c_k \sin(k x) \right)^2 \, \mathrm{d} x.
 \end{equation*}
 You might like to use the fact that for all $k \in \integers_{>0}$, we have
 \begin{equation}
@@ -127,6 +131,8 @@ You might like to use the fact that for all $k \in \integers_{>0}$, we have
 \part [10] Using the numbers $c_1$ through $c_{10}$ you found in the previous question, ask a graphing utility
 to graph both $y = x$ and $y = \sum_{k=1}^{10} \frac{1}{\sqrt{\uppi}} c_k \sin(k x))$ on the same graph. 
 
+For a graphing utility, you can use Julia and Gadfly, or optionally, you can use Desmos; if you have never
+used Desmos, here is a link to a Desmos graph \url{https://www.desmos.com/calculator/kauijqwiri}
 \end{parts}
 
 \end{questions}
