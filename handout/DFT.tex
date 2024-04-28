@@ -80,9 +80,9 @@ Spring 2024
 \begin{frame}{A trigonometric basis}  
 
 
-Let $n \in \integers_{\geq 0}$ and let $a_0$ through $a_n$ and $b_1$ though $b_n$ be real numbers.  Define a function $F$ by 
+Let $n \in \integers_{\geq 0}$ and let $a_0, \dots, a_n$ and $b_1, \dots, b_n$ be real numbers.  Define a function $F$ by 
 \begin{equation*}
-F(x) = a_0 + \sum_{k=1}^n a_k \cos(k x) +  a_k \sin(k x).
+F(x) = a_0 + \sum_{k=1}^n a_k \cos(k x) +  b_k \sin(k x).
 \end{equation*}
 
 Expressing $\cos$ and $\sin$ in exponential form, the formula is 
@@ -93,7 +93,7 @@ F(x) &= a_0 + \sum_{k=1}^n a_k  \frac{\cis(k x) +  \overline{\cis(k x)}}{2} + b_
 \end{frame}
 
 \begin{frame}{An exponential basis}
-And
+So
 \begin{align*}
 F(x)   & = a_0 + \sum_{k=1}^n \frac{1}{2} (a_k  - \imag b_k) \cis(k x) +   \frac{1}{2} (a_k  + \imag b_k) \overline{\cis(k x) }   \\
           &= a_0 + \re  \left ( \sum_{k=1}^n (a_k  - \imag b_k) \cis(k x) \right)
@@ -104,7 +104,7 @@ Defining complex numbers $c_0, c_1, \dots, c_n $ as
 \end{equation*}
 we have
 \begin{equation*}
-F(x)    = \re  \left ( \sum_{k=0}^n c_k  \, \cis(k x) \right).
+F(x)    = \re  \left ( \sum_{k=0}^n c_k \,  \, \cis(k x) \right).
 \end{equation*}
 \end{frame}
 
@@ -120,7 +120,7 @@ where
   c_k = \begin{cases} \frac{1}{2} (a_k  + \imag b_k) & k < 0 \\
                                        a_0 & k = 0 \\
                                        \frac{1}{2} (a_k  - \imag b_k) & k > 0
-       \end{cases}
+       \end{cases}.
 \end{equation*}
 \end{frame}
 
@@ -128,29 +128,49 @@ where
 
 For any $n \in \integers_{\geq 0}$,  the set of functions
 \begin{equation*}
-  \{ x \mapsto \cis(k x) \mid k \in -n \dots n \}
+  \{ x \in [0, 2 \uppi]  \mapsto \cis(k x) \mid k \in -n \dots n \}
 \end{equation*}
 is orthogonal with respect to the inner product
 \begin{equation*}
   \langle f, g  \rangle = \int_0^{2 \uppi} \overline{f(x)} g(x) \ \mathrm{d} x.
 \end{equation*}
-In particular
+In particular for $k, \ell \in \integers$, we have
 \begin{equation*}
  \int_0^{2 \uppi}  \overline{ \cis(k x) } \, \cis(\ell x) \mathrm{d} x = \begin{cases} 0 & k \neq \ell \\ 2 \uppi & k = \ell \end{cases}
      = 2 \uppi \delta_{k, \ell}
  \end{equation*}
 \end{frame}
 
+\begin{frame}{The  Kronecker delta function}
 
-\begin{frame}
-Let $n \in \integers_{\geq 0}$ and let $c_{-n}, \dots, c_n \in \complex$. Define a 
+We define the Kronecker delta function $\delta$ as
+\begin{equation*}
+   \delta_{k, \ell} = \begin{cases} 0 & k \neq \ell \\ 1 & k= \ell \end{cases}.
+\end{equation*}
+
+\begin{handlist}
+\item The arguments to the Kronecker delta are almost always subscripts.
+
+\item Example $\delta_{\uppi, 3} = 0$ and $\delta_{\uppi, \uppi} = 1$.
+
+\item We have $\sum_{k=0}^n f_k \delta_{k\ell} = \begin{cases} f_\ell &  \ell \in 0 \dots n \\ 0 & \ell \notin 0 \dots n  \end{cases}$.
+\end{handlist}
+\end{frame}
+
+
+\begin{frame}{A trigonometric puzzle}
+
+\textbf{Problem} Let $n \in \integers_{\geq 0}$ and let $c_{-n}, \dots, c_n \in \complex$. Define a 
 function $F$ whose formula is 
-\begin{equation}
+\begin{equation*}
     F(x) = \sum_{k=-n}^n c_k \euler^{\imag  k x}
-\end{equation}
+\end{equation*}
 For a given function $F$, we would like to find a way to find the complex numbers $c_{-n}, \dots, c_n$.
 
-\textbf{Step \#1} Multiply Eq. 1 by $\euler^{-\imag  \ell x}$. This 
+\end{frame}
+
+\begin{frame}{Step \#1}
+\textbf{Step \#1} Multiply $\displaystyle F(x) = \sum_{k=-n}^n c_k \euler^{\imag  k x}$  by $\euler^{-\imag  \ell x}$. This 
 gives
 \begin{equation}
     \euler^{-\imag  \ell x} F(x) = \sum_{k=-n}^n c_k 
@@ -163,7 +183,7 @@ Using a rule of exponents, we have
 \end{equation}
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Step \#2}
     \textbf{Step \#2} Integrate with respect to $x$ over the 
     interval $[0, 2 \uppi]$
     \begin{equation}
@@ -180,7 +200,7 @@ Using a rule of exponents, we have
  \end{equation}
  \end{frame}
  
- \begin{frame}
+ \begin{frame}{Step \#3}
    \textbf{Step \#3} Integrate the orthogonal functions:
    \begin{equation}
        \int_0^{2 \uppi} \euler^{-\imag  \ell x} F(x) \,
@@ -194,7 +214,7 @@ Using a rule of exponents, we have
   
  \end{frame}
  
- \begin{frame}
+ \begin{frame}{What did we just do?}
  We've shown that if 
  \begin{equation}
     F(x) = \sum_{k=-n}^n c_k \euler^{\imag  k x}
@@ -206,6 +226,17 @@ Then for all $\ell \in -n \dots n$, we have
 \begin{handlist}
 \item Given the function $F$, the complex numbers $c_{-n}$ through $c_n$ are uniquely determined.
 \end{handlist}
+ \end{frame}
+ 
+ \begin{frame}{Fourier coefficients}
+ 
+ For any function $F$ that is integrable on the interval $[0,2 \uppi]$ the numbers $c_k$ defined as
+ \begin{equation*}
+   c_k = \frac{1}{2 \uppi} \int_0^{2 \uppi} \cis(k x) F(x) \, \mathrm{d} x
+ \end{equation*}
+ are the \emph{Fourier coefficients} of the function $F$.  Generally $k \in \integers$.
+ 
+ 
  \end{frame}
  
  \begin{frame}{I know what you are thinking}
@@ -231,10 +262,26 @@ Then for all $\ell \in -n \dots n$, we have
 becomes more and more ``wiggly.''  So we should expect that our right point rule quadrature rule will give less and less 
 accurate results for larger and larger $\ell$.
   
+  \vfill
+  
+  
+  \end{frame}
+  
+  \begin{frame}{Nice coincidence}
+  
+  You might be thinking ``Why the low accuracy right point rule?'' Why not something like the trapezoidal rule?  Ha!
+  
+  For a function $F$ with period $2 \uppi$, the right-point, left-point, and trapezoidal rule all give the same value for
+  
+  \begin{equation}
+     \int_0^{2 \uppi} \cis(k x) F(x) \, \mathrm{d} x
+  \end{equation}
+  where $k \in \integers$.
+  
   \end{frame}
   
   \begin{frame}{DFT defined}
-  \begin{define}  Let $a_0, a_1, \dots a_{n-1}$ be numbers (either real or complex).   For every $\ell \in 0 \dots n-1$, define
+  \begin{define}  Let $a_0, a_1, \dots a_{n-1}$ be numbers (either real or complex).   For every $\ell \in 0 \dots, n-1$, define
   \begin{equation*}
       \widehat a_\ell = \sum_{k=0}^{n-1}  \euler^{-  \imag \frac{2 \uppi}{n}  \ell  k} a_k
   \end{equation*}
@@ -251,7 +298,7 @@ accurate results for larger and larger $\ell$.
       \widehat a_\ell = \sum_{k=0}^{n-1}  \mathcal{F}_{\ell, k} a_k
   \end{equation*}
   we see that the DFT is matrix multiplication. Arranging $\widehat a_0, \dots \widehat a_{n-1}$ and  
-   $a_0, \dots \widehat a_{n-1}$ as column vectors $\mathbf{a}$ and  $\widehat{\mathbf{a}}$, we have
+   $a_0, \dots \widehat a_{n-1}$ as column vectors $\mathbf{a}$ and  $\widehat{\mathbf{a}}$,  respectively, we have
     \begin{equation*}
       \widehat{\mathbf{a}}  = \mathcal{F} \, \mathbf{a}
   \end{equation*}
@@ -265,9 +312,9 @@ accurate results for larger and larger $\ell$.
      
      \item But the matrix $\mathcal{F}$ has some special (almost magic) properties that 
      makes the effort only proportional to 
-     $n \log_{10} n$.
+     $n \log_{10}( n)$.
      
-     \item The algorithm that uses these properties to do the multiplication superfast is the \emph{Fast Fourier Transform} (FFT).
+     \item The algorithm that utilizes these properties to perform the multiplication quickly is the \emph{Fast Fourier Transform} (FFT).
      
      \item The FFT isn't really a transform, but an algorithm that computes a transform.
      
@@ -277,5 +324,11 @@ accurate results for larger and larger $\ell$.
   
     \end{frame}
     
+    \begin{frame}{What does chatGPT have to say?}
     
+    \textbf{Question} Would this document make for a good lecture for 3rd year computer science students?
+    
+    \textbf{Answer} Yes, this document could serve as a good lecture for 3rd year computer science students, particularly those interested in topics related to mathematics, signal processing, or algorithms.  (Specifics deleted).
+    
+    \end{frame}
 \end{document}
