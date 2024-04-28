@@ -217,9 +217,9 @@ Using a rule of exponents, we have
  \begin{frame}{What did we just do?}
  We've shown that if 
  \begin{equation}
-    F(x) = \sum_{k=-n}^n c_k \euler^{\imag  k x}
+    F(x) = \sum_{k=-n}^n c_k \euler^{\imag  k x},
 \end{equation}
-Then for all $\ell \in -n \dots n$, we have
+then for all $\ell \in -n \dots n$, we have
 \begin{equation}
    c_\ell = \frac{1}{2 \uppi} \int_0^{2 \uppi} \euler^{-\imag  \ell x} F(x) \, \mathrm{d}x
 \end{equation}
@@ -234,7 +234,7 @@ Then for all $\ell \in -n \dots n$, we have
  \begin{equation*}
    c_k = \frac{1}{2 \uppi} \int_0^{2 \uppi} \cis(k x) F(x) \, \mathrm{d} x
  \end{equation*}
- are the \emph{Fourier coefficients} of the function $F$.  Generally $k \in \integers$.
+ are the \emph{Fourier coefficients} of the function $F$.  Generally, $k \in \integers$.
  
  
  \end{frame}
@@ -297,8 +297,8 @@ accurate results for larger and larger $\ell$.
    \begin{equation*}
       \widehat a_\ell = \sum_{k=0}^{n-1}  \mathcal{F}_{\ell, k} a_k
   \end{equation*}
-  we see that the DFT is matrix multiplication. Arranging $\widehat a_0, \dots \widehat a_{n-1}$ and  
-   $a_0, \dots \widehat a_{n-1}$ as column vectors $\mathbf{a}$ and  $\widehat{\mathbf{a}}$,  respectively, we have
+  we see that the DFT is matrix multiplication. Arranging $\widehat a_0, \dots, \widehat a_{n-1}$ and  
+   $a_0, \dots, \widehat a_{n-1}$ as column vectors $\mathbf{a}$ and  $\widehat{\mathbf{a}}$,  respectively, we have
     \begin{equation*}
       \widehat{\mathbf{a}}  = \mathcal{F} \, \mathbf{a}
   \end{equation*}
