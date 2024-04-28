@@ -1,0 +1,281 @@
+\documentclass[portrait,fleqn,12pt]{beamer}
+\usetheme[progressbar=frametitle]{metropolis}
+\usepackage{amsmath}
+\usepackage{fleqn,amssymb,shadow}
+\usepackage{float}
+\usepackage{epsfig}
+\usepackage{enumerate}
+\usepackage{cancel}
+\usepackage{fontawesome5}
+%\usepackage{fourier}
+\usepackage{upgreek}
+%\raggedright
+
+% Custom commands
+\newcommand{\fma}{{\rm fma}}
+\newcommand{\reals}{\mathbf{R}}
+\newcommand{\epsmach}{\varepsilon_m}
+\newcommand{\mymax}{\mbox{max} \,\,}
+\newcommand{\mydeg}{\mbox{deg}}
+\newcommand{\dom}{\mbox{dom}}
+\newcommand{\fl}{\mbox{fl}}
+\newcommand{\rel}{\mbox{rel}}
+\newcommand{\cond}{\mbox{cond}}
+\newcommand{\bern}{\mathcal{B}}
+\newcommand{\order}{\mathcal{O}}
+\newcommand{\atan}{\rm{arctan}}
+\newcommand{\bfa}{\mathbf{a}}
+\newcommand{\bfb}{\mathbf{b}}
+\newcommand{\bfzero}{\mathbf{0}}
+\newcommand{\bfx}{\mathbf{x}}
+\newcommand{\complex}{\mathbf{C}}
+\newcommand{\integers}{\mathbf{Z}}
+\newcommand{\D}{\mathrm{D}}
+\newcommand{\cis}{\mathrm{cis}}
+\newcommand{\euler}{\mathrm{e}}
+\newcommand{\imag}{\mathrm{i}}
+\newcommand{\nth}{n\textsuperscript{th}\,}
+\newcommand{\kth}{k\textsuperscript{th}\,}
+
+\newcommand{\re}{\mathrm{Re}}
+% Custom environments
+\newenvironment{alphalist}
+   {\begin{enumerate}[(a)]
+       \addtolength{\itemsep}{0.0\itemsep}}
+     {\end{enumerate}}
+
+\newenvironment{handlist}
+   {\begin{enumerate}[\faHandPointRight]
+       \addtolength{\itemsep}{0.0\itemsep}}
+     {\end{enumerate}}
+
+\newenvironment{define}[1]{
+  \textbf{Definition} #1}{}
+
+\newenvironment{idefine}[2]{
+  \index{#1}
+  \textbf{Definition} #2}{\(\blacktriangleleft\)}
+
+\newenvironment{myexample}[1]{
+  \textbf{Example} #1}
+
+
+\newenvironment{mynote}[1]{
+  \textbf{Note} #1}
+
+\begin{document}
+
+\begin{frame}
+\begin{flushleft} 
+\textbf{The Discrete Fourier Transform} \\
+MATH 420 \& CYBR 304 \\
+Spring 2024 
+\end{flushleft}
+
+\emph{“The profound study of nature is the most fertile source of mathematical discovery.”} \hfill{\sc  Joseph Fourier}
+
+\end{frame}
+
+
+\begin{frame}{A trigonometric basis}  
+
+
+Let $n \in \integers_{\geq 0}$ and let $a_0$ through $a_n$ and $b_1$ though $b_n$ be real numbers.  Define a function $F$ by 
+\begin{equation*}
+F(x) = a_0 + \sum_{k=1}^n a_k \cos(k x) +  a_k \sin(k x).
+\end{equation*}
+
+Expressing $\cos$ and $\sin$ in exponential form, the formula is 
+\begin{align*}
+F(x) &= a_0 + \sum_{k=1}^n a_k  \frac{\cis(k x) +  \overline{\cis(k x)}}{2} + b_k  \frac{\cis(k x) -  \overline{\cis(k x)}}{2 \imag}, \\
+       & = a_0 + \sum_{k=1}^n \frac{1}{2} (a_k  - \imag b_k) \cis(k x) +   \frac{1}{2} (a_k  + \imag b_k) \overline{\cis(k x) } .  \\
+\end{align*}
+\end{frame}
+
+\begin{frame}{An exponential basis}
+And
+\begin{align*}
+F(x)   & = a_0 + \sum_{k=1}^n \frac{1}{2} (a_k  - \imag b_k) \cis(k x) +   \frac{1}{2} (a_k  + \imag b_k) \overline{\cis(k x) }   \\
+          &= a_0 + \re  \left ( \sum_{k=1}^n (a_k  - \imag b_k) \cis(k x) \right)
+\end{align*}
+Defining complex numbers $c_0, c_1, \dots, c_n $ as
+\begin{equation*}
+  c_k = \begin{cases} a_0  & k =0 \\ a_k  - \imag b_k & k \neq 0 \end{cases}
+\end{equation*}
+we have
+\begin{equation*}
+F(x)    = \re  \left ( \sum_{k=0}^n c_k  \, \cis(k x) \right).
+\end{equation*}
+\end{frame}
+
+\begin{frame}{Unreal functions}
+
+If we drop the condition that $F$ is real-valued and use the fact that $\overline{\cis(k x) } = \cis(-kx)$ we have
+\begin{align*}
+F(x)    &= a_0 + \sum_{k=1}^n \frac{1}{2} (a_k  - \imag b_k) \cis(k x) +   \frac{1}{2} (a_k  + \imag b_k) \cis(-k x) ,   \\
+         &= \sum_{k=-n}^n c_k \cis(k x).
+\end{align*}
+where
+\begin{equation*}
+  c_k = \begin{cases} \frac{1}{2} (a_k  + \imag b_k) & k < 0 \\
+                                       a_0 & k = 0 \\
+                                       \frac{1}{2} (a_k  - \imag b_k) & k > 0
+       \end{cases}
+\end{equation*}
+\end{frame}
+
+\begin{frame}{Unreal and orthogonal}
+
+For any $n \in \integers_{\geq 0}$,  the set of functions
+\begin{equation*}
+  \{ x \mapsto \cis(k x) \mid k \in -n \dots n \}
+\end{equation*}
+is orthogonal with respect to the inner product
+\begin{equation*}
+  \langle f, g  \rangle = \int_0^{2 \uppi} \overline{f(x)} g(x) \ \mathrm{d} x.
+\end{equation*}
+In particular
+\begin{equation*}
+ \int_0^{2 \uppi}  \overline{ \cis(k x) } \, \cis(\ell x) \mathrm{d} x = \begin{cases} 0 & k \neq \ell \\ 2 \uppi & k = \ell \end{cases}
+     = 2 \uppi \delta_{k, \ell}
+ \end{equation*}
+\end{frame}
+
+
+\begin{frame}
+Let $n \in \integers_{\geq 0}$ and let $c_{-n}, \dots, c_n \in \complex$. Define a 
+function $F$ whose formula is 
+\begin{equation}
+    F(x) = \sum_{k=-n}^n c_k \euler^{\imag  k x}
+\end{equation}
+For a given function $F$, we would like to find a way to find the complex numbers $c_{-n}, \dots, c_n$.
+
+\textbf{Step \#1} Multiply Eq. 1 by $\euler^{-\imag  \ell x}$. This 
+gives
+\begin{equation}
+    \euler^{-\imag  \ell x} F(x) = \sum_{k=-n}^n c_k 
+    \euler^{-\imag  \ell x} \euler^{\imag  k x}
+\end{equation}
+Using a rule of exponents, we have
+\begin{equation}
+    \euler^{-\imag  \ell x} F(x) = \sum_{k=-n}^n c_k 
+    \euler^{-\imag  (k - \ell) x}.
+\end{equation}
+\end{frame}
+
+\begin{frame}
+    \textbf{Step \#2} Integrate with respect to $x$ over the 
+    interval $[0, 2 \uppi]$
+    \begin{equation}
+       \int_0^{2 \uppi} \euler^{-\imag  \ell x} F(x) \,
+         \mathrm{d}x =  \int_0^{2 \uppi} \sum_{k=-n}^n c_k 
+        \euler^{-\imag  (k - \ell) x} \,
+        \mathrm{d}x.
+ \end{equation}
+ Swap the integration and the finite sum:
+ \begin{equation}
+       \int_0^{2 \uppi} \euler^{-\imag  \ell x} F(x) \,
+         \mathrm{d}x =  \sum_{k=-n}^n c_k 
+         \int_0^{2 \uppi}  \euler^{-\imag  (k - \ell) x} \,   \mathrm{d}x.
+ \end{equation}
+ \end{frame}
+ 
+ \begin{frame}
+   \textbf{Step \#3} Integrate the orthogonal functions:
+   \begin{equation}
+       \int_0^{2 \uppi} \euler^{-\imag  \ell x} F(x) \,
+         \mathrm{d}x =  \sum_{k=-n}^n c_k  2 \uppi \delta_{k, \ell} .
+       \end{equation}
+   Simplify the sum
+   \begin{equation}
+       \int_0^{2 \uppi} \euler^{-\imag  \ell x} F(x) \,
+         \mathrm{d}x =   2 \uppi c_\ell.
+       \end{equation}
+  
+ \end{frame}
+ 
+ \begin{frame}
+ We've shown that if 
+ \begin{equation}
+    F(x) = \sum_{k=-n}^n c_k \euler^{\imag  k x}
+\end{equation}
+Then for all $\ell \in -n \dots n$, we have
+\begin{equation}
+   c_\ell = \frac{1}{2 \uppi} \int_0^{2 \uppi} \euler^{-\imag  \ell x} F(x) \, \mathrm{d}x
+\end{equation}
+\begin{handlist}
+\item Given the function $F$, the complex numbers $c_{-n}$ through $c_n$ are uniquely determined.
+\end{handlist}
+ \end{frame}
+ 
+ \begin{frame}{I know what you are thinking}
+ 
+ Unless $F$ is fairly simple, we have no chance at finding a formula for the numbers $c_{-n}$ through $c_n$.  
+ 
+ Have no fear: we have
+ a tool for that.  Let's use the right-point rule integration to find approximate values for the Fourier coefficients. Using $n$ equal length 
+ subintervals of $[0, 2 \uppi]$, we have
+\begin{align*}
+  c_\ell &\approx \frac{1}{2 \uppi}  \frac{2 \uppi}{n} \sum_{k=0}^{n-1}  \euler^{-  \imag \frac{2 \uppi}{n}  \ell  k} F(x_k) \\
+            &=  \frac{1}{n} \sum_{k=0}^{n-1}  \euler^{-  \imag \frac{2 \uppi}{n}  \ell  k} F \left (\frac{2 \uppi}{n} k \right)  \\
+\end{align*}
+ 
+  \end{frame}
+  
+  \begin{frame}{Caveat}
+  
+  For large values of the integer $\ell$, the integrand of
+  \begin{equation*}
+   c_\ell = \frac{1}{2 \uppi} \int_0^{2 \uppi} \euler^{-\imag  \ell x} F(x) \, \mathrm{d}x
+\end{equation*}
+becomes more and more ``wiggly.''  So we should expect that our right point rule quadrature rule will give less and less 
+accurate results for larger and larger $\ell$.
+  
+  \end{frame}
+  
+  \begin{frame}{DFT defined}
+  \begin{define}  Let $a_0, a_1, \dots a_{n-1}$ be numbers (either real or complex).   For every $\ell \in 0 \dots n-1$, define
+  \begin{equation*}
+      \widehat a_\ell = \sum_{k=0}^{n-1}  \euler^{-  \imag \frac{2 \uppi}{n}  \ell  k} a_k
+  \end{equation*}
+  The list of numbers  $\widehat a_0,  \widehat a_1, \dots, \widehat a_{n-1}$ is the \emph{discrete Fourier transform} (DFT) of 
+  $a_0, a_1, \dots, a_{n-1}$.
+  
+  \end{define}
+  \end{frame}
+  
+  \begin{frame}{Doubly indexed things are matrices}
+ 
+ For any $n \in \integers_{>0}$, define $\mathcal{F}_{\ell, k}  = \euler^{-  \imag \frac{2 \uppi}{n}  \ell  k}$. We  have
+   \begin{equation*}
+      \widehat a_\ell = \sum_{k=0}^{n-1}  \mathcal{F}_{\ell, k} a_k
+  \end{equation*}
+  we see that the DFT is matrix multiplication. Arranging $\widehat a_0, \dots \widehat a_{n-1}$ and  
+   $a_0, \dots \widehat a_{n-1}$ as column vectors $\mathbf{a}$ and  $\widehat{\mathbf{a}}$, we have
+    \begin{equation*}
+      \widehat{\mathbf{a}}  = \mathcal{F} \, \mathbf{a}
+  \end{equation*}
+  
+    \end{frame}
+    
+     \begin{frame}{Magic properties}
+     
+     \begin{handlist}
+     \item When the size of a matrix $\mathcal{F}$ is $n\times n$, ordinarily  the effort required to do the matrix product $ \mathcal{F} \, \mathbf{a}$ is proportional to $n^2$.  
+     
+     \item But the matrix $\mathcal{F}$ has some special (almost magic) properties that 
+     makes the effort only proportional to 
+     $n \log_{10} n$.
+     
+     \item The algorithm that uses these properties to do the multiplication superfast is the \emph{Fast Fourier Transform} (FFT).
+     
+     \item The FFT isn't really a transform, but an algorithm that computes a transform.
+     
+     \item When $n$ is large, $n^2 \gg n \log_{10}(n)$.
+ 
+ \end{handlist}
+  
+    \end{frame}
+    
+    
+\end{document}
