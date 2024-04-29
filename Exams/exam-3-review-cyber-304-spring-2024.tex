@@ -1,0 +1,773 @@
+\documentclass[12pt,fleqn]{exam}
+\usepackage{algorithmic,url,calc}
+\usepackage{amsopn,amsmath,upgreek}
+\renewcommand{\algorithmicensure}{\textbf{Return:}}
+\newenvironment{alphalist}{
+  \vspace{-0.4in}
+  \begin{enumerate}[(a)]g
+    \addtolength{\itemsep}{-1.2\itemsep}}
+  {\end{enumerate}}
+%\usepackage{newtxmath}
+%\usepackage{libertine}
+%\usepackage{libertinust1math}
+\newcommand{\integers}{\mathbf{Z}}
+\newcommand{\reals}{\mathbf{R}}
+\newcommand{\complex}{\mathbf{C}}
+\DeclareMathOperator{\rel}{rel}
+\DeclareMathOperator{\fl}{fl}
+\DeclareMathOperator{\cis}{cis}
+\usepackage{fourier}
+\usepackage{color}\shadedsolutions
+\definecolor{SolutionColor}{rgb}{1,1,0.7}
+
+\addpoints
+\boxedpoints
+\pointsinmargin
+\pointname{pts}
+\begin{document}
+\begin{flushleft}
+
+{\bf CYBR 304} \\
+   Spring \the\year\\
+  Review for Third Examination
+\end{flushleft}
+
+
+
+
+\begin{questions}
+
+\item Know the properties of an inner product (page 205 of our textbook).
+
+\item Know the definition of the Kronecker delta function (classnotes Friday).
+
+\item Find a simple representation of $\displaystyle \sum_{k=-10}^{10} \left(\uppi^2 + 42\right) \delta_{k,1}$.
+
+\item Find a simple representation of $\displaystyle \sum_{k=-10}^{10} \left(\uppi^2 + 42\right) \delta_{k,28}$.
+
+\item Given an innerproduct on a set of function, know what it means for functions to be perpendicular.
+
+\item Let $f,g$, and $h$ be functions. For some innner product, suppose
+\begin{equation}
+\begin{bmatrix}
+\langle f,f \rangle & \langle f,g \rangle & \langle f,h \rangle \\
+\langle g,f \rangle & \langle g,g \rangle & \langle g,h \rangle \\
+\langle h,f \rangle & \langle h,g \rangle & \langle h,h \rangle 
+\end{bmatrix} = 
+\begin{bmatrix} 2 & 3 & 4 \\
+                        3 & 2 & 8 \\
+                        4 & 8 & 1
+\end{bmatrix}.
+\end{equation}
+\begin{parts}
+\part Find the numerical value of $\langle f, g-h \rangle $
+\part Find the numerical value of $\langle f, 2 f + 5 g \rangle $
+
+\part Find a real number $\alpha$ such that $\langle \alpha f, \alpha f \rangle = 1$.
+\part Find a real number $\beta$ such that $\langle \beta g,  \beta g \rangle = 1$.
+\part Find a real number $\alpha$ such that $f$ and $f + \alpha g$ are perpendicular.
+\part Find a real number $\beta$ such that $g$ and $g+ \alpha h$ are perpendicular.
+\end{parts}
+
+\item Know what it means to say that two functions are orthgonal with respect to an inner product (Definition 5.3.2, page 5.3.2).
+
+\item Be able to show that the functions $x  \in [-1,1] \mapsto x$ and $x \in [-1,1] \mapsto  3 x^2 - 1$ are orthogonal
+with respect to the innerproduct $\langle f, g \rangle = \int_{-1}^1 f(x) g(x) \, \mathrm{d} x$.
+
+\item Be able to show that the functions $x  \in [-1,1] \mapsto \cis(x) $ and $x \in [-1,1] \mapsto  \cis(2 x)$ are orthogonal
+with respect to the innerproduct $\langle f, g \rangle = \int_{0}^{2 \uppi} \overline{f(x)} g(x) \, \mathrm{d} x$.
+
+\item Know how to solve a continuous least squares problem using an orthogonal basis (see Examples 5.3.3 and 5.3.4, page 209. The actual computation for this example (top of page 210) is too involved for an exam problem, but you should 
+understand the logic behind the calculation).
+
+\item Given that the set of functions $\{f,g\}$ are orthonormal with respect to the innerproduct $\langle f, g \rangle =
+\int_0^1 f(x) g(x) \, \mathrm{d} x$, find integral representations for the numbers that minimize the 
+function
+\begin{equation*}
+   (a,b) \mapsto \int_0^1 \left(x - a f(x) - b g(x) \right)^2 \, \mathrm{d} x.
+\end{equation*}
+You are not given the formula for the functions $f$ and $g$, so you will not be able to find the explicit values of
+the numbers that minimize the given function.
+
+\item Know the Gram-Schmidt process (page 206 of our textbook). Be able to work through a few steps of the process for
+a given set of functions and an innner product (Example 5.3.1, page 206).
+
+\item For the innerproduct $\langle f, g \rangle = \int_{0}^{1} \sqrt{x} f(x) g(x) \, \mathrm{d} x$, do the Gram-Schmidt
+process for the functions $f_0 = x \in [0,1] \mapsto 1$, $f_1 = x \in [0,1] \mapsto x$, 
+and $f_2 = x \in [0,1] \mapsto x^2$.
+
+\item Know the properties of the function $\mathrm{cis}$. (Class on Monday)
+
+\item Know the definition of the Fourier coefficients (Handout and classes on Frirday and Monday)
+
+\item Understand the process of approximating the value of the  Fourier coefficients by the right point rule to ``discover''
+the DFT.
+
+\end{questions}
+
+
+
+\end{document}
+\item Know how the Google page rank is determined (our class disscussion doesn't include the so-called damping factor--know
+ the method as described in class, and \emph{not} as you might find it
+described elsewhere.)
+
+\item Given the links between webpages, be able to write the linear equations that determine the Google page rank (actually, the method we learned in class without the damping factor).
+
+\item Consider three webpages, $A,B$, and $C$. The links between these pages are $A \to B$, $A \to A$, $A \to B$, $B \to C$, $C \to C$, and $C \to A$. Find the  linear equations for
+the page ranks. Include the condition that the sum of the ranks is one.
+
+\item Know the three properties of a \emph{vector norm} (either classnotes or  \url{https://en.wikipedia.org/wiki/Norm_(mathematics)}
+
+
+\item Know the definitions of the one, two, and infinity vector norms. (Either classnotes or \url{https://en.wikipedia.org/wiki/Norm_(mathematics)#p-norm}.
+
+\item Given a vector (say with three components), compute its one, two, and infinity norms.
+
+\item Find the one, two, and infinity norms of the vector $\langle -6, -9, 23 \rangle$.
+
+\item Know the process of row reduction for matrices.
+
+\question   Use row reduction to solve the linear system  \( \begin{bmatrix}1 & 2\\
+-7 & 1 \end{bmatrix} \begin{bmatrix} x  \\  y \end{bmatrix}= \begin{bmatrix} 5  \\ -5 \end{bmatrix} \).
+\begin{solution}%[2.75in]
+
+\end{solution}
+%\item Know how to find the LU factorization of a matrix.  
+
+%\item Given the LU factorization of a matrix, know how to efficiently solve the linear system associated with this matrix.
+
+
+
+\item Know the definition of the  one and infinity matrix norms. Again, I'd say the best source for this is our classnotes:   For any square matrix the one  and infinity norms are defined by
+\begin{equation*}
+   \| A \|_1 = \text{maximum absolute column sum}, \quad 
+       \| A \|_\infty =  \text{maximum absolute row sum}.
+\end{equation*}
+
+
+ \item Know the definition of the matrix condition number.
+ 
+ \item  Understand the meaning of the bound
+ \begin{equation*}
+   \| \mathbf{x} - \mathbf{\widehat x} \|_p \leq 2 \varepsilon_m \frac{\mbox{cond}_A}
+   {1   - \varepsilon_m \mbox{cond}_A} \| \mathbf{x} \|_p,
+   \end{equation*}
+   provided \(1   - \varepsilon_m \mbox{cond}_A > 0 \).
+   
+    
+    \question Given that 
+
+\[
+\begin{bmatrix}1 & 2\\
+-7 & 1\end{bmatrix}^{-1} = \begin{bmatrix}\frac{1}{15} & -\frac{2}{15}\\
+\frac{7}{15} & \frac{1}{15}\end{bmatrix}
+\]
+find the infinity norm condition number of the matrix \(\begin{bmatrix}1 & 2\\
+-7 & 1\end{bmatrix}\).
+
+\question The condition number of a matrix \(M\) is  \(10^{12}\).  You need to solve a linear system \(M x = b\) and you need to ensure that the true solution \(x\) and the numerical solution \(\widehat x\) satisfy
+\[
+     \frac{\| x - \widehat x \|_\infty} {\| x   \|_\infty} < 10^{-14}.
+\]
+What this the greatest value of the machine epsilon that will allow for this?
+
+    \item Know how to solve an interpolation problem using a Vandermonde matrix; specifically know how to find the coefficient matrix and write the linear equations in matrix form.
+    
+     \item Know how to solve an interpolation problem using the Lagrange polynomials; know the properties of the Lagrange polynomials; and  given the knots, know how to find the formula for the Lagrange polynomials.
+     
+    %  \item Know how to solve an interpolation problem using Newton polynomials; know the properties of the 
+  %    Newton  polynomials; and know how to construct the divided difference table.
+      
+  %    \item Understand the algorithim for efficiently evaluating an linear combination of Newton polynomials.
+      
+      \item Know what it means to say that a polynomial interpolates a function.
+      
+    %  \item Understand the uniqueness proof of the interpolating polynomial.
+      
+    
+    \question   Find the matrix product \(\begin{bmatrix} 1 & 1 \\ -1 & 2 \end{bmatrix}  
+\begin{bmatrix} 3 & 1 \\ -2 & 1 \end{bmatrix}\).
+\begin{solution}%[2.75in]
+
+\end{solution}
+
+
+
+\question   Using integration by parts, show that \( \int_a^b F(x) \, \mathrm{d}x = (b-a) F(a) - \int_a^b (x-b) F^\prime(x) \, \mathrm{d} x \).  
+
+
+\begin{solution}%[2.75in]
+
+\end{solution}
+
+
+
+
+\question   In terms of a \emph{Vandermonde matrix}, find linear equations that determine \(c_0,c_1\), and \(c_2\) such that the
+polynomial \(P(x) = c_0  + c_1 x + c_2 x^2\) interpolates the points \((1,8), (2,9), (10,12)\). Write the equations in matrix form, but \emph{do not solve them}.
+
+\begin{solution}%[2.75in]
+
+\end{solution}
+
+%\newpage
+
+
+\question   Find the \emph{three}  Lagrange polynomials for the three knots \(1,2,3\).
+
+
+\begin{solution}%[2.75in]
+
+\end{solution}
+
+
+%\question   For the knots \(1,2,3\), find the Newton divided difference table for the function \(F(x) = x^2\).
+
+%\begin{solution}%[2.75in]
+
+%\end{solution}
+
+%\newpage
+
+\question   Let \(L_0, L_1\), and \(L_2\) be the  Lagrange polynomials for the three knots \(1,2,3\).  Find numbers \(c_0, c_1\), and \(c_2\), such that  for \(P(x) = c_0 L_0(x) + c_1 L_1 + c_2 L_2\),
+we have \(P(1)  = 0, P(2) = 9\), and  \(P(10) = 12\).
+
+\begin{solution}%[2.75in]
+
+\end{solution}
+
+
+
+
+\question [5] In terms of a \emph{Vandermonde matrix}, find linear equations that determine \(c_0,c_1\), and \(c_2\) such that the
+polynomial \(P(x) = c_0  + c_1 x + c_2 x^2\) interpolates the points \((1,1), (2,4), (3,8)\). Write the equations in matrix form, but \emph{do not solve them}.
+
+\begin{solution}%[2.75in]
+
+\end{solution}
+
+%\newpage
+
+
+\question [5] Find the \emph{three}  Lagrange polynomials for the three knots \(-1,0,1\).
+
+
+\begin{solution}%[2.75in]
+
+\end{solution}
+
+
+%\question [5] For the knots \(1,2,3\) find the Newton divided difference table for the function \(F(x) = x^2\).
+
+%\begin{solution}[2.75in]
+
+%\end{solution}
+
+%\newpage
+
+\question [5] Let \(L_0, L_1\), and \(L_2\) be the  Lagrange polynomials for the three knots \(-1,0,1\).  Find numbers \(c_0, c_1\), and \(c_2\), such that  for \(P(x) = c_0 L_0(x) + c_1 L_1 + c_2 L_2\),
+we have \(P(-1)  = 10, P(0) = 2\), and  \(P(1) = 5\).
+
+\begin{solution}%[2.75in]
+
+\end{solution}
+
+
+
+\question Given that 
+
+
+\[
+\begin{bmatrix}2 & 3\\
+4 & 5\end{bmatrix}^{-1} = \begin{bmatrix}-\frac{5}{2} & \frac{3}{2}\\ 2 & -1\end{bmatrix}\]
+
+
+
+find the infinity norm condition number of the matrix \(\begin{bmatrix}2 & 3\\
+4 & 5\end{bmatrix} \)
+%\newpage
+
+%\question  [5] Making use of the (wonderful) formula \(\int_{-\pi}^\pi \exp(i (k - \ell) x) \, dx = 2 \pi %\delta_{k,\ell}\), where \(k,\ell \in \integers\),
+%show how to find \emph{integral expressions} for \(c_{-n}, c_{-n+1}, \dots c_n\), where \(F(x) = %\sum_{k=-n}^n c_k \exp(i k x) \).
+
+%\begin{solution}%[2.75in]
+
+
+
+%\end{solution}
+
+\question Let $T_n$ be the n-panel trapezodial rule estimation for $\int_0^1 F$. Given that
+\begin{equation*}
+    \underset{[0,1]}{\max} | F |  = \uppi^5, \quad   \underset{[0,1]}{\max} | F^\prime |  = \sqrt{107 \uppi}, \text{ and }   \underset{[0,1]}{\max} | F^{\prime \prime} |  = 120,
+\end{equation*}
+Find the least integer $n$ such that you can be certain that  $| T_n(F) - \int_0^1 F | < 10^{-8}$.
+
+\end{questions}
+\end{document}
+
+\question Know the definitions of interval ariththemetic (classnotes).
+
+\question Know how to convert a base two number to a  base ten number (textbook page 7 and classnotes). Example
+\[
+   (1.011)_2 = 1 + 0 \times \frac{1}{2} + 1 \times \frac{1}{4} + 1 \times \frac{1}{8} = \frac{11}{8} 
+\]
+
+
+%\question Be able to convert a non-terminating base two number to a base ten number (textbook top of page 7 \S 0.2.2, handout on floating point numbers, and classnotes). Example:
+
+%Let \(x = (1.\overline{10})_2\). Then \(4 x = (110. \overline{10})_2.\) Subtracting yields \(4x - x = (110)_2 - (1)_2  = 6 - 1\).  So \(x = 5/3\).
+
+\question Given the number of digits in the signficand of a binary floating point number and the least and greatest values for the
+exponent, find the (a) largest floating point number, (b) the least positive floating point number, and (c) the machine epsilon (classnotes plus Eq. 0.9, \S0.3). But by our standard,
+\[
+    \left | \fl(x) - x \right|  \leq |x| \varepsilon_m
+\] 
+and 
+\[ 
+   \varepsilon_m  = \left(\frac{1}{2} \right)^{\mbox{bits in significand}}.
+\]
+And the book uses
+\[
+    \left | \fl(x) - x \right|  \leq \frac{1}{2} |x| \varepsilon_m
+\] 
+and 
+\[ 
+   \varepsilon_m  = \left(\frac{1}{2} \right)^{\mbox{bits in fractional part}}.
+\]
+The IEEE standard doesn't define the machine epsilon and definitions vary.  Our standard minimizes the number of factors of \(1/2\). And I think that's a good thing.
+
+\question Know what we mean by subtractive cancellation.  You should be able to give an example of subtractive cancellation (textbook page 16, \S0.4, classnotes). 
+
+Example: Suppose \(x = 3.14 \pm 0.01\) and \(y = 3.12 \pm 0.01\).  Thus \(x\) and \(y\) are known accurate to two decimal places. But there difference \(x - y\) is a number in the interval \((0, 0.2)\). In \(\pm\) language,
+we have \(x - y = 0.1 \pm 0.1\).  Thus although \(x\) and \(y\) are know to be accurate to two decimal places,  the difference \(x - y\) is known accurately to zero digits.
+
+\question Know everything there is to know about the function \(\mbox{fl}\) (rounds to nearest float, page 10, especially Eq. (0.9); and classnotes).
+
+\question Know that floating point addition is not associative.  
+
+\question Know the rule that for floating point addition of to floats that \(x  \oplus y = (x + y) (1 + \varepsilon) \), where \(|\varepsilon| \leq \varepsilon_m\).  Using this rule, be able to show that for floats \(a,b\), and \(c\), that
+\[
+     \left|  (a  \oplus b) \oplus c - (a + b + c)   \right|  \leq \varepsilon_m  \left (\left |a + b + c \right|  +  \left | a + b \right| \right) + \varepsilon_m^2 | a + b|.
+ \]
+ Assuming that \( \varepsilon^2  \) is negligible,  what is the best order to add the numbers \(1.1 \times 10^9\), \mbox{\(-1.09 \times 10^9\)}, and \(1.8 \times 10^{10}\) using floating point addition? Explain.  Hint: Choose the order that minimizes the sum \( \left | a + b \right| \), where \(a\) and \(b\) are the first two numbers that are summed.
+
+\question Understand the derivation and the significance of the result
+\[
+   \left | \frac{x + y -  (\fl(x) + \fl(y))}{x + y}  \right|  \leq \varepsilon_m \frac{|x| + |y|}{|x + y|}.
+\]
+
+
+
+%\question Know the Horner method for polynomial evaluation (\S0.1). Be able to write pseudo code for the Horner method (classnotes).
+
+%\question Know what it means for a function to have a simple zero and a multiple zero (classnotes, page 46, \S1.3).
+
+\question Know what it means for a function to have a fixed point (Definition 1.4, page 31).
+
+\question Know how the fixed point sequence is defined (middle page 31). Also understand the diagrams  on page 34 and 35.
+
+
+\question Know what it means for a sequence to converge linearly (classnotes).  Definition 1.5, page 35 of our textbook yet.
+
+
+%\question Know the process of Gauss elimination and back substitution (\S 2.1.1, pages 72--73); know what is meant by the matrix size and an upper triangular matrix.
+
+%\question Know the definitions of the one, two, and infinity vector norms (\S 2.3.1, page 86 and Monday Class)
+
+%\question Know the definition of the matrix one and infinity norm (Monday Class); the textbook (page 88). Know the basic properties of the matrix norm.
+
+
+
+
+
+
+
+
+
+
+
+
+
+\question Convert the number \((1.01)_2\) from base \emph{two} to base \emph{ten}.
+
+%\vspace{1.5in}
+
+%\question Convert the number \((1.\overline{011})_2\) from base \emph{two} to base \emph{ten.}
+
+%\vspace{1.5in}
+
+
+\question A (mythical) \(\mathrm{UNK}_{2018}\) floating point number has 5 bits
+in its fractional part. Also, the exponent range is -10 .. 11.  For a \(UNK_{2018}\) floating
+point number, what is the \emph{smallest} floating point number that
+is \emph{greater than one}?
+
+
+
+
+
+\question Find the \emph{fixed points} of the function \(x \mapsto {{10\,\left(1-x\right)\,\left(2-x\right)}\over{3}}\).
+
+%\begin{solution}[3.5in]
+%\end{solution}
+
+
+\question  The sequence  \(\displaystyle k \mapsto 5 + \frac{1}{8^k} \) converges to 5. Show that the sequence 
+ converges to 5 \emph{linearly}.
+
+
+%\vspace{2.0in}
+
+%\newpage
+
+
+
+\question  Find an upper bound\footnote{Yes, infinity is an upper bound. The
+upper bound you give needs to be \emph{smaller} than infinity.}
+ for
+\(
+  \left| a + b -  \left(a  \oplus b) \right) \right|
+\), where both \(a\) and \(b\) are floating point numbers. 
+The function \(\mbox{fl}\) rounds a number to the nearest floating point number. 
+%\vspace{2.0in}
+
+%\begin{solution}[3.5in]
+%\end{solution}
+
+%\newpage
+
+
+%\question  Is floating-point addition \emph{associative}? If not, what
+%is the best way to add $a + b + c$, where $c > a > b > 0$ are
+%floating point numbers.
+
+%\question Using binary floating point numbers with three bits in the
+%significand, show that floating point addition is not associative.
+
+
+
+
+%\question  Explain why subtracting two floating-point numbers
+%that are close together is almost always a bad thing to do.  
+%Illustrate with an example.
+
+
+\question (True or False) \underline{\phantom{xxxxxxxx}} Floating point addition is \emph{associative.}
+
+\question Given that a sequence \(F\) converges to 1, what does it mean to say that \(F\) converges to 1 \emph{linearly}?
+
+
+\question Show that the sequence \(\displaystyle k \mapsto 1 + \left(\frac{1}{2} \right)^k \) converges to 1 \emph{linearly}.
+
+
+
+%\newpage
+
+%\question  Show that \(0\) is a fixed point of the function \(F(x) = x^2\). If the first term of a fixed point sequence for \(F\) is \(1/2\),
+%geometrically show the first few terms of the fixed point sequence. Does this fixed point sequence appear to converge to 0? 
+
+
+
+\question  Convert the number \((1.11)_2\) from base \emph{two} to base \emph{ten}.
+
+\question  Although \(\displaystyle \sqrt{1+x} - 1 =
+\frac{x}{\sqrt{1+x} + 1}\) is an identity, for floating point
+evaluation one formula should be
+preferred over the other when \(x\) is near zero.
+Which formula is better when \(x\) is near zero
+and why?
+\end{questions}
+
+\end{document}
+
+
+\question  Although \(\displaystyle \sqrt{1+x} - 1 =
+\frac{x}{\sqrt{1+x} + 1}\) is an identity, for floating point
+evaluation one formula should be
+preferred over the other when \(x\) is near zero.
+Which formula is better when \(x\) is near zero
+and why?
+
+\vspace{2.0in}
+
+
+%\clearpage
+
+%%\question  A floating point number of the type Larry has six bits in its {\em fractional part\/} and its exponent range is -5 to 5.
+
+%\begin{parts}
+
+%\part  Find the {\em largest positive\/} Larry floating point number.
+
+%\vspace*{1.5in}
+
+%\part  Let \(\rm{fl}(x) \) be the Larry floating point number
+%that is the closest to \(x\).  Using the fact that a Larry float
+%has six bits in its fractional part, find an upper bound for
+%\(\displaystyle
+%    \left | \pi - \rm{fl}(\pi) \right|.
+%\)
+
+%\vspace{3.5in}
+
+%\part  When a Larry number is converted to decimal, how many digits
+%should be shown in the number?
+
+
+%\vspace*{1.0in}
+
+%\end{parts}
+
+
+%\clearpage
+
+
+\question  Let \(a\) be a floating point number and let
+\(\varepsilon_M\) be the machine epsilon.  Find an upper
+bound for
+\(
+  \left | 1 \oplus a \otimes a  - (1 + a^2)\right|
+\).
+
+%\vspace*{2.5in}
+
+
+
+
+
+\question Draw a nicely labled diagram and show a derivation of the recursive formula for the Newton squence.
+
+\question Know what it means for a sequence to converge linearly.
+
+
+%\question  In a physics experiment, you measure the mass \(m\) and
+%the speed \(v\) of your favorite massive particle.  From this
+%data, you need to determine the kinetic energy \(T = \frac{1}{2} m v^2\). 
+%Your data is:
+%\begin{align*}
+%  \widehat m &= 1.5 \mbox{ kg}, \quad \mbox{rel}(m, \widehat m) < 1.2\%, \\
+%  \widehat v &= 2.5 \mbox{ m}/\mbox{s}, \quad  \mbox{rel}(v, \widehat v) < 0.5\%
+%\end{align*}
+%where \(\widehat m\) is the measured value of the mass \(m\), and similarly
+%for \(v\).  
+
+%\begin{parts}
+
+%\part  Find the condition number for the function \(T(m,v) = \frac{1}{2} m v^2\).
+
+%\vspace{1.5in}
+
+%\part Use the condition number to find the approximate upper bound
+%for  \(\mbox{rel}(T, \widehat T)\).
+
+%\end{parts}
+
+
+
+\%clearpage
+
+
+%\question  Show that 
+%\(
+%  5000 x + 7 x^2 = \mathcal{O}(x^2), \mbox{ on} [1,\infty)
+%\)
+
+%\vspace{2.0in}
+
+%\question  You need to add the numbers \(x_1, x_2, \dots, x_9\). You
+%know that 
+%\[
+%  \mbox{cond}_+(x_1, x_2, \dots, x_9) = 10^{23}.
+%\]
+%If you do the summation using double floating point numbers, what is 
+%an upper bound for 
+%\[
+%   \mbox{rel}(\sum x_k, \sum \mbox{fl}(x_k))?
+%\]
+%(The function \(\mbox{fl}\) rounds to the nearest double float.)
+%The machine epsilon for double floats is about \(10^{-16}\). Assume
+%that the numbers \(x_1\) through \(x_9\) are such that overflow and
+%underflow does not happen.
+
+
+%\vspace*{2.5in}
+\end{questions}
+\end{document}
+
+
+\question Starting with a {\em quotient of relative differences}, derive
+the formula
+\[
+   \mbox{cond}_F(x) = \left | x \frac{F^\prime(x)}{F(x)} \right|,
+\]
+for a differentiable function \(F : \mathbf{R} \to \mathbf{R}\).
+
+\vspace*{2.0in}
+
+\question  Let \(F(x) = x^2 \, \exp(x)\).  
+\begin{parts}
+
+\part  Find a formula for the condition number of \(F\).
+
+\vspace*{1.5in}
+
+\part  Assuming that ill-conditioned means that the condition number
+exceeds 1000, find the interval(s) on which \(F\) is {\em
+well-conditioned.}
+
+\vspace*{1.5in}
+
+\end{parts}
+
+\question  Explain why subtracting two floating-point numbers
+that are close together is almost always a bad thing to do.  
+Illustrate with an example.
+
+\vspace{2.5in}
+
+\question  Although \(\displaystyle \sqrt{1+x} - 1 =
+\frac{x}{\sqrt{1+x} + 1}\), one formula should be
+preferred over the other when \(x\) is near zero.
+Which formula is better when \(x\) is near zero
+and why?
+
+\vspace{2.5in}
+
+\question  Let \(z\) be a floating point number and let
+\(\varepsilon\) be the machine epsilon.  Find an upper
+bound for
+\[
+  \left| \left (1 \oplus \left( z \otimes z \right) \right) -
+    (1 +z^2) \right |.
+\]
+
+\vspace*{2.5in}
+
+\question Let $\mathbf{x}$ be the vector $\mathbf{x} = \langle 1, 2 \rangle$.
+Find the values of
+\begin{parts}
+
+\part  $ \| \mathbf{x} \|_{2} = $
+
+\vspace*{0.5in}
+
+\part  $ \| \mathbf{x} \|_{\infty} = $
+
+\vspace*{0.5in}
+
+\part  $\|  \mathbf{x} \|_{1} = $
+
+\vspace*{0.5in}
+
+\end{parts}
+
+\question  Find the one-norm of the matrix
+\(
+  \begin{pmatrix} 1 & 2 \\ 2 & -1 \end{pmatrix}.
+\)
+
+\vspace{2.5in}
+
+\newpage
+
+\question  Is floating-point addition {\em associative\/}? If not, what
+is the best way to add $a + b + c$, where $c > a > b > 0$ are
+floating point numbers.
+
+\vspace{1.5in}
+
+\question  The condition number of a matrix \(M\) is \(10^{42}\). 
+You need to solve the linear system \(M \mathbf{x} = \mathbf{b}\).
+If you do this using the best pivoting scheme (say scaled
+full-pivoting) and IEEE double-floats, would you expect the solution
+to be accurate?  To get an accurate solution, what must you do
+in addition to using a good pivoting scheme?
+
+
+\vspace*{1.5in}
+
+\question  A  IEEE-007 floating-point number has 10 bits
+in its fractional part and its exponent range is
+-126 to 127.  For this question you don't need to give a decimal
+number; any simple representation for the number is
+acceptable. Define \(\mbox{Fl}(x) = \mbox{nearest IEEE-007 number to } x\).
+Find an upper bound for
+\(
+   | \mbox{Fl}(\pi) - \pi |.
+\)
+
+item Know the derivation of the Newton sequence (find the point where a tangent
+line intersects the axis).
+
+\question Know what it means for a sequence to converge linearly.
+
+\question Know what it means for a sequence to converge quadratically.
+
+
+\end{questions}
+
+\end{document}
+
+item Know the derivation of the Newton sequence (find the point where a tangent
+line intersects the axis).
+
+\question Know what it means for a sequence to converge linearly.
+
+\question Know what it means for a sequence to converge quadratically.
+
+\question Know when finding the zero of a function is ill--conditioned and
+when it is well--conditioned.
+
+
+
+\question Given some pseudocode, be able to insert a running error into the code; for
+example, insert a running error into
+
+\begin{algorithmic}
+\REQUIRE \(Q \in  \integers_{\geq 0} \mapsto \reals\) and \(n \in \integers_{\geq 0}\)
+ \STATE $s \leftarrow 0$ ;; accumulator for sum \(1 + Q(0) + Q(0) Q(1) + \cdots \)
+ \STATE $z \leftarrow 1$ ;; accumulator for product \(Q(0) Q(1) \cdots \)
+ \STATE $k \leftarrow 0$
+ \WHILE{$k < n$} 
+    \STATE $s \leftarrow s + z$
+    \STATE $z \leftarrow z \cdot Q(k) $
+    \STATE $k \leftarrow 1 + k $
+\ENDWHILE
+\ENSURE $s$
+\end{algorithmic}
+
+
+\question For \(x\) near zero, you need to evaluate the function \(F\), where
+\[
+    F(x)  =  \frac{1}{1-x} - \frac{1}{1+x}.
+\]
+There are algebraically equivalent ways to evaluate this function.
+For \(x\) near zero, find an alternative  formula for \(F\) that
+you recommended for inputs that are near zero.
+
+%\vspace{1.5in}
+
+\question  Let \(a\) be a floating point number and let
+\(\varepsilon_m\) be the machine epsilon.  Find an \emph{upper bound} for
+\(
+  \left | 1 \oplus a \otimes a \right |
+\).
+
+\item Given a matrix, know how to find its two norm--remember its a Lagrange multiplier problem.  For the matrix \(M = \begin{bmatrix}1 & 1\\ 1 & 1\end{bmatrix}\), first find \(M^T M\). This matrix is
+\[
+  M^T M = \begin{bmatrix}2 & 2\\ 2 & 2\end{bmatrix}.
+\]
+Second, subtract \(z\) from each diagonal entry of  \(M^T M\). This gives
+\[
+\begin{bmatrix}2-z & 2\\ 2 & 2-z\end{bmatrix}.
+\]
+Third, do row reduction on this matrix (Hint: first swap rows); this gives
+\[\begin{bmatrix}2 & -\left( z-2\right) \\
+0 & -\frac{\left( z-4\right) z}{2}\end{bmatrix}\]
+Fourth, find the values of \(z\) that make the last row vanish; these values are \(z =0, z=2\);
+The square root of the largest of these values is the two norm. Thus
+\[
+  \| M \|_2 = \sqrt{\max\{0,2\}} = \sqrt{2}.
+\] 
+To see how all this simply relates to the Lagrange method, see your classnotes.
