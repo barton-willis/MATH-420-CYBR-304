@@ -7,7 +7,7 @@
 \usepackage{enumerate}
 \usepackage{cancel}
 \usepackage{fontawesome5}
-\usepackage{fourier}
+%\usepackage{fourier}
 \usepackage{upgreek}
 %\raggedright
 %\usepackage[sfdefault]{FiraSans}
@@ -239,6 +239,20 @@ then for all $\ell \in -n \dots n$, we have
  
  
  \end{frame}
+
+ \begin{frame}{Continuous least squares }
+
+  \textbf{Fact} For any integrable function $F$ and any nonnegative integer $n$,
+  the numbers $c_{-n}$ through $c_n$ that minimize the function
+  \begin{equation*}
+     (c_{-n}, c_{-n+1}, \dots, c_n) \mapsto 
+       \int_0^{2 \uppi} \left |F(x) - \sum_{k=-n}^n c_k \cis(k x) \right |^2 
+        \, \mathrm{d} x 
+  \end{equation*}
+  are the Fourier coefficients.
+ \end{frame}
+
+
  
  \begin{frame}{I know what you are thinking}
  
