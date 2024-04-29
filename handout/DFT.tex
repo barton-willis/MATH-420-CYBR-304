@@ -80,7 +80,7 @@ Spring 2024
 \begin{frame}{A trigonometric basis}  
 
 
-Let $n \in \integers_{\geq 0}$ and let $a_0, \dots, a_n$ and $b_1, \dots, b_n$ be real numbers.  Define a function $F$ by 
+Let $n \in \integers_{\geq 0}$ and let $a_0$ through $a_n$ and $b_1$ through $b_n$ be real numbers.  Define a function $F$ by 
 \begin{equation*}
 F(x) = a_0 + \sum_{k=1}^n a_k \cos(k x) +  b_k \sin(k x).
 \end{equation*}
@@ -95,12 +95,12 @@ F(x) &= a_0 + \sum_{k=1}^n a_k  \frac{\cis(k x) +  \overline{\cis(k x)}}{2} + b_
 \begin{frame}{An exponential basis}
 So
 \begin{align*}
-F(x)   & = a_0 + \sum_{k=1}^n \frac{1}{2} (a_k  - \imag b_k) \cis(k x) +   \frac{1}{2} (a_k  + \imag b_k) \overline{\cis(k x) }   \\
-          &= a_0 + \re  \left ( \sum_{k=1}^n (a_k  - \imag b_k) \cis(k x) \right)
+F(x)   & = a_0 + \sum_{k=1}^n \frac{1}{2} (a_k  - \imag b_k) \cis(k x) +   \frac{1}{2} (a_k  + \imag b_k) \overline{\cis(k x) },   \\
+          &= a_0 + \re  \left ( \sum_{k=1}^n (a_k  - \imag b_k) \cis(k x) \right).
 \end{align*}
 Defining complex numbers $c_0, c_1, \dots, c_n $ as
 \begin{equation*}
-  c_k = \begin{cases} a_0  & k =0 \\ a_k  - \imag b_k & k \neq 0 \end{cases}
+  c_k = \begin{cases} a_0  & k =0 \\ a_k  - \imag b_k & k \neq 0 \end{cases},
 \end{equation*}
 we have
 \begin{equation*}
@@ -124,7 +124,7 @@ where
 \end{equation*}
 \end{frame}
 
-\begin{frame}{Unreal and orthogonal}
+\begin{frame}{Unreal but orthogonal}
 
 For any $n \in \integers_{\geq 0}$,  the set of functions
 \begin{equation*}
@@ -137,7 +137,7 @@ is orthogonal with respect to the inner product
 In particular for $k, \ell \in \integers$, we have
 \begin{equation*}
  \int_0^{2 \uppi}  \overline{ \cis(k x) } \, \cis(\ell x) \mathrm{d} x = \begin{cases} 0 & k \neq \ell \\ 2 \uppi & k = \ell \end{cases}
-     = 2 \uppi \delta_{k, \ell}
+     = 2 \uppi \delta_{k, \ell}.
  \end{equation*}
 \end{frame}
 
@@ -149,7 +149,7 @@ We define the Kronecker delta function $\delta$ as
 \end{equation*}
 
 \begin{handlist}
-\item The arguments to the Kronecker delta are almost always subscripts.
+\item The arguments to the Kronecker delta function are almost expressed as subscripts.
 
 \item Example $\delta_{\uppi, 3} = 0$ and $\delta_{\uppi, \uppi} = 1$.
 
@@ -160,12 +160,12 @@ We define the Kronecker delta function $\delta$ as
 
 \begin{frame}{A trigonometric puzzle}
 
-\textbf{Problem} Let $n \in \integers_{\geq 0}$ and let $c_{-n}, \dots, c_n \in \complex$. Define a 
+\textbf{Problem} Let $n \in \integers_{\geq 0}$ and let $c_{-n}$ through $c_n$ be complex numbers. Define a 
 function $F$ whose formula is 
 \begin{equation*}
     F(x) = \sum_{k=-n}^n c_k \euler^{\imag  k x}
 \end{equation*}
-For a given function $F$, we would like to find a way to find the complex numbers $c_{-n}, \dots, c_n$.
+For a given function $F$, we would like to find a way to find the complex numbers $c_{-n}$ through $c_n$.
 
 \end{frame}
 
@@ -247,8 +247,8 @@ then for all $\ell \in -n \dots n$, we have
  a tool for that.  Let's use the right-point rule integration to find approximate values for the Fourier coefficients. Using $n$ equal length 
  subintervals of $[0, 2 \uppi]$, we have
 \begin{align*}
-  c_\ell &\approx \frac{1}{2 \uppi}  \frac{2 \uppi}{n} \sum_{k=0}^{n-1}  \euler^{-  \imag \frac{2 \uppi}{n}  \ell  k} F(x_k) \\
-            &=  \frac{1}{n} \sum_{k=0}^{n-1}  \euler^{-  \imag \frac{2 \uppi}{n}  \ell  k} F \left (\frac{2 \uppi}{n} k \right)  \\
+  c_\ell &\approx \frac{1}{2 \uppi}  \frac{2 \uppi}{n} \sum_{k=0}^{n-1}  \euler^{-  \imag \frac{2 \uppi}{n}  \ell  k} F(x_k), \\
+            &=  \frac{1}{n} \sum_{k=0}^{n-1}  \euler^{-  \imag \frac{2 \uppi}{n}  \ell  k} F \left (\frac{2 \uppi}{n} k \right).
 \end{align*}
  
   \end{frame}
@@ -323,6 +323,20 @@ accurate results for larger and larger $\ell$.
  \end{handlist}
   
     \end{frame}
+    
+  \begin{frame}{Inverses}
+  
+  For a Fourier matrix $\mathcal{F}$ of size $n\times n$, we have
+  \begin{equation*} 
+        \overline{\mathcal{F}} \mathcal{F} = n \mathrm{I},
+  \end{equation*}
+  where $\mathrm{I}$ is the $n \times n$ identity matrix.  Thus
+      \begin{equation*} 
+        n \mathcal{F}^{-1} = \overline{\mathcal{F}}.
+  \end{equation*}
+  
+  
+  \end{frame}
     
     \begin{frame}{What does chatGPT have to say?}
     
