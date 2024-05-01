@@ -1,4 +1,4 @@
-\documentclass[12pt,fleqn]{exam}
+\documentclass[12pt,fleqn,answers]{exam}
 \usepackage{algorithmic,url,calc}
 \usepackage{amsopn,amsmath,upgreek}
 \renewcommand{\algorithmicensure}{\textbf{Return:}}
@@ -61,11 +61,48 @@
 \end{equation}
 \begin{parts}
 \part Find the numerical value of $\langle f, g-h \rangle $
-\part Find the numerical value of $\langle f, 2 f + 5 g \rangle $
+\begin{solution}
+$\langle f, g-h \rangle = \langle f, g \rangle - \langle f, h \rangle
+= 3 - 4 = -1$
+\end{solution}
+  
 
+\part Find the numerical value of $\langle f, 2 f + 5 g \rangle $
+\begin{solution}
+  $\langle f, 2 f + 5 g \rangle = \langle f, 2 f  \rangle \langle f, 5 g  \rangle 
+  = 2 \langle f, f  \rangle + 5 \langle f,g  \rangle = 2 \times 2 + 5 \times 3 
+  = 4+ 15 = 19$.
+  \end{solution}
 \part Find a real number $\alpha$ such that $\langle \alpha f, \alpha f \rangle = 1$.
+\begin{solution}
+  We need to solve $\langle \alpha f, \alpha f \rangle = 1$ for $\alpha$.
+  We have
+  \begin{align*}
+      \left[\langle \alpha f, \alpha f \rangle = 1 \right] 
+      &= \left[\alpha^2 \langle f,  f \rangle = 1 \right] \\
+      &= \left[2 \alpha^2   = 1 \right] \\
+      &= \left[\alpha   = - \frac{1}{\sqrt{2}} \text{ or } 
+                \alpha   =  \frac{1}{\sqrt{2}}\right]
+  \end{align*}
+\end{solution}
 \part Find a real number $\beta$ such that $\langle \beta g,  \beta g \rangle = 1$.
+\begin{solution}
+  We need to solve $\langle \beta g, \beta g \rangle = 1$ for $\alpha$.
+  We have
+  \begin{align*}
+      \left[\langle \beta g, \beta g \rangle = 1 \right] 
+      &= \left[\beta^2 \langle g,  g \rangle = 1 \right] \\
+      &= \left[2 \beta^2   = 1 \right] \\
+      &= \left[\beta   = - \frac{1}{\sqrt{2}} \text{ or } 
+                \beta   =  \frac{1}{\sqrt{2}}\right]
+  \end{align*}
+\end{solution}
+
 \part Find a real number $\alpha$ such that $f$ and $f + \alpha g$ are perpendicular.
+\begin{solution}
+  $\left[ \langle f, f + \alpha g \rangle$
+\end{solution}
+
 \part Find a real number $\beta$ such that $g$ and $g+ \alpha h$ are perpendicular.
 \end{parts}
 
