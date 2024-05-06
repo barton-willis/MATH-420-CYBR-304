@@ -1,0 +1,258 @@
+\documentclass[12pt,fleqn,answers]{exam}
+\usepackage{pifont}
+\usepackage{dingbat}
+\usepackage{amsmath,amssymb}
+\usepackage{epsfig}
+\usepackage[colorlinks=true,linkcolor=black,anchorcolor=black,citecolor=black,filecolor=black,menucolor=black,runcolor=black,urlcolor=black]{hyperref}
+\usepackage[letterpaper, margin=0.75in]{geometry}
+\addpoints
+\boxedpoints
+\pointsinmargin
+\pointname{pts}
+
+\usepackage[thinc]{esdiff}
+\usepackage{pdfpages}
+\usepackage[final]{microtype}
+\usepackage[american]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
+\usepackage{isomath}
+\usepackage{upgreek,amsmath}
+\usepackage{amssymb}
+
+\usepackage{color}
+\usepackage{tcolorbox}
+
+
+\newcommand{\reals}{\mathbf{R}}
+\newcommand{\lub}{\mathrm{lub}} 
+\newcommand{\glb}{\mathrm{glb}} 
+\newcommand{\complex}{\mathbf{C}}
+\newcommand{\dom}{\mbox{dom}}
+\newcommand{\range}{\mbox{range}}
+\newcommand{\integers}{\mathbf{Z}}
+
+\newcommand{\imag}{\, \mathrm{i}}
+\newcommand{\fl}{\mathrm{fl}}
+\usepackage{xcolor}
+\shadedsolutions
+\definecolor{SolutionColor}{rgb}{0.95,0.95,0.95}
+
+\usepackage{graphicx}
+\newcommand\AM{{\sc am}}
+\newcommand\PM{{\sc pm}}
+     
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+\newcommand{\quiz}{\RNum{3} }
+\newcommand{\term}{Spring}
+\newcommand{\due}{15:00 \PM}
+\newcommand{\class}{CYBR 304 \& MATH 420}
+
+\usepackage {tikz}
+\usetikzlibrary {positioning}
+\definecolor {processblue}{cmyk}{0.96,0,0,0}
+
+\usepackage{color}  
+\usepackage{tikz}  
+  
+\usetikzlibrary{shapes, arrows, calc, arrows.meta, fit, positioning} 
+\tikzset{  
+    -Latex,auto,node distance =1.5 cm and 1.3 cm, thick,
+    state/.style ={ellipse, draw, minimum width = 0.9 cm}, 
+    point/.style = {circle, draw, inner sep=0.18cm, fill, node contents={}},  
+    bidirected/.style={Latex-Latex,dashed}, 
+    el/.style = {inner sep=2.5pt, align=right, sloped}  
+}  
+
+\begin{document}
+\large
+\noindent\makebox[3.0truein][l]{\textbf{\class}}
+\textbf{Name:} \hrulefill \\
+\noindent \makebox[3.0truein][l]{\textbf{Exam \quiz}}
+\textbf{Row and Seat}:\hrulefill\\
+
+\noindent  Exam \quiz  has questions 1 through  \numquestions \/ with a total of  \numpoints\/  points.   
+
+\vspace{0.1in}
+\noindent \begin{tcolorbox}
+    \begin{minipage}{6.5in}
+    \begin{enumerate}
+    
+    \normalsize 
+    \item \textbf{Show all of your work.} Do not expect to earn full credit for a correct answer without the needed work.
+    
+    \item Divine intervention is \emph{not} a substitute for showing your work.
+    
+    \item Respect equality.  Do not write equal ($=$) between expressions that are not equal.
+    
+           
+    \item If your answer is wrong, but your work shows me that you know the major steps in solving a problem, you will likely earn
+    some partial credit.
+    
+    \item Your work should convince me that not only could you correctly solve the given 
+    problem, but you could also solve any related problem.
+    
+    \item If a question asks for an explanation, write your answer as an English sentence. 
+    
+    \item No talking, no sharing calculators, and no scratch paper.
+    \item  Turn your phone off and put it out of sight.
+    \item  Clear your desk of everything, except a pencil, an eraser, and a calculator.
+    \item If you never make a mistake, you may use ink; otherwise, use a pencil.
+    \item Do not unstaple the pages of your exam.
+    \item We'll all start at the same time; it is  the polite thing to do.
+    \item Write your answers in the space provided. 
+    \item If you do not want something graded, erase it or clearly cross it out. 
+    \item You may stare at your feet, your paper, or the ceiling, but nowhere else. 
+    \item If you wear a  baseball cap, wear it backwards, so I can see your eyes.
+    \item Work each problem correctly.
+    \item When you are finished, collect your things, place your exam paper in the folder on the front desk,
+    and quietly leave the room.
+    \item After you turn in your paper, I will not answer questions about the test until after it is graded.
+    
+    \item Not knowing the rules is not a valid excuse for not following them.
+    
+    \item Read all directions and problems carefully. 
+    \end{enumerate} 
+    \end{minipage} 
+    
+    \end{tcolorbox}
+
+    \newpage
+
+
+
+\begin{questions}
+
+\question Find a simple representation of each sum:
+
+\begin{parts}
+\part [5]  $\displaystyle \sum_{k=-10}^{10}   \delta_{k,5}$.
+\begin{solution}%[3.5in]
+We have
+\begin{equation*}
+\sum_{k=-10}^{10}   \delta_{k,5} = \delta_{-10,5} + \delta_{-9,5} + \cdots \delta_{5,5} + \delta_{6,5} + \cdots
++ \delta_{10,5} = 0 + 0+ \cdots + 1  + 0 + 0 + \dots 0 = 1.
+\end{equation*}
+Since the Kronecker delta $\delta_{k,5}$ is 1 if $k = 5$ and 0 otherwise, the sum is simply $\delta_{5,5} = 1$.
+\end{solution}
+\part [5]  $\displaystyle \sum_{k=-10}^{10}   \delta_{k,15}$.
+\begin{solution}[3.5in]
+We have
+\begin{equation*}
+\sum_{k=-10}^{10}   \delta_{k,15} = \delta_{-10,15} + \delta_{-9,15} + \cdots + 
+\delta_{10,15}  = 0 + 0 \cdots + 0 + 0 = 0.
+\end{equation*}
+Since the Kronecker delta $\delta_{k,15}$ is 1 if $k = 15$ and 0 otherwise, the summand simplifies to 0, makin
+the sum zero.
+\end{solution}
+
+\end{parts}
+
+%\newpage
+
+\question Let $f,g$, and $h$ be functions. For some inner product, suppose
+\begin{equation*}
+\begin{bmatrix}
+\langle f,f \rangle & \langle f,g \rangle & \langle f,h \rangle \\
+\langle g,f \rangle & \langle g,g \rangle & \langle g,h \rangle \\
+\langle h,f \rangle & \langle h,g \rangle & \langle h,h \rangle 
+\end{bmatrix} = 
+\begin{bmatrix} 2 & 3 & 4 \\
+                        3 & 2 & 8 \\
+                        4 & 8 & 1
+\end{bmatrix}.
+\end{equation*}
+\begin{parts}
+\part [5] Find the numerical value of $\langle f, g + h \rangle $.
+\begin{solution}[2.5in]
+Using linearity of the inner product, 
+\[\langle f, g + h \rangle = \langle f, g \rangle + \langle f, h \rangle = 3 + 4 = 7.\]
+\end{solution}
+  
+\part [5] Find a positive real number $\alpha$ such that  $\langle \alpha f, \alpha f \rangle = 1 $.
+\begin{solution}[2.5in]
+We need $\langle \alpha f, \alpha f \rangle = \alpha^2 \langle f, f \rangle = 2 \alpha^2  = 1$. Solving for $\alpha$
+and keeping in mind that we need a positive solution, we get $\alpha = \frac{1}{\sqrt{2}}$.
+\end{solution}
+\part [5] Find a real number $\alpha$ such that $f$ and $f + \alpha g$ are perpendicular.
+\begin{solution}[2.5in]
+We need $\langle f, f + \alpha g \rangle = 0$. Using linearity of the inner product, 
+\[0 = \langle f, f + \alpha g \rangle = \langle f, f \rangle + \alpha \langle f, g \rangle = 2 + 3\alpha.\]
+Thus, $\alpha = -\frac{2}{3}$.
+\end{solution}
+\end{parts}
+
+\question [5] Define $P_1(x)  = x$ and $P_2(x)  = 3 x^2 - 1$. Show that $P_1$ and $P_2$ are
+perpendicular with respect to the inner product $\langle f, g \rangle = \int_{-1}^1 f(x) g(x) \, \mathrm{d} x$.
+\begin{solution}[3.5in]
+To show that $P_1$ and $P_2$ are perpendicular, we need to show that $\langle P_1, P_2 \rangle = 0$. Using the given inner product,
+\[\langle P_1, P_2 \rangle = \int_{-1}^1 x(3x^2 - 1) \, \mathrm{d} x = \left[ x^2 - \frac{x^4}{2} \right]_{-1}^1 = 0.\]
+Thus, $P_1$ and $P_2$ are perpendicular.
+\end{solution}
+
+\question [5]  Let $F \in C_{[0,2 \uppi]}$. For $k \in \integers$, define the numbers $c_k$ as
+\[c_k = \frac{1}{2 \uppi} \int_0^{2 \uppi} \mathrm{e}^{-\mathrm{i} k x} F(x) \, \mathrm{d} x.\]
+Using an n-panel right point rule, find approximate values for the numbers $c_k$ in terms of summation notation.
+\begin{solution}[3.5in]
+The right point rule for an interval $[a,b]$ with $n$ panels and function $F(x)$ is given by:
+\[\int_a^b F(x) \, \mathrm{d} x \approx \sum_{k=1}^n F(x_k) \Delta x,\]
+where $x_k = a + k \Delta x$ for $k = 0, 1, \ldots, n$, and $\Delta x = \frac{b-a}{n}$. 
+Applying this to our integral, we get:
+\[c_k \approx \frac{1}{n} \sum_{j=0}^{n-1} \mathrm{e}^{-\mathrm{i} k x_j} F(x_j) \]
+where $x_j = \frac{2\uppi j}{n}$ for $j = 0, 1, \ldots, n-1$.
+\end{solution}
+
+\newpage
+
+\question [5] Apply the Gram-Schmidt process to the functions $f_0(x) = 1$ and $f_1(x) = x$ with the inner product
+$\langle f,g \rangle = \int_0^1 f(x) g(x) \, \mathrm{d} x$. You should choose $g_0(x) = 1$. Your only task is 
+to find a formula for $g_1$.
+\begin{solution}[3.5in]
+We start with $g_0(x) = f_0(x) = 1$. Then,
+\[g_1(x) = f_1(x) - \frac{\langle f_1, g_0 \rangle}{\langle g_0, g_0 \rangle} g_0(x),\]
+where 
+\[\langle f_1, g_0 \rangle = \int_0^1 x \cdot 1 \, \mathrm{d} x = \frac{1}{2}, \quad \text{and} \quad \langle g_0, g_0 \rangle = \int_0^1 1 \cdot 1 \, \mathrm{d} x = 1.\]
+Therefore,
+\[g_1(x) = x - \frac{1/2}{1} \cdot 1 = x - \frac{1}{2}.\]
+\end{solution}
+
+\question  Consider the family polynomials defined by the recurrence relation:
+\[ P_{n+1}(x) = 2 x P_n(x) - P_{n-1}(x), \]
+where \( P_0(x) = 1 \) and \( P_1(x) = x \). 
+
+\begin{parts}
+\part [5] Using the recurrence relation, find a formula for \( P_2 \).
+\begin{solution}[3.5in]
+Using the recurrence relation, we have:
+\[P_2(x) = 2xP_1(x) - P_0(x) = 2x(x) - 1 = 2x^2 - 1.\]
+\end{solution}
+
+\end{parts}
+
+\question[5] Consider the Julia code for evaluation these polynomials
+
+\begin{verbatim}
+function P(n::Integer,x::Number)
+    if n==0
+        1
+    elseif n==1 
+        x
+    else
+        2*x*P(n-1,x) - P(n-2,x)
+    end
+\end{verbatim}
+
+\begin{solution}[3.5in]
+The cost to evaluate \verb| 2*x*P(n-1,x) - P(n-2,x) | is the cost 
+to evaluate   \verb| P(n-1,x)  | plus the cost to evaluate 
+ \verb| P(n-2,x)  | plus three additional floating point operatations ;
+ these three additional floating point operations  come from the two explict multiplications in 
+ \verb| 2*x*P(n-1,x)  | and from the subtraction in \verb| 2*x*P(n-1,x) - P(n-2,x) |. Thus 
+to evaluate $P(n,x)$ using the given Julia code, we can express the number of floating point operations $C_n$ recursively as follows:
+\[C_0 = 0, \quad C_1 = 0, \quad \text{and} \quad C_{n+1} = C_n + C_{n-1} + 3 \quad \text{for } n \geq 1.\]
+\end{solution}
+
+
+\end{questions}
+\end{document}
