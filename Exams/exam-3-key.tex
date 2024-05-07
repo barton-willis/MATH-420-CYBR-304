@@ -131,19 +131,19 @@
 \begin{solution}%[3.5in]
 We have
 \begin{equation*}
-\sum_{k=-10}^{10}   \delta_{k,5} = \delta_{-10,5} + \delta_{-9,5} + \cdots \delta_{5,5} + \delta_{6,5} + \cdots
-+ \delta_{10,5} = 0 + 0+ \cdots + 1  + 0 + 0 + \dots 0 = 1.
+\sum_{k=-10}^{10}   \delta_{k,5} = \delta_{-10,5} + \delta_{-9,5} + \cdots + \delta_{5,5} + \delta_{6,5} + \cdots
++ \delta_{10,5} = 0 + 0+ \cdots + 1  + 0 + 0 + \dots + 0 = 1.
 \end{equation*}
-Since the Kronecker delta $\delta_{k,5}$ is 1 if $k = 5$ and 0 otherwise, the sum is simply $\delta_{5,5} = 1$.
+Since the Kronecker delta $\delta_{k,5}$ is 1 if $k = 5$ and $0$ otherwise, the sum is simply $\delta_{5,5} = 1$.
 \end{solution}
 \part [5]  $\displaystyle \sum_{k=-10}^{10}   \delta_{k,15}$.
 \begin{solution}[3.5in]
 We have
 \begin{equation*}
 \sum_{k=-10}^{10}   \delta_{k,15} = \delta_{-10,15} + \delta_{-9,15} + \cdots + 
-\delta_{10,15}  = 0 + 0 \cdots + 0 + 0 = 0.
+\delta_{10,15}  = 0 + 0 + \cdots + 0 + 0 = 0.
 \end{equation*}
-Since the Kronecker delta $\delta_{k,15}$ is 1 if $k = 15$ and 0 otherwise, the summand simplifies to 0, makin
+Since the Kronecker delta $\delta_{k,15}$ is 1 if $k = 15$ and 0 otherwise, the summand simplifies to 0, making
 the sum zero.
 \end{solution}
 
@@ -187,7 +187,7 @@ Thus, $\alpha = -\frac{2}{3}$.
 perpendicular with respect to the inner product $\langle f, g \rangle = \int_{-1}^1 f(x) g(x) \, \mathrm{d} x$.
 \begin{solution}[3.5in]
 To show that $P_1$ and $P_2$ are perpendicular, we need to show that $\langle P_1, P_2 \rangle = 0$. Using the given inner product,
-\[\langle P_1, P_2 \rangle = \int_{-1}^1 x(3x^2 - 1) \, \mathrm{d} x = \left[ x^2 - \frac{x^4}{2} \right]_{-1}^1 = 0.\]
+\[\langle P_1, P_2 \rangle = \int_{-1}^1 x(3 x^2 - 1) \, \mathrm{d} x = \left[ \frac{3}{4} x^4 - \frac{1}{2} x^2  \right]_{-1}^1 = 0.\]
 Thus, $P_1$ and $P_2$ are perpendicular.
 \end{solution}
 
@@ -225,7 +225,7 @@ where \( P_0(x) = 1 \) and \( P_1(x) = x \).
 \part [5] Using the recurrence relation, find a formula for \( P_2 \).
 \begin{solution}[3.5in]
 Using the recurrence relation, we have:
-\[P_2(x) = 2xP_1(x) - P_0(x) = 2x(x) - 1 = 2x^2 - 1.\]
+\[P_2(x) = 2xP_1(x) - P_0(x)  = 2x^2 - 1.\]
 \end{solution}
 
 \end{parts}
@@ -244,13 +244,16 @@ function P(n::Integer,x::Number)
 \end{verbatim}
 
 \begin{solution}[3.5in]
-The cost to evaluate \verb| 2*x*P(n-1,x) - P(n-2,x) | is the cost 
-to evaluate   \verb| P(n-1,x)  | plus the cost to evaluate 
- \verb| P(n-2,x)  | plus three additional floating point operatations ;
- these three additional floating point operations  come from the two explict multiplications in 
- \verb| 2*x*P(n-1,x)  | and from the subtraction in \verb| 2*x*P(n-1,x) - P(n-2,x) |. Thus 
+The cost to evaluate \verb|2*x*P(n-1,x)-P(n-2,x)| is the cost 
+to evaluate   \verb|P(n-1,x)|, plus the cost to evaluate 
+ \verb|P(n-2,x)|, plus three additional floating point operations;
+ these three additional floating point operations  come from the two explicit multiplications in 
+ \verb|2*x*P(n-1,x)| and from the subtraction in \verb|2*x*P(n-1,x)-P(n-2,x)|. 
+ 
+ \quad The cost to evaluate \verb|P(n-1,x)| is $C_{n-1}$; the cost to evaluate   \verb|P(n-2,x)| is $C_{n-2}.$
+ Thus 
 to evaluate $P(n,x)$ using the given Julia code, we can express the number of floating point operations $C_n$ recursively as follows:
-\[C_0 = 0, \quad C_1 = 0, \quad \text{and} \quad C_{n+1} = C_n + C_{n-1} + 3 \quad \text{for } n \geq 1.\]
+\[C_0 = 0, \quad C_1 = 0, \quad \text{and} \quad C_{n} = C_{n-1} + C_{n-2} + 3 \quad \text{for } n \geq 2.\]
 \end{solution}
 
 
