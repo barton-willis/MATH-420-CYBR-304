@@ -39,9 +39,8 @@
 \newtheorem{myfact}{Fact}
 \newtheorem{metathm}{Meta Theorem}
 \newtheorem{Question}{Question}
-\newtheorem{Answer}{Qnswer}
+\newtheorem{Answer}{Answer}
 \newtheorem{myproof}{Proof}
-\newtheorem{hurestic}{Hurestic}
 
 \usepackage[english]{babel}
 \usepackage[final]{microtype}
@@ -67,11 +66,24 @@
 \usepackage{wrapfig}
 \begin{document}
 
+\begin{frame}
+\begin{flushleft} 
+\large
+\textbf{The matrix condition number} \\
+\normalsize
+\vspace{0.25in}
+MATH 420 \& CYBR 304 \\
+Spring 2024 
+\end{flushleft}
+
+
+
+\end{frame}
 
 \begin{frame}{Small change, big effect}
 
 
-Small changes in inputs can cause big changes in the output. For example, the 
+Small changes in inputs sometimes cause big changes in the output. For example, the 
 solution to the linear equations
 \begin{align*}
     1000 x - 1000 y &= -1000\\
@@ -111,7 +123,7 @@ In matrix form, these two sets of linear equations are
 
 \item But the solutions are far apart. 
 
-\item The determinant of each coefficient matrix \(1000\).
+\item The determinant of each coefficient matrix is \(1000\).
 
 \item A  determinant near zero \emph{isn't} required for the butterfly effect.
 
@@ -130,7 +142,7 @@ Consider the linear equations
 
 \begin{itemize}
 
-\item Variables with no hats are the true value, and variables with hats are approximations to the true value.
+\item When $M \approx \widehat M$ and $y \approx \widehat y$, we would like a bound on $\| x - \widehat x \|$.
 
 \item We might have, for example,
 \[
@@ -140,8 +152,6 @@ Consider the linear equations
    \widehat y = \begin{bmatrix} \fl(\frac{2}{3}) \\ \fl(\frac{1}{42}) \end{bmatrix},
    \]
 where \(\fl\) rounds to the nearest float.
-
-\item We would like to bound \( \| x - \widehat x \| \).
 
 \item Let's not commit to a specific norm.
 
@@ -171,10 +181,10 @@ We'll bound each term of the last two terms separately.
 We'll assume that for our norm, we have $\| y - \widehat y  \| \leq \varepsilon_m \| y \|$.
 Thus
 \begin{align*}
-   \|M^{-1} \left(y - \widehat y \right) \| &\leq \| M^{-1} \| \| y - \widehat y  \|,  &(\mbox{basic norm fact}) \\
+   \|M^{-1} \left(y - \widehat y \right) \| &\leq \| M^{-1} \| \| y - \widehat y  \|,  &(\mbox{basic property of norms}) \\
                &\leq  \varepsilon_m \| M^{-1} \| \| y  \|, &(\mbox{assumption}) \\
                &= \varepsilon_m \| M^{-1} \|  \| M x  \|,  &(\mbox{definition of } x ) \\
-               &=  \varepsilon_m \| M^{-1} \|  \| M  \| \|x  \|.  &(\mbox{basic norm fact}) 
+               &=  \varepsilon_m \| M^{-1} \|  \| M  \| \|x  \|.  &(\mbox{basic property of norms}) 
 \end{align*}
 \end{frame}
 
@@ -202,7 +212,7 @@ But for matrices \(a\) and \(b\), the expression  \(\frac{b-a}{a b}\) is ambiguo
     \left(M^{-1} - \widehat M^{-1} \right) \widehat y &= M^{-1} (\widehat M - M) \widehat M^{-1} \widehat y, \\
     &=   M^{-1} (\widehat M - M) \widehat x.
  \end{align*}
- The norm is bounded by
+ Assuming that $ \|  \widehat M - M \| \leq \varepsilon \|M \|$, the norm is bounded by
  \begin{align*}
   \| \left(M^{-1} - \widehat M^{-1} \right) \widehat y \| &= \| M^{-1} \| 
      \|  \widehat M - M \| \|\widehat x \|, \\
