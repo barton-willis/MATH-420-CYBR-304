@@ -180,7 +180,7 @@ gives
 Using a rule of exponents, we have
 \begin{equation}
     \euler^{-\imag  \ell x} F(x) = \sum_{k=-n}^n c_k 
-    \euler^{-\imag  (k - \ell) x}.
+    \euler^{\imag  (k - \ell) x}.
 \end{equation}
 \end{frame}
 
@@ -190,14 +190,14 @@ Using a rule of exponents, we have
     \begin{equation}
        \int_0^{2 \uppi} \euler^{-\imag  \ell x} F(x) \,
          \mathrm{d}x =  \int_0^{2 \uppi} \sum_{k=-n}^n c_k 
-        \euler^{-\imag  (k - \ell) x} \,
+        \euler^{\imag  (k - \ell) x} \,
         \mathrm{d}x.
  \end{equation}
  Swap the integration and the finite sum:
  \begin{equation}
        \int_0^{2 \uppi} \euler^{-\imag  \ell x} F(x) \,
          \mathrm{d}x =  \sum_{k=-n}^n c_k 
-         \int_0^{2 \uppi}  \euler^{-\imag  (k - \ell) x} \,   \mathrm{d}x.
+         \int_0^{2 \uppi}  \euler^{\imag  (k - \ell) x} \,   \mathrm{d}x.
  \end{equation}
  \end{frame}
  
@@ -313,7 +313,7 @@ accurate results for larger and larger $\ell$.
       \widehat a_\ell = \sum_{k=0}^{n-1}  \mathcal{F}_{\ell, k} a_k
   \end{equation*}
   we see that the DFT is matrix multiplication. Arranging $\widehat a_0, \dots, \widehat a_{n-1}$ and  
-   $a_0, \dots, \widehat a_{n-1}$ as column vectors $\mathbf{a}$ and  $\widehat{\mathbf{a}}$,  respectively, we have
+   $a_0, \dots, a_{n-1}$ as column vectors $\mathbf{a}$ and  $\widehat{\mathbf{a}}$,  respectively, we have
     \begin{equation*}
       \widehat{\mathbf{a}}  = \mathcal{F} \, \mathbf{a}
   \end{equation*}
